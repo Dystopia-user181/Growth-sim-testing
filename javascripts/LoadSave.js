@@ -29,7 +29,7 @@ if (localStorage.getItem("player") !== null) {
 		player = savePlayer;
 		Object.keys(player).forEach(function(key) {
 			if (key != "notation" && key != "theme" && key != "timePlayed") {
-				if (typeof(player[key]) = "object") {
+				if (typeof(player[key]) == "object") {
 					player[key].forEach(function (item, index) {
 						player[key][index] = new Decimal(item);
 					});
