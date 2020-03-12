@@ -1,9 +1,9 @@
 body {
-	background-color: #2B3535;
-	color: #C0C0C0;
+	background-color: #FFFFFF;
+	color: #202020;
 	height: 100%;
-	text-shadow: 0px 0px 2px #C0C0C0;
-	font-family: sans-serif;
+	text-shadow: 0px 0px 2px #202020;
+	font-family: "Lucida Console", Monaco, monospace;
 }
 td {
 	display: table-cell;
@@ -13,56 +13,56 @@ td {
 	width: 135px;
 	height: 35px;
 	float: right;
-	background-color: #2B3535;
-	color: white;
+	background-color: #FFFFFF;
+	color: #000000;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .efButton {
 	width: 135px;
 	height: 35px;
-	background-color: #2B3535;
-	color: white;
+	background-color: #FFFFFF;
+	color: #000000;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .prestigeButton {
 	width: 170px;
 	height: 40px;
-	background-color: #2B3535;
-	color: white;
+	background-color: #FFFFFF;
+	color: #000000;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .tabsButton {
 	width: 130px;
 	height: 40px;
-	background-color: #2B3535;
-	color: #55FFEE;
+	background-color: #FFFFFF;
+	color: #33AAAA;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 2px solid #55FFEE;
-	box-shadow: 0px 0px 8px 1px #55FFEE;
+	border: 2px solid #33AAAA;
+	box-shadow: 0px 0px 8px 1px #33AAAA;
 }
 .optionsButton {
 	width: 200px;
 	height: 55px;
-	background-color: #2B3535;
-	color: #D0D0D0;
+	background-color: #FFFFFF;
+	color: #000000;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 20px;
-	border-radius: 5px;
-	border: 3px solid #11AA11;
+	border: 2px solid #11AA11;
 	box-shadow: 0px 0px 8px 1px #11AA11;
 }
 .popup {
@@ -71,43 +71,41 @@ td {
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
-	text-align: center;
-	border: 4px solid black;
-	border-radius: 5px;
-	background-color: #455A64;
-	color: #D0D0D0;
+	border: 2px solid green;
+	background-color: white;
+	color: black;
 }
 .cancelButton {
-	color: #C0C0C0;
-	background-color: #455A64;
+	color: black;
+	background-color: white;
 	position: absolute;
 	left: 50%;
 	bottom: 0;
 	transform: translateX(-50%) translateY(-50%);
-	border: 3px solid green;
-	border-radius: 3px;
+	border: 2px solid green;
+}
+.buyTd {
+	z-index: 1;
+	width: 270px;
 }
 #money {
-	color: white;
-	text-shadow: 0px 0px 4px white;
+	color: #000000;
+	text-shadow: 0px 0px 4px #000000;
 }
 #corruptButton {
 	height: 100px;
 	width: 200px;
 	font-size: 40px;
-	border: 3px solid green;
-	border-radius: 3px;
-	background-color: #2B3535;
-	color: #F0F0F0;
+	border: 2px solid green;
+	background-color: #FFFFFF;
+	color: #000000;
 	box-shadow: 0px 0px 8px 1px green;
 }
 #corruptMessage {
-	color: white;
+	color: #FFFFFF;
 	font-size: 30px;
 }
 #away {
 	width: 400px;
 	height: 300px;
-	background-color: #455a64;
-	color: #C0C0C0;
 }

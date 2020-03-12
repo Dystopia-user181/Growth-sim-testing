@@ -3,7 +3,7 @@ body {
 	color: #C0C0C0;
 	height: 100%;
 	text-shadow: 0px 0px 2px #C0C0C0;
-	font-family: sans-serif;
+	font-family: "Lucida Console", Monaco, monospace;
 }
 td {
 	display: table-cell;
@@ -16,9 +16,9 @@ td {
 	background-color: #2B3535;
 	color: white;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .efButton {
@@ -27,9 +27,9 @@ td {
 	background-color: #2B3535;
 	color: white;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .prestigeButton {
@@ -38,9 +38,9 @@ td {
 	background-color: #2B3535;
 	color: white;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
-	border: 3px solid green;
+	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
 }
 .tabsButton {
@@ -49,8 +49,8 @@ td {
 	background-color: #2B3535;
 	color: #55FFEE;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border-radius: 5px;
 	border: 2px solid #55FFEE;
 	box-shadow: 0px 0px 8px 1px #55FFEE;
 }
@@ -60,9 +60,9 @@ td {
 	background-color: #2B3535;
 	color: #D0D0D0;
 	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 20px;
-	border-radius: 5px;
-	border: 3px solid #11AA11;
+	border: 2px solid #11AA11;
 	box-shadow: 0px 0px 8px 1px #11AA11;
 }
 .popup {
@@ -72,10 +72,10 @@ td {
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
 	text-align: center;
-	border: 4px solid black;
-	border-radius: 5px;
-	background-color: #455A64;
+	border: 2px solid black;
 	color: #D0D0D0;
+	background-color: #455A64;
+
 }
 .cancelButton {
 	color: #C0C0C0;
@@ -84,8 +84,7 @@ td {
 	left: 50%;
 	bottom: 0;
 	transform: translateX(-50%) translateY(-50%);
-	border: 3px solid green;
-	border-radius: 3px;
+	border: 2px solid green;
 }
 #money {
 	color: white;
@@ -95,8 +94,7 @@ td {
 	height: 100px;
 	width: 200px;
 	font-size: 40px;
-	border: 3px solid green;
-	border-radius: 3px;
+	border: 2px solid green;
 	background-color: #2B3535;
 	color: #F0F0F0;
 	box-shadow: 0px 0px 8px 1px green;

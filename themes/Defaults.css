@@ -1,0 +1,30 @@
+html {
+	height: 100vh;
+}
+.buyTd {
+	z-index: 1;
+	width: 270px;
+}
+#moneyAmount {
+	color: #7755FF;
+	text-shadow: 0px 0px 7px #7755FF; 
+}
+#bottomBar {
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	position: absolute;
+}
+#saveCopy {
+	display: none;
+}
+#mpAmount {
+	color: #AAAA11;
+	text-shadow: 0px 0px 7px #AAAA11;
+}
+#discordLink {
+	text-shadow: 0px 0px 2px #0000FF;
+}
+#hacker, #trainer, #master, #layer3, #layer4, #reshuffle {
+	display: none;
+}
