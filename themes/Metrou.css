@@ -1,0 +1,104 @@
+body {
+	background-color: #FFFFFF;
+	color: #202020;
+	height: 100%;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+td {
+	display: table-cell;
+	vertical-align: inherit;
+}
+.buyButton {
+	width: 135px;
+	height: 35px;
+	float: right;
+	background-color: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 15px;
+	border: 2px solid green;
+}
+.efButton {
+	width: 135px;
+	height: 35px;
+	background-color: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 15px;
+	border: 2px solid green;
+	box-shadow: 0px 0px 8px 1px green;
+}
+.prestigeButton {
+	width: 170px;
+	height: 40px;
+	background-color: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 15px;
+	border: 2px solid green;
+}
+.tabsButton {
+	width: 130px;
+	height: 40px;
+	background-color: #FFFFFF;
+	color: #33AAAA;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 15px;
+	border: 2px solid #33AAAA;
+}
+.optionsButton {
+	width: 200px;
+	height: 55px;
+	background-color: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 20px;
+	border: 2px solid #11AA11;
+}
+.popup {
+	position: absolute;
+	z-index: 5;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border: 2px solid green;
+	background-color: white;
+	color: black;
+}
+.cancelButton {
+	color: black;
+	background-color: white;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%) translateY(-50%);
+	border: 2px solid green;
+}
+.buyTd {
+	z-index: 1;
+	width: 270px;
+}
+#money {
+	color: #000000;
+}
+#corruptButton {
+	height: 100px;
+	width: 200px;
+	font-size: 40px;
+	border: 2px solid green;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+#corruptMessage {
+	color: #FFFFFF;
+	font-size: 30px;
+}
+#away {
+	width: 400px;
+	height: 300px;
+}
