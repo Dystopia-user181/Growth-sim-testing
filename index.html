@@ -13,7 +13,7 @@
 		<script defer src = "javascripts/GameFunctions.js" charset = "utf-8" type = "text/javascript"></script>
 		<script defer src = "javascripts/Update.js" charset = "utf-8" type = "text/javascript"></script>
 	</head>
-	<link id = "styles" rel = "stylesheet" href = "themes/Light.css"/>
+	<link id = "styles" rel = "stylesheet" href = "themes/Lightu.css"/>
 	<link id = "styles" rel = "stylesheet" href = "themes/Defaults.css"/>
 	<body align = "center">
 		<div id = "game" align = "center">
@@ -33,7 +33,7 @@
 				<p id = "efficiencyStat">Efficiency: 1.00</p>
 			</div>
 			<div align = "center">
-				<button float = "left" class = "tabsButton" id = "producersTab" onclick = "switchTab('producer')"><b>Production</b></button>
+				<button float = "left" class = "tabsButton" id = "producersTab" onclick = "switchTab('main')"><b>Production</b></button>
 				<button float = "left" class = "tabsButton" id = "optionsTab" onclick = "switchTab('options')"><b>Options</b></button>
 			</div>
 		</div>
@@ -125,6 +125,9 @@
 						</td>
 						<td>
 							<button class = "optionsButton" id = "themes" onclick = "switchTheme()">Theme: Light</button>
+						</td>
+						<td>
+							<button class = "optionsButton" id = "neonTg" onclick = "toggleNeon()">Neon: Off</button>
 						</td>
 					</tr>
 				</tbody>
