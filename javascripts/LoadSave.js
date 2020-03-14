@@ -28,7 +28,7 @@ if (localStorage.getItem("player") !== null) {
 	if (!values.includes(null) && !values.includes(NaN) && !values.includes(undefined) ) {
 		player = savePlayer;
 		Object.keys(player).forEach(function(key) {
-			if (key != "notation" && key != "theme" && key != "timePlayed") {
+			if (key != "notation" && key != "theme" && key != "timePlayed" && key != "neon") {
 				if (typeof(player[key]) == "object") {
 					player[key].forEach(function (item, index) {
 						player[key][index] = new Decimal(item);
@@ -41,8 +41,7 @@ if (localStorage.getItem("player") !== null) {
 		update();
 		for (var i = 0; i < 1000; i++) {
 			player.money = player.money.add((player.hacks[0].div(1000000).mul(multi.hacks)).mul(((new Date()).getTime) - savePlayer.timePlayed));
-			player.hacks[0] = player.hacks[0].add(((player.hackers[0].div(2000000).mul(multi.hackers).add(player.trainers[0].div(400000).mul(multi.trainers).add(player.masters[0].div(80000).mul(multi.masters)))).mul(((new Date()).getTime) - savePlayer.timePlayed)));
-			player.hackers[0] = player.hackers[0].add((player.trainers[0].div(10000000).mul(multi.trainers).add(player.masters[0].div(2000000).mul(multi.masters))).mul(((new Date()).getTime) - savePlayer.timePlayed));
+			player.hacks[0] = player.hacks[0].add(((player.hackers[0].div(2000000).mul(multi.hackers).add(player.trainers[0].div(400000).mul(multi.trainers).add(player.masters[0].div(80000).mul(multi.masters)))).mul(((new Date()).getTime) - savePlayer.timePlayed)));			player.hackers[0] = player.hackers[0].add((player.trainers[0].div(10000000).mul(multi.trainers).add(player.masters[0].div(2000000).mul(multi.masters))).mul(((new Date()).getTime) - savePlayer.timePlayed));
 			player.trainers[0] = player.trainers[0].add((player.masters[0].div(25000000).mul(multi.masters)).mul(((new Date()).getTime) - savePlayer.timePlayed));
 		}
 		document.getElementById("away").style.display = "initial";

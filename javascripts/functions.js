@@ -1,14 +1,11 @@
+let currentTab = "main";
 function save () {
 	localStorage.setItem('player', btoa(JSON.stringify(player)));
 }
 function switchTab(tab) {
-	if (tab == "producer") {
-		document.getElementById("main").style.display = "initial";
-		document.getElementById("options").style.display = "none";
-	} else if (tab == "options") {
-		document.getElementById("main").style.display = "none";
-		document.getElementById("options").style.display = "initial";
-	}
+	document.getElementById(currentTab).style.display = "none";
+	document.getElementById(tab).style.display = "initial";
+	currentTab = tab;
 }
 function copy() {
 	let saveCopy = document.getElementById("saveCopy");
@@ -25,7 +22,7 @@ function pasteSave() {
 	if (typeof(parsedSave) == "object") {
 		player = parsedSave;
 		Object.keys(player).forEach(function(key) {
-			if (key != "notation" && key != "theme" && key!= "timePlayed") {
+			if (key != "notation" && key != "theme" && key != "timePlayed" && key != "neon") {
 				if (typeof(player[key]) == "object") {
 					player[key].forEach(function (item, index) {
 						player[key][index] = new Decimal(item);
@@ -35,6 +32,13 @@ function pasteSave() {
 				}
 			}
 		});
+		update();
+		for (var i = 0; i < 1000; i++) {
+			player.money = player.money.add((player.hacks[0].div(1000000).mul(multi.hacks)).mul(((new Date()).getTime) - savePlayer.timePlayed));
+			player.hacks[0] = player.hacks[0].add(((player.hackers[0].div(2000000).mul(multi.hackers).add(player.trainers[0].div(400000).mul(multi.trainers).add(player.masters[0].div(80000).mul(multi.masters)))).mul(((new Date()).getTime) - savePlayer.timePlayed)));
+			player.hackers[0] = player.hackers[0].add((player.trainers[0].div(10000000).mul(multi.trainers).add(player.masters[0].div(2000000).mul(multi.masters))).mul(((new Date()).getTime) - savePlayer.timePlayed));
+			player.trainers[0] = player.trainers[0].add((player.masters[0].div(25000000).mul(multi.masters)).mul(((new Date()).getTime) - savePlayer.timePlayed));
+		}
 	}
 }
 function hardReset() {

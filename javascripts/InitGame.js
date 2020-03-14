@@ -11,7 +11,8 @@ var player = {
 	matrixStat: new Decimal(0),
 	timePlayed: (new Date()).getTime(),
 	notation: "Scientific",
-	theme: "Light"
+	theme: "Light",
+	neon: false
 }
 var initPlayer = {
 	money: new Decimal(1),
@@ -26,7 +27,8 @@ var initPlayer = {
 	matrixStat: new Decimal(0),
 	timePlayed: (new Date()).getTime(),
 	notation: "Scientific",
-	theme: "Light"
+	theme: "Light",
+	neon: false
 }
 var costs = {
 	hacks: new Decimal(1),

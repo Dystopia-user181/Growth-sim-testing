@@ -94,11 +94,19 @@ function update () {
 		if (player.masters[0].gte(costs.unlock)) {
 			document.getElementById("buyReshuffle").style.border = "2px solid green";
 			document.getElementById("buyReshuffle").style.backgroundColor = buttonTheme.available;
-			document.getElementById("buyReshuffle").style.boxShadow = "0px 0px 7px 3px green";
+			if (player.neon) {
+				document.getElementById("buyReshuffle").style.boxShadow = "0px 0px 8px 1px green";
+			} else {
+				document.getElementById("buyReshuffle").style.boxShadow = "0px 0px";
+			}
 		} else {
 			document.getElementById("buyReshuffle").style.border = "2px solid red";
 			document.getElementById("buyReshuffle").style.backgroundColor = buttonTheme.unAvailable;
-			document.getElementById("buyReshuffle").style.boxShadow = "0px 0px 7px 3px red";
+			if (player.neon) {
+				document.getElementById("buyReshuffle").style.boxShadow = "0px 0px 8px 1px red";
+			} else {
+				document.getElementById("buyReshuffle").style.boxShadow = "0px 0px";
+			}
 		}
 	}
 	//Corrupted Matrix
