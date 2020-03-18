@@ -1,10 +1,10 @@
 var sP = atob(localStorage.getItem("player"));
 var savePlayer = JSON.parse(sP);
 if (localStorage.getItem("player") !== null) {
-	Object.keys(initPlayer).forEach(function(key) {
+	Object.keys(savePlayer).forEach(function(key) {
 		if (savePlayer[key] != undefined) {
-			if (initPlayer[key] == undefined) {
-				if (typeof(savePlayer[key]) != typeof(initPlayer[key])) {
+			if (initPlayer[key] != undefined) {
+				if (typeof(savePlayer[key]) != typeof(initPlayer[key]) && (typeof(initPlayer[key]) != "object" && typeof(savePlayer.key) != "string")) {
 					console.log(key + "invalid");
 					savePlayer[key] = initPlayer[key];
 					console.log("Value " + key + " fixed");
