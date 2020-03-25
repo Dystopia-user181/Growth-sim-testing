@@ -73,7 +73,7 @@ function update () {
 			document.getElementById("layer3").style.display = "none";
 			document.getElementById("layer4").style.display = "table-row";
 			document.getElementById("reshuffle").style.display = "none";
-		} else if (player.resets.equals(new Decimal(3))) {
+		} else if (player.resets.gte(new Decimal(3))) {
 			document.getElementById("hacker").style.display = "table-row";
 			document.getElementById("trainer").style.display = "table-row";
 			document.getElementById("master").style.display = "table-row";
