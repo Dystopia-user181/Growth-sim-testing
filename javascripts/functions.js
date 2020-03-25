@@ -1,6 +1,7 @@
 let currentTab = "main";
 function save () {
 	localStorage.setItem('player', btoa(JSON.stringify(player)));
+	console.log("Game saved.");
 }
 function switchTab(tab) {
 	document.getElementById(currentTab).style.display = "none";
