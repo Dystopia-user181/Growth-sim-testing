@@ -119,7 +119,7 @@ function update () {
 	}
 	//Matrix Points
 	document.getElementById("mpAmount").innerHTML = player.matrixPoints.toString();
-	if (player.matrixStat.gte(new Decimal(0))) {
+	if (player.matrixStat.gte(new Decimal(1))) {
 		document.getElementById("matrixPoints").style.display = "initial";
 	} else {
 		document.getElementById("matrixPoints").style.display = "none";

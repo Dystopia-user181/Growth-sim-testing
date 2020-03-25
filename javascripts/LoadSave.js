@@ -8,7 +8,7 @@ if (localStorage.getItem("player") !== null) {
 					Object.keys(savePlayer[key]).forEach(function (key2) {
 						if (typeof(savePlayer[key][key2]) != typeof(JSON.parse(JSON.stringify(initPlayer))[key][key2])) {
 							console.log(key + "." + key2 + " invalid");
-							savePlayer[key][key2] = JSON.parse(JSON.stringify(initPlayer[key][key2]);
+							savePlayer[key][key2] = JSON.parse(JSON.stringify(initPlayer))[key][key2];
 							console.log("Value " + key + "." + key2 + " fixed");
 							alert(key + "." + key2 + " invalid; Fixed");
 						} else {
