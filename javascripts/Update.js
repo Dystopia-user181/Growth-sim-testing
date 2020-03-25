@@ -57,7 +57,7 @@ function update () {
 		//Unlock Masters
 		indicateUnlock(player.trainers[0], "unlockMaster");
 		//Update on shifts
-		if (player.resets.m == 1 && player.resets.e == 0) {
+		if (player.resets.equals(new Decimal(1))) {
 			document.getElementById("hacker").style.display = "table-row";
 			document.getElementById("trainer").style.display = "none";
 			document.getElementById("master").style.display = "none";
@@ -65,7 +65,7 @@ function update () {
 			document.getElementById("layer3").style.display = "table-row";
 			document.getElementById("layer4").style.display = "none";
 			document.getElementById("reshuffle").style.display = "none";
-		} else if (player.resets.m == 2 && player.resets.e == 0) {
+		} else if (player.resets.equals(new Decimal(2))) {
 			document.getElementById("hacker").style.display = "table-row";
 			document.getElementById("trainer").style.display = "table-row";
 			document.getElementById("master").style.display = "none";
@@ -73,7 +73,7 @@ function update () {
 			document.getElementById("layer3").style.display = "none";
 			document.getElementById("layer4").style.display = "table-row";
 			document.getElementById("reshuffle").style.display = "none";
-		} else if (player.resets.m >= 3 || player.resets.e > 0) {
+		} else if (player.resets.equals(new Decimal(3))) {
 			document.getElementById("hacker").style.display = "table-row";
 			document.getElementById("trainer").style.display = "table-row";
 			document.getElementById("master").style.display = "table-row";
@@ -119,7 +119,7 @@ function update () {
 	}
 	//Matrix Points
 	document.getElementById("mpAmount").innerHTML = player.matrixPoints.toString();
-	if (player.matrixStat.m > 0) {
+	if (player.matrixStat.gte(new Decimal(0))) {
 		document.getElementById("matrixPoints").style.display = "initial";
 	} else {
 		document.getElementById("matrixPoints").style.display = "none";

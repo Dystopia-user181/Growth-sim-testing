@@ -137,23 +137,23 @@ function buyMax (stuff) {
 }
 function unlock () {
 	//Unlock Hacker
-	if (player.resets.m == 0) {
-		if (player.hacks[0].e > 0) {
+	if (player.resets.equals(new Decimal(0))) {
+		if (player.hacks[0].gte(new Deicmal(10))) {
 			player.resets = new Decimal(1),
 			player.hacks = [player.hacks[0].minus(10), player.hacks[1].minus(10)];
 		}
 	} 
 	//Unlock Trainer
-	if (player.resets.m == 1 && player.resets.e == 0) {
-		if (player.hackers[0].e > 0) {
+	if (player.resets.equals(new Decimal(1))) {
+		if (player.hackers[0].gte(new Decimal(10))) {
 			player.resets = new Decimal(2),
 			player.hacks = [new Decimal(0), new Decimal(0)]
 			player.hackers = [player.hackers[0].minus(10), player.hackers[1].minus(10)];
 		}
 	}
 	//Unlock Master
-	if (player.resets.m == 2 && player.resets.e == 0) {
-		if (player.trainers[0].e > 0) {
+	if (player.resets.equals(new Decimal(2))) {
+		if (player.trainers[0].gte(new Decimal(10))) {
 			player.resets = new Decimal(3),
 			player.hacks = [new Decimal(0), new Decimal(0)];
 			player.hackers = [new Decimal(0), new Decimal(0)];
