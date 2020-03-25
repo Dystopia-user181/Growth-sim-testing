@@ -176,7 +176,8 @@ function reset (stuff) {
 			matrixStat: player.matrixStat,
 			timePlayed: player.timePlayed,
 			notation: player.notation,
-			theme: player.theme
+			theme: player.theme,
+			neon: player.neon
 		}
 	}
 }
@@ -194,6 +195,7 @@ function corrupt () {
 		matrixStat: player.matrixStat.add(1),
 		timePlayed: player.timePlayed,
 		notation: player.notation,
-		theme: player.theme
+		theme: player.theme,
+		neon: player.neon
 	}
 }

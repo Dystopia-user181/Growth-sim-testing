@@ -57,15 +57,16 @@ function formatNatural (variable) {
 }
 function formatCancer (variable) {
 	if (variable.m*Math.pow(10, variable.e%3) < 999.995) {
-		return ((variable.m*Math.pow(10, variable.e%3)).toFixed(2) + formatCancerE(variable.e));
+		return ((variable.m*Math.pow(10, variable.e%3)).toFixed(2) + formatCancerE(variable));
 	} else {
 		return ("1.00e" + formatCancerE(variable.e + 1));
 	}
 }
 function formatCancerE (variable) {
 	let returnText = "";
-	for (let i = 0; i < Math.floor(variable/3); i++) {
-		returnText = returnText + cancer[(Math.floor(variable/3).toString())[i]];
+	let maxPow = Math.floor(new Decimal(variable.e/3).e) + 1;
+	for (var i = 0; i < maxPow; i++) {
+		returnText += cancer[Math.floor(Math.floor(variable.e/3)/Math.pow(10, i))%Math.pow(10, i + 1)];
 	}
 	return (returnText);
 }
