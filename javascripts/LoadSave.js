@@ -1,15 +1,28 @@
 var sP = atob(localStorage.getItem("player"));
 var savePlayer = JSON.parse(sP);
 if (localStorage.getItem("player") !== null) {
-	Object.keys(savePlayer).forEach(function(key) {
+	Object.keys(initPlayer).forEach(function(key) {
 		if (savePlayer[key] != undefined) {
 			if (initPlayer[key] != undefined) {
-				if (typeof(savePlayer[key]) != typeof(initPlayer[key]) && (typeof(initPlayer[key]) != "object" && typeof(savePlayer.key) != "string")) {
-					console.log(key + "invalid");
-					savePlayer[key] = initPlayer[key];
-					console.log("Value " + key + " fixed");
+				if (typeof(savePlayer[key]) == "object" && typeof(JSON.parse(JSON.stringify(initPlayer))[key]) == "object") {
+					Object.keys(savePlayer[key]).forEach(function (key2) {
+						if (typeof(savePlayer[key][key2]) != typeof(JSON.parse(JSON.stringify(initPlayer))[key][key2])) {
+							console.log(key + "." + key2 + " invalid");
+							savePlayer[key][key2] = JSON.parse(JSON.stringify(initPlayer[key][key2]);
+							console.log("Value " + key + "." + key2 + " fixed");
+							alert(key + "." + key2 + " invalid; Fixed");
+						} else {
+							console.log(key + "." + key2 + " found");
+						}
+					})
 				} else {
-					console.log(key + "found");
+					if (typeof(savePlayer[key]) == typeof(JSON.parse(JSON.stringify(initPlayer))[key])) {
+						console.log(key + " found");
+					} else {
+						console.log(key + " invalid");
+						savePlayer[key] = JSON.parse(JSON.stringify(initPlayer))[key];
+						console.log("Value " + key + " invalid; Fixed");
+					}
 				}
 			} else {
 				delete savePlayer.key;
