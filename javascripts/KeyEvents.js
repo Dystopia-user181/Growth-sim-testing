@@ -1,7 +1,7 @@
 document.addEventListener("keydown", function (e) {
 	if (e.which == 77) {
 		buyMax('1');
-		if (player.resets.gte(new Deicmal(1))) {
+		if (player.resets.gte(new Decimal(1))) {
 			buyMax('2');
 		}
 		if (player.resets.gte(new Decimal(2))) {
