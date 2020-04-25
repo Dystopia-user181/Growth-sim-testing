@@ -13,35 +13,35 @@ td {
 	width: 135px;
 	height: 35px;
 	float: right;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
+}
+.yes {
 	border: 2px solid green;
 	box-shadow: 0px 0px 8px 1px green;
+}
+.no {
+	border: 2px solid red;
+	box-shadow: 0px 0px 8px 1px red;
+	background-color: #505050;
 }
 .efButton {
 	width: 135px;
 	height: 35px;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border: 2px solid green;
-	box-shadow: 0px 0px 8px 1px green;
 }
 .prestigeButton {
 	width: 170px;
 	height: 40px;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 15px;
-	border: 2px solid green;
-	box-shadow: 0px 0px 8px 1px green;
 }
 .tabsButton {
 	width: 130px;
@@ -64,6 +64,19 @@ td {
 	font-size: 20px;
 	border: 2px solid #11AA11;
 	box-shadow: 0px 0px 8px 1px #11AA11;
+}
+.computerDiv {
+	background-color: #272822;
+	border: 2px solid #1C1C1C;
+	box-shadow: 0px 0px 8px 1px #1C1C1C;
+	height: 200px;
+	width: 24vw;
+	font-size: 25px;
+}
+.computerButton {
+	color: #FFFFFF;
+	height: 30px;
+	width: 135px;
 }
 .popup {
 	position: absolute;
@@ -89,6 +102,10 @@ td {
 #money {
 	color: white;
 	text-shadow: 0px 0px 4px white;
+}
+#moneyAmount {
+	color: #7755FF;
+	text-shadow: 0px 0px 7px #7755FF; 
 }
 #corruptButton {
 	height: 100px;

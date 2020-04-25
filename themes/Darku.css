@@ -11,34 +11,33 @@ td {
 .buyButton {
 	width: 135px;
 	height: 35px;
-	float: right;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-size: 15px;
 	border-radius: 5px;
-	border: 3px solid green;
+}
+.yes {
+	border: 2px solid green;
+}
+.no {
+	border: 2px solid red;
+	background-color: #505050;
 }
 .efButton {
 	width: 135px;
 	height: 35px;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-size: 15px;
 	border-radius: 5px;
-	border: 3px solid green;
 }
 .prestigeButton {
 	width: 170px;
 	height: 40px;
-	background-color: #2B3535;
 	color: white;
 	text-align: center;
 	font-size: 15px;
 	border-radius: 5px;
-	border: 3px solid green;
-	box-shadow: 0px 0px 8px 1px green;
 }
 .tabsButton {
 	width: 130px;
@@ -59,6 +58,20 @@ td {
 	font-size: 20px;
 	border-radius: 5px;
 	border: 3px solid #11AA11;
+}
+.computerDiv {
+	background-color: #272822;
+	border: 2px solid #1C1C1C;
+	border-radius: 3px;
+	height: 200px;
+	width: 24vw;
+	font-size: 25px;
+}
+.computerButton {
+	color: #FFFFFF;
+	height: 30px;
+	width: 135px;
+	border-radius: 5px;
 }
 .popup {
 	position: absolute;
@@ -84,6 +97,9 @@ td {
 }
 #money {
 	color: white;
+}
+#moneyAmount {
+	color: #7755FF;
 }
 #corruptButton {
 	height: 100px;

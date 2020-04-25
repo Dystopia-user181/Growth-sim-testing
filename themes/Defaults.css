@@ -1,18 +1,68 @@
 html {
 	height: 100vh;
+	transition: all 0.5s;
+}
+button {
+	transition: all 0.5s;
+	margin: 3px;
+	outline: none;
+}
+button:hover {
+	border-color: #F4D258;
+	box-shadow: 0px 0px 9px 1px #F4D258;
+}
+.typeStat {
+	position: relative;
+}
+.tooltipwarning {
+	user-select: none;
+	transform: translateX(100px) translateY(-100%);
+	display: flex;
+	position: static;
+	align-items: center;
+	justify-content: center;
+	height: 20px;
+	width: 20px;
+	border-radius: 20px;
+	background-color: red;
+	color: white;
+}
+.tooltip {
+	transition: all 1s;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 80%;
+	width: 300px;
+	background-color: #FFFFE0;
+	border: 2px solid #FFFF44;
+	border-radius: 4px;
+	color: #AAAA00;
+	visibility: hidden;
+	opacity: 0;
+}
+.tooltipwarning:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+.yes {
+	background-color: inherit;
+}
+.computerDiv {
+	width: 100vw;
+	text-align: center;
+}
+.computerButton {
+	clear: none;
 }
 .buyTd {
 	z-index: 1;
 	width: 270px;
 }
-#moneyAmount {
-	color: #7755FF;
-	text-shadow: 0px 0px 7px #7755FF; 
-}
 #bottomBar {
 	bottom: 0;
 	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%);
 	position: absolute;
 }
 #saveCopy {
