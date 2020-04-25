@@ -2,132 +2,159 @@
 <html>
 	<head>
 		<title>Hacking simulator</title>
-		<link rel = "icon" type = "image/png" href = "icon.png"/>
-		<script defer src = "javascripts/break_infinity.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/InitGame.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/LoadSave.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/notations.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/KeyEvents.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/functions.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/themes.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/GameFunctions.js" charset = "utf-8" type = "text/javascript"></script>
-		<script defer src = "javascripts/Update.js" charset = "utf-8" type = "text/javascript"></script>
+		<link rel="icon" type="image/png" href="icon.png"/>
+		<script defer src="javascripts/break_infinity.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/InitGame.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/notations.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/KeyEvents.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/functions.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/themes.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/GameFunctions.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/Update.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/LoadSave.js" charset="utf-8" type="text/javascript"></script>
 	</head>
-	<link id = "styles" rel = "stylesheet" href = "themes/Lightu.css"/>
-	<link id = "styles" rel = "stylesheet" href = "themes/Defaults.css"/>
-	<body align = "center">
-		<div id = "game" align = "center">
-		<div id = "corruptPreBreak" align = "center">
-			<p id = "corruptMessage" font-size = "30px" align = "center">You have generated too much damage for the matrix to handle and have corrupted it.</p>
-			<div align = "center"><button id = "corruptButton" onclick = "corrupt()" align = "center">Collapse</button></div>
+	<link id="styles" rel="stylesheet" href="themes/Lightu.css"/>
+	<link id="style" rel="stylesheet" href="themes/Defaults.css"/>
+	<body align="center">
+		<div id="game" align="center">
+		<div id="corruptPreBreak" align="center">
+			<p id="corruptMessage" font-size="30px" align="center">The Matrix Has Fallen.</p>
+			<div align="center"><button id="corruptButton" onclick="corrupt()" align="center">Collapse</button></div>
 		</div>
-		<div id = "inGame">
-		<div id = "basicStat" align = "center" width = "100%">
-			<div id = "matrixPoints" align = "center">You have <span id = "mpAmount">0</span> Matrix Points</div>
-			<p style = "font-size: 40px; margin: 10px" id = "money">You have caused $0 of loss.</p>
-			<p style = "font-size: 30px; margin: 10px;" id = "0perSec">You are causing $0 of loss every second.</p>
-			<p id = "efficiency">Increase working efficiency by 10%</p>
-			<div align = "center">
-				<button float = "left" align = "center" class = "efButton" id = "buyEfficiency" onclick = "buy('ef')">Cost: $1.00e3</button>
-				<button class = "efButton" id = "buyEfficiencyMax" onclick = "buyMax('ef')">Buy Max</button>
-				<p id = "efficiencyStat">Efficiency: 1.00</p>
+		<div id="inGame">
+		<div id="basicStat" align="center" width="100%">
+			<div id="matrixPoints" align="center">You have <span id="mpAmount">0</span> Matrix Points</div>
+			<p style="font-size: 40px; margin: 10px" id="money">You have caused $0 of loss.</p>
+			<p style="font-size: 30px; margin: 10px;" id="0perSec">You are causing $0 of loss every second.</p>
+			<p id="efficiency">Increase working efficiency by 10%</p>
+			<div align="center">
+				<button float="left" align="center" class="efButton" id="buyEfficiency" onclick="buy('ef')">Cost: $1.00e3</button>
+				<button class="efButton" id="buyEfficiencyMax" onclick="buyMax('ef')">Buy Max</button>
+				<p id="efficiencyStat">Efficiency: 1.00</p>
 			</div>
-			<div align = "center">
-				<button float = "left" class = "tabsButton" id = "producersTab" onclick = "switchTab('main')"><b>Production</b></button>
-				<button float = "left" class = "tabsButton" id = "optionsTab" onclick = "switchTab('options')"><b>Options</b></button>
+			<div align="center">
+				<button float="left" class="tabsButton" id="producersTab" onclick="switchTab('main')">Production</button>
+				<button float="left" class="tabsButton" id="computerTab" onclick="switchTab('computer')">Computer</button>
+				<button float="left" class="tabsButton" id="optionsTab" onclick="switchTab('options')">Options</button>
 			</div>
 		</div>
-		<div id = "main" align = "center">
-			<table id = "productionTable" width = "100%">
+		<div id="main" align="center">
+			<table id="productionTable" width="100%">
 				<tbody>
-			 		<tr width = "100%" id = "hack" height = "30px">
-						<td width = "25%" id = "1">Hacks ×1.00</td>
-						<td width = "50%" class = "typeStat" align = "center" id = "1stat">0 (0)</td>
-						<td width = "270px" align = "right" class = "buyTd" id = "1buy">
-							<div width = "270px">
-								<button class="buyButton" id = "buyHackMax" onclick = "buyMax('1')">Buy Max until 5</button>
-								<button class="buyButton" id = "buyHack" onclick = "buy('1')">Hack: $1.00</button>
+			 		<tr width="100%" id="hack" height="30px">
+						<td width="25%" id="1">Thwarters ×1.00</td>
+						<td width="50%" class="typeStat" align="center"><span id="1stat">0 (0)</span><div class="tooltipwarning" id="hackMaxed">!<div class="tooltip">You have run out of memory for new thwarters! Buy more computers.</div></div></td>
+						<td width="270px" align="right" class="buyTd" id="1buy">
+							<div width="270px">
+								<button class="buyButton" id="buyHackMax" onclick="buyMax('1')">Buy Max</button>
+								<button class="buyButton" id="buyHack" onclick="buy('1')">$1.00</button>
 							</div>
 						</td>
 					</tr>
-					<tr width = "100%" id = "hacker" display = "none" height = "30px">
-						<td width = "25%" id = "2">Hackers ×1.00</td>
-						<td width = "50%" align = "center" class = "typeStat" id = "2stat">0 (0)</td>
-						<td width = "270px" align = "right" class = "buyTd" id = "2buy">
-							<div width = "270px">
-								<button class="buyButton" id = "buyHackerMax" onclick = "buyMax('2')">Buy Max until 5</button>
-								<button class="buyButton" id = "buyHacker" onclick = "buy('2')">Hire: $100.00</button>
+					<tr width="100%" id="hacker" display="none" height="30px">
+						<td width="25%" id="2">Programmers ×1.00</td>
+						<td width="50%" align="center" class="typeStat" id="2stat">0 (0)</td>
+						<td width="270px" align="right" class="buyTd" id="2buy">
+							<div width="270px">
+								<button class="buyButton" id="buyHackerMax" onclick="buyMax('2')">Buy Max</button>
+								<button class="buyButton" id="buyHacker" onclick="buy('2')">Hire: $100.00</button>
 							</div>
 						</td>
 					</tr>
-					<tr width = "100%" id = "trainer" display = "none" height = "30px">
-						<td width = "25%" id = "3">Trainers ×1.00</td>
-						<td width = "50%" align = "center" class = "typeStat" id = "3stat">0 (0)</td>
-						<td width = "270px" align = "right" class = "buyTd" id = "3buy">
-							<div width = "270px">
-								<button class="buyButton" id = "buyTrainerMax" onclick = "buyMax('3')">Buy Max until 5</button>
-								<button class="buyButton" id = "buyTrainer" onclick = "buy('3')">Hire: $1.00e4</button>
+					<tr width="100%" id="trainer" display="none" height="30px">
+						<td width="25%" id="3">Trainers ×1.00</td>
+						<td width="50%" align="center" class="typeStat" id="3stat">0 (0)</td>
+						<td width="270px" align="right" class="buyTd" id="3buy">
+							<div width="270px">
+								<button class="buyButton" id="buyTrainerMax" onclick="buyMax('3')">Buy Max</button>
+								<button class="buyButton" id="buyTrainer" onclick="buy('3')">Hire: $1.00e4</button>
 							</div>
 						</td>
 					</tr>
-					<tr width = "100%" id = "master" display = "none" height = "30px">
-		   				<td width = "25%" id = "4">CodeMasters ×1.00</td>
-						<td width = "50%" align = "center" class = "typeStat" id = "4stat">0 (0)</td>
-						<td width = "270px" align = "right" class = "buyTd" id = "4buy">
-							<div width = "270px">
-								<button class="buyButton" id = "buyMasterMax" onclick = "buyMax('4')">Buy Max until 5</button>
-								<button class="buyButton" id = "buyMaster" onclick = "buy('4')">Hire: $1.00e6</button>
+					<tr width="100%" id="master" display="none" height="30px">
+		   				<td width="25%" id="4">CodeMasters ×1.00</td>
+						<td width="50%" align="center" class="typeStat" id="4stat">0 (0)</td>
+						<td width="270px" align="right" class="buyTd" id="4buy">
+							<div width="270px">
+								<button class="buyButton" id="buyMasterMax" onclick="buyMax('4')">Buy Max</button>
+								<button class="buyButton" id="buyMaster" onclick="buy('4')">Hire: $1.00e6</button>
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<table id = "prestige" width = "100%">
-				<tr id = "layer2">
-					<td id = "2LayerStat">Unlock Hackers (0): Requires 10 Hacks</td>
-					<td id = "2LayerBuy" align = "right"><button class = "prestigeButton" id = "unlockHacker" onclick = "unlock()">Recruit Hackers</button></td>
-					<td width = "270px"> </td>
+			<table id="prestige" width="100%">
+				<tr id="layer2">
+					<td id="2LayerStat">Unlock Programmers (0): Requires 15 Hacks</td>
+					<td id="2LayerBuy" align="right"><button class="prestigeButton" id="unlockHacker" onclick="unlock()">Recruit Programmers</button></td>
+					<td width="270px"> </td>
 				</tr>
-				<tr id = "layer3">
-					<td id = "3LayerStat">Unlock Trainers (1): Requires 10 Hackers</td>
-					<td id = "3LayerBuy" align = "right"><button class = "prestigeButton" id = "unlockTrainer" onclick = "unlock()">Recruit Trainers</button></td>
-					<td width = "270px"> </td>
+				<tr id="layer3">
+					<td id="3LayerStat">Unlock Trainers (1): Requires 15 Hackers</td>
+					<td id="3LayerBuy" align="right"><button class="prestigeButton" id="unlockTrainer" onclick="unlock()">Recruit Trainers</button></td>
+					<td width="270px"> </td>
 				</tr>
-				<tr id = "layer4">
-					<td id = "4LayerStat">Unlock CodeMasters (2): Requires 10 Trainers</td>
-					<td id = "4LayerBuy" align = "right" width><button class = "prestigeButton" id = "unlockMaster" onclick = "unlock()">Recruit CodeMasters</button></td>
-					<td width = "270px"> </td>
+				<tr id="layer4">
+					<td id="4LayerStat">Unlock CodeMasters (2): Requires 15 Trainers</td>
+					<td id="4LayerBuy" align="right"><button class="prestigeButton" id="unlockMaster" onclick="unlock()">Recruit CodeMasters</button></td>
+					<td width="270px"> </td>
 				</tr>
-				<tr id = "reshuffle">
-					<td id = "reshuffleStat">Code Reshuffle: Requires 10 Masters</td>
-					<td id = "reshuffleBuy" align = "right"><button class = "prestigeButton" id = "buyReshuffle" onclick = "reset('1')">Reset all stats for a boost</button></td>
-					<td width = "270px"> </td>
+				<tr id="reshuffle">
+					<td id="reshuffleStat">Code Reshuffle: Requires 15 Masters</td>
+					<td id="reshuffleBuy" align="right"><button class="prestigeButton" id="buyReshuffle" onclick="reset('1')">Reset all stats for a boost</button></td>
+					<td width="270px"> </td>
 				</tr>
 			</table>
 		</div>
-		<div id = "options">
-			<table align = "center">
-				<tbody align = "center">
-					<tr width = "100%" align = "center">
+		<div id="computer">
+			<table>
+				<tr>
+					<td class="computerDiv">
+						<p>Computers</p>
+						<p id="computerAmount">1</p>
+						<button class="computerButton" id="buyComputer" onclick="buyCompt('computer')">$1.00e3</button>
+					</td>
+					<td class="computerDiv">
+						<p>Server Rack</p>
+						<p id="serverAmount">0</p>
+						<button class="computerButton" id="buyServer" onclick="buyCompt('server')">$1.00e6</button>
+					</td>
+					<td class="computerDiv">
+						<p>Memory</p>
+						<p id="memory">1</p>
+						<button class="computerButton" id="buyMemory" onclick="buyCompt('memory')">$2.00e3</button>
+					</td>
+					<td class="computerDiv">
+						<p>Power</p>
+						<p id="power">1</p>
+						<button class="computerButton" id="buyPower" onclick="buyCompt('power')">$1.00e4</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="options">
+			<table align="center">
+				<tbody align="center">
+					<tr width="100%" align="center">
 						<td>
-							<button class = "optionsButton" id = "notation" onclick = "switchNotation()">Notation: Scientific</button>
+							<button class="optionsButton" id="notation" onclick="switchNotation()">Notation: Scientific</button>
 						</td>
 						<td>
-							<button class = "optionsButton" id = "export" onclick = "copy()">Export to clipboard</button>
+							<button class="optionsButton" id="export" onclick="copy()">Export to clipboard</button>
 						</td>
 						<td>
-							<button class = "optionsButton" id = "import" onclick = "pasteSave()">Import</button>
+							<button class="optionsButton" id="import" onclick="pasteSave()">Import</button>
 						</td>
 					</tr>
-					<tr width = "100%" align = "center">
+					<tr width="100%" align="center">
 						<td>
-							<button class = "optionsButton" id = "wipe" onclick = "hardReset()">Complete reset</button>
+							<button class="optionsButton" id="wipe" onclick="hardReset()">Complete reset</button>
 						</td>
 						<td>
-							<button class = "optionsButton" id = "themes" onclick = "switchTheme()">Theme: Light</button>
+							<button class="optionsButton" id="themes" onclick="switchTheme()">Theme: Light</button>
 						</td>
 						<td>
-							<button class = "optionsButton" id = "neonTg" onclick = "toggleNeon()">Neon: Off</button>
+							<button class="optionsButton" id="neonTg" onclick="toggleNeon()">Neon: Off</button>
 						</td>
 					</tr>
 				</tbody>
@@ -135,11 +162,7 @@
 		</div>	
 		</div>
 		</div>
-		<div class = "popup" id = "away" align = "center">
-			<p id = "awayMessage">While you were away, </p>
-			<button class = "cancelButton" id = "cancel" onclick = "cancelPopup()">Okay</button>
-		</div>
-		<input type = "text" value = "" id = "saveCopy">
-		<div id = "bottomBar" align = "center"><span>| <a href = "https://discord.gg/DVy4XjB" target = "_newtab" id = "discordLink">Discord</a> |</span></div>
+		<input type="text" value="" id="saveCopy">
+		<div id="bottomBar" align="center"><span>| <a href="https://discord.gg/DVy4XjB" target="_newtab" id="discordLink">Discord</a> |</span></div>
 	</body>
 </html>
