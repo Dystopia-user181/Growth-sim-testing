@@ -31,6 +31,7 @@ if (localStorage.getItem("player") !== null) {
 			}
 		} else {
 			savePlayer[key] = initPlayer[key];
+			console.log("Re-added excess value" + key);
 		}
 	});
 	var values = Object.values(savePlayer);
@@ -48,8 +49,8 @@ if (localStorage.getItem("player") !== null) {
 			}
 		});
 		simulateTime((new Date).getTime() - savePlayer.timePlayed);
-		document.getElementById("away").style.display = "initial";
-		document.getElementById("awayMessage").innerHTML = "While you were away, your money gained " + formatNotation(new Decimal(savePlayer.money.log10() - player.money.log10())) + " Orders of Magnitude.";
+		console.log(savePlayer.money.log10());
+		console.log(player.money.log10());
 	} else {
 		alert("Error: save contains invalid values. Loading terminated.");
 	}

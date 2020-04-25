@@ -1,5 +1,6 @@
 document.addEventListener("keydown", function (e) {
-	if (e.which == 77) {
+	switch (e.which) {
+		case 77:
 		buyMax('1');
 		if (player.resets.gte(new Decimal(1))) {
 			buyMax('2');
@@ -11,27 +12,38 @@ document.addEventListener("keydown", function (e) {
 			buyMax('4');
 		}
 		buyMax('ef');
-	}
-	if (e.which == 49) {
+		case 49:
 		buyMax('1');
-	}
-	if (e.which == 50 && player.resets.gte(new Decimal(1))) {
-		buyMax('2');
-	} 
-	if (e.which == 51 && player.resets.gte(new Decimal(2))) {
-		buyMax('3');
-	}
-	if (e.which == 52 && player.resets.gte(new Decimal(3))) {
-		buyMax('4');
-	}
-	if (e.which == 69) {
+		case 50: 
+		if (player.resets.gte(new Decimal(1))) {
+			buyMax('2');
+		} 
+		case 51: 
+		if (player.resets.gte(new Decimal(2))) {
+			buyMax('3');
+		}
+		case 52: 
+		if (player.resets.gte(new Decimal(3))) { 
+			buyMax('4');
+		}
+		case 69: 
 		buyMax('ef');
-	}
-	if (e.which == 68) {
+		break;
+		case 68:
 		if (!player.resets.gte(new Decimal(3))) {
 			unlock();
 		} else {
 			reset('1');
 		}
+		break;
+		case 67:
+		buyCompt('computer');
+		buyCompt('server');
+		buyCompt('memory');
+		buyCompt('power');
+		break;
+		default:
+		console.log('F u');
+		break;
 	}
 });

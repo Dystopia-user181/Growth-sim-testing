@@ -6,6 +6,7 @@ var player = {
 	masters: [new Decimal(0), new Decimal(0)],
 	efficiencies: new Decimal(0),
 	efficiency: new Decimal(1),
+	computer: [new Decimal(1), new Decimal(0), new Decimal(0), new Decimal(0)],
 	resets: new Decimal(0),
 	matrixPoints: new Decimal(0),
 	matrixStat: new Decimal(0),
@@ -22,6 +23,7 @@ var initPlayer = {
 	masters: [new Decimal(0), new Decimal(0)],
 	efficiencies: new Decimal(0),
 	efficiency: new Decimal(1),
+	computer: [new Decimal(1), new Decimal(0), new Decimal(0), new Decimal(0)],
 	resets: new Decimal(0),
 	matrixPoints: new Decimal(0),
 	matrixStat: new Decimal(0),
@@ -36,6 +38,7 @@ var costs = {
 	trainers: new Decimal("1e4"),
 	masters: new Decimal("1e6"),
 	efficiency: new Decimal("1e3"),
+	computer: [new Decimal(1e3), new Decimal(5e4), new Decimal(2e3), new Decimal(1e4)],
 	unlock: new Decimal(10)
 }
 var multi = {
@@ -44,7 +47,8 @@ var multi = {
 	trainers: new Decimal(1),
 	masters: new Decimal(1)
 }
-document.getElementById("inGame").style.display = "none";
-document.getElementById("options").style.display = "none";
-document.getElementById("away").style.display = "none";
-document.getElementById("corruptPreBreak").style.display = "none";
+var maxHacks = new Decimal(100);
+function $(element) {return document.getElementById(element);}
+$("options").style.display = "none";
+$("computer").style.display = "none";
+$("corruptPreBreak").style.display = "none";

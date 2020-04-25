@@ -4,12 +4,12 @@ function save () {
 	console.log("Game saved.");
 }
 function switchTab(tab) {
-	document.getElementById(currentTab).style.display = "none";
-	document.getElementById(tab).style.display = "initial";
+	$(currentTab).style.display = "none";
+	$(tab).style.display = "initial";
 	currentTab = tab;
 }
 function copy() {
-	let saveCopy = document.getElementById("saveCopy");
+	let saveCopy = $("saveCopy");
 	saveCopy.style.display = "block";
 	saveCopy.value = btoa(JSON.stringify(player)); 
 	saveCopy.select();
@@ -34,16 +34,14 @@ function pasteSave() {
 			}
 		});
 		simulateTime((new Date()).getTime() - parsedSave.timePlayed);
-		console.log((new Date()).getTime() - parsedSave.timePlayed);
-		console.log(parsedSave.timePlayed);
-		console.log((new Date()).getTime());
 	}
 }
 function simulateTime(time) {
-	update();
 	for (var i = 0; i < 1000; i++) {
+		update();
 		player.money = player.money.add(player.hacks[0].div(1000000).mul(multi.hacks).mul(player.efficiency).mul(time));
-		player.hacks[0] = player.hacks[0].add(player.hackers[0].div(2000000).mul(multi.hackers).add(player.trainers[0].div(400000).mul(multi.trainers)).add(player.masters[0].div(80000).mul(multi.masters)).mul(player.efficiency).mul(time));
+		player.hacks[0] = player.hacks[0].add(player.hackers[0].div(2000000).mul(multi.hackers).add(player.trainers[0].div(400000).mul(multi.trainers)).add(player.masters[0].div(80000).mul(multi.masters)).mul(player.efficiency).mul(time).mul(player.computer[3]));
+		player.hacks[0] = player.hacks[0].min(maxHacks);
 		player.hackers[0] = player.hackers[0].add(player.trainers[0].div(10000000).mul(multi.trainers).add(player.masters[0].div(2000000).mul(multi.masters)).mul(player.efficiency).mul(time));
 		player.trainers[0] = player.trainers[0].add(player.masters[0].div(25000000).mul(multi.masters).mul(player.efficiency).mul(time));
 	}
@@ -56,5 +54,5 @@ function hardReset() {
 	}
 }
 function cancelPopup() {
-	document.getElementById("away").style.display = "none";
+	$("away").style.display = "none";
 }

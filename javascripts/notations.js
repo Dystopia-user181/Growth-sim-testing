@@ -25,10 +25,10 @@ function switchNotation () {
 	});
 	if (index == -1) {
 		player.notation = "Scientific";
-		document.getElementById("notation").innerHTML = "Notation: Scientific";
+		$("notation").innerHTML = "Notation: Scientific";
 	} else {
 		player.notation = notations[(index+1)%notations.length];
-		document.getElementById("notation").innerHTML = "Notation: " + player.notation;
+		$("notation").innerHTML = "Notation: " + player.notation;
 	}
 }
 let cancer = ["💦", "😡", "😭", "😱", "😂", "😍", "😞", "😈", "🙈", "🍆"];
