@@ -8,7 +8,10 @@ var initPlayer = {
 	containerLevel: 0,
 	plantium: new Decimal(0),
 	machine: 0,
-	unlockedSell: false,
+	tutorial: {
+		unlockedSell: false,
+		unlockedHoneybee: false
+	},
 	version: "0.0.0.1"
 };
 var player = initPlayer;
