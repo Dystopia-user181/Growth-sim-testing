@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Hacking simulator</title>
+		<title>Growth</title>
 		<link rel="icon" type="image/png" href="icon.png"/>
 		<script defer src="javascripts/break_infinity.js" charset="utf-8" type="text/javascript"></script>
+		<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>!-->
+		<script defer src="javascripts/initGame.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/notation.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/planting.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/ui.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/price_fluctuate.js" charset="utf-8" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
 	</head>
-	<body></body>
+	<body>
+		<h1>Welcome to growth simulator</h1>
+		<hr>
+		You have <span id="plants">0</span> Plants in your inventory.
+		<br><br>
+		There are <span id="plantsUn">200</span> Plants in the field.
+		<br><br>
+		<button onclick="unplant()">Pick 1 plant from the field.</button>
+		<button id="sellplant" onclick="sell()" style="visibility: hidden;">Sell 1 plant</button>
+		<br><br>
+		<span id="moneys" style="visibility: hidden;">You have $<span id="moneycount">0.00</span></span>
+		<hr>
+		Price of a plant: $<span id="price">5.00</span>
+	</body>
 </html>

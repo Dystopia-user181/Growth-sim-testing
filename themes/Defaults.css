@@ -1,80 +1,13 @@
-html {
-	height: 100vh;
+* {
 	transition: all 0.5s;
+	color: #fff;
+	background: #000;
+	font-family: Lucida Console;
 }
 button {
-	transition: all 0.5s;
-	margin: 3px;
-	outline: none;
+	border: 2px solid #fff;
 }
 button:hover {
-	border-color: #F4D258;
-	box-shadow: 0px 0px 9px 1px #F4D258;
-}
-.typeStat {
-	position: relative;
-}
-.tooltipwarning {
-	user-select: none;
-	transform: translateX(100px) translateY(-100%);
-	display: flex;
-	position: static;
-	align-items: center;
-	justify-content: center;
-	height: 20px;
-	width: 20px;
-	border-radius: 20px;
-	background-color: red;
-	color: white;
-}
-.tooltip {
-	transition: all 1s;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 80%;
-	width: 300px;
-	background-color: #FFFFE0;
-	border: 2px solid #FFFF44;
-	border-radius: 4px;
-	color: #AAAA00;
-	visibility: hidden;
-	opacity: 0;
-}
-.tooltipwarning:hover .tooltip {
-	visibility: visible;
-	opacity: 1;
-}
-.yes {
-	background-color: inherit;
-}
-.computerDiv {
-	width: 100vw;
-	text-align: center;
-}
-.computerButton {
-	clear: none;
-}
-.buyTd {
-	z-index: 1;
-	width: 270px;
-}
-#bottomBar {
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	position: absolute;
-}
-#saveCopy {
-	display: none;
-}
-#mpAmount {
-	color: #AAAA11;
-	text-shadow: 0px 0px 7px #AAAA11;
-}
-#discordLink {
-	text-shadow: 0px 0px 2px #0000FF;
-}
-#hacker, #trainer, #master, #layer3, #layer4, #reshuffle {
-	display: none;
+	border: 2px solid #fb7;
+	box-shadow: 0px 0px 7px 1px #fb7;
 }
