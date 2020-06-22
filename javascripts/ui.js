@@ -9,6 +9,6 @@ function updateUI() {
 	(player.tutorial.unlockedSell) ? $("moneys").style.visibility = "visible" : $("moneys").style.visibility = "hidden";
 	(player.tutorial.unlockedSell) ? $("priceSpan").style.visibility = "visible" : $("priceSpan").style.visibility = "hidden";
 	(player.tutorial.unlockedPot) ? $("Pots").style.visibility = "visible" : $("Pots").style.visibility = "hidden";
-	player.version = "0.0.0.2";
+	player.version = "0.0.0.3";
 }
 setInterval(updateUI, 50);

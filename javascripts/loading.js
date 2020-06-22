@@ -16,7 +16,7 @@ Why doesn't this code have "use strict";?
 ```js- wait I'm not in discord
 */
 var parsedSave = JSON.parse(localStorage.getItem("growthsimsave"));
-if (parsedSave.version === "0.0.0.1") throw "Save Too Old, balancing incorrect";
+if (parsedSave.version !== "0.0.0.3") throw "Save Too Old, balancing incorrect";
 Object.keys(initPlayer).forEach(function (key, index) {
 	if (parsedSave[key] === undefined) {
 		parsedSave[key] = initPlayer[key];
