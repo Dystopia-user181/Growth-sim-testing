@@ -1,4 +1,5 @@
 function unplant() {
+	if (player.plantUnpicked.lte(0)) return;
 	player.plantUnpicked = player.plantUnpicked.sub(1);
 	player.plantPicked = player.plantPicked.add(1);
 	player.tutorial.unlockedSell = true;
@@ -7,5 +8,5 @@ setInterval(function () {player.plantUnpicked = player.plantUnpicked.add(1)}, 10
 function sell() {
 	if (player.plantPicked.lte(0)) return;
 	player.plantPicked = player.plantPicked.sub(1);
-	player.money = player.money.add(plantSell);
+	player.money = player.money.add(plantSell/10);
 }

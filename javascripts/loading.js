@@ -6,10 +6,14 @@ catch (truck)
 
 //Output: Failed to catch (truck): Too heavy
 
-
+Something something Python 🐍
 0.1+0.2 ahhhhhhh
-
 php bad lollolol funny
+Why is css
+Redfire has AD clone
+"Hello world";
+Why doesn't this code have "use strict";?
+```js- wait I'm not in discord
 */
 var parsedSave = JSON.parse(localStorage.getItem("growthsimsave"));
 Object.keys(initPlayer).forEach(function (key, index) {
