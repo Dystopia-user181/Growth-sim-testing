@@ -13,6 +13,6 @@ function sell() {
 }
 function buyCvt() {
 	if (player.money.lt(player.container.mul(5).add(20))) return;
+	player.money = player.money.sub(player.container.mul(5).add(20));
 	player.container = player.container.add(1);
-	player.money = player.money.sub(20);
 }
