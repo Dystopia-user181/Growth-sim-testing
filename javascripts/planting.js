@@ -9,4 +9,10 @@ function sell() {
 	if (player.plantPicked.lte(0)) return;
 	player.plantPicked = player.plantPicked.sub(1);
 	player.money = player.money.add(plantSell/10);
+	if (player.money.gte(100)) player.tutorial.unlockedPot = true;
+}
+function buyCvt() {
+	if (player.money.lt(20)) return;
+	player.container = player.container.add(1);
+	player.money = player.money.sub(20);
 }

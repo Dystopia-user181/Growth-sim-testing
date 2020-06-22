@@ -10,6 +10,7 @@ var initPlayer = {
 	machine: 0,
 	tutorial: {
 		unlockedSell: false,
+		unlockedPots: false,
 		unlockedHoneybee: false
 	},
 	version: "0.0.0.2"

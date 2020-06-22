@@ -22,7 +22,7 @@ Object.keys(initPlayer).forEach(function (key, index) {
 		parsedSave[key] = initPlayer[key];
 	} else if (typeof parsedSave[key] === "string" && typeof initPlayer[key] === "object") {
 		parsedSave[key] = new Decimal(parsedSave[key]);
-	} else if (typeof initPlayer[key] === "Object" && typeof parsedSave[key] === "object") {
+	} else if (typeof initPlayer[key] === "object" && typeof parsedSave[key] === "object") {
 		Object.keys(initPlayer).forEach(function (key2, index2) {
 			if (parsedSave[key] === undefined) {
 				parsedSave[key] = initPlayer[key];
