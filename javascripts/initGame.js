@@ -12,7 +12,7 @@ var initPlayer = {
 		unlockedSell: false,
 		unlockedHoneybee: false
 	},
-	version: "0.0.0.1"
+	version: "0.0.0.2"
 };
 var player = initPlayer;
 var plantSell = 5;
