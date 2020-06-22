@@ -4,7 +4,7 @@ function updateUI() {
 	$("moneycount").innerText = toSci(player.money, 2);
 	$("price").innerText = toSci(plantSell/10, 2);
 	$("cvts").innerText = toSci(player.container, 0);
-	$("cvtprice").innerText = toSci(player.cultivator.mul(5).add(20), 2);
+	$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
 	(player.tutorial.unlockedSell) ? $("sellplant").style.visibility = "visible" : $("sellplant").style.visibility = "hidden";
 	(player.tutorial.unlockedSell) ? $("moneys").style.visibility = "visible" : $("moneys").style.visibility = "hidden";
 	(player.tutorial.unlockedSell) ? $("priceSpan").style.visibility = "visible" : $("priceSpan").style.visibility = "hidden";
