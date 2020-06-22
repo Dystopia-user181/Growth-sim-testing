@@ -12,7 +12,7 @@ function sell() {
 	if (player.money.gte(100)) player.tutorial.unlockedPot = true;
 }
 function buyCvt() {
-	if (player.money.lt(player.cultivator.mul(5).add(20))) return;
+	if (player.money.lt(player.container.mul(5).add(20))) return;
 	player.container = player.container.add(1);
 	player.money = player.money.sub(20);
 }
