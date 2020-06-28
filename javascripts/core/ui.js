@@ -5,10 +5,13 @@ function updateUI() {
 	$("price").innerText = toSci(plantSell/10, 2);
 	$("cvts").innerText = toSci(player.container, 0);
 	$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
+	$("bees").innerText = toSci(player.bee, 0);
+	$("honey").innerText = toSci(player.honey, 0);
 	(player.tutorial.unlockedSell) ? $("sellplant").style.visibility = "visible" : $("sellplant").style.visibility = "hidden";
 	(player.tutorial.unlockedSell) ? $("moneys").style.visibility = "visible" : $("moneys").style.visibility = "hidden";
 	(player.tutorial.unlockedSell) ? $("priceSpan").style.visibility = "visible" : $("priceSpan").style.visibility = "hidden";
 	(player.tutorial.unlockedPot) ? $("Pots").style.visibility = "visible" : $("Pots").style.visibility = "hidden";
+	(player.tutorial.unlockedHoneybee) ? $("Bees").style.visibility = "visible" : $("Bees").style.visibility = "hidden";
 	player.version = "0.0.0.3";
 }
 setInterval(updateUI, 50);
