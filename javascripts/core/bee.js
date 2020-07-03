@@ -4,3 +4,9 @@ function addHoneyBee() {
 	}
 }
 setInterval(addHoneyBee, 2000);
+function sellHoney() {
+	if (player.honey.lte(0)) return;
+	player.honey = player.honey.sub(1);
+	player.money = player.money.add(plantSell/2);
+	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
+}

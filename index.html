@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html id="html">
 	<head>
 		<title>Growth</title>
 		<link rel="icon" type="image/png" href="icon.png"/>
 		<script defer src="javascripts/break_infinity.js" charset="utf-8" type="text/javascript"></script>
-		<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>!-->
+		<!--script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script!-->
 		<script defer src="javascripts/core/initGame.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/notation.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/planting.js" charset="utf-8" type="text/javascript"></script>
@@ -17,41 +17,52 @@
 		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
 	</head>
 	<body>
-		<h1>Welcome to growth simulator</h1>
+		<h2>Welcome to growth simulator</h2>
 		<a href="https://discord.gg/DVy4XjB">Discord</a>
 		<br><br>
 		<button onclick="tab('Plants')">Plants</button>
+		<button onclick="invert()" style="position: absolute; right: 0;">Toggle Dark Mode</button>
 		<hr>
 		You have <span id="plants">0</span> Plants in your inventory.
 		<br><br>
 		There are <span id="plantsUn">200</span> Plants in the field.
 		<br><br>
-		<div id="Plants" class="tab" style="width: 50%;">
-			<div id="Main" style="width: 80%;">
-				<button onclick="unplant()">Pick 1 plant from the field.</button>
-				<button id="sellplant" onclick="sell()" style="visibility: hidden;">Sell 1 plant</button>
-				<br><br>
-				<span id="moneys" style="visibility: hidden;">You have $<span id="moneycount">0.00</span></span>
-				<br><br>
-				<span id="priceSpan">Price of a plant: $<span id="price">5.00</span></span>
+		<div id="Plants" class="tab" style="display: flex; align-items: flex-start;">
+			<div id="Plants1" style="width: 50%;">
+				<div id="Main" style="width: 80%;">
+					<button onclick="unplant()">Pick 1 plant from the field.</button>
+					<button id="sellplant" onclick="sell()" style="visibility: hidden;">Sell 1 plant</button>
+					<br><br>
+					<span id="moneys" style="visibility: hidden;">You have $<span id="moneycount">0.00</span></span>
+					<br><br>
+					<span id="priceSpan">Price of a plant: $<span id="price">0.50</span></span>
+				</div>
+				<br><hr><br>
+				<div id="Pots" style="width: 90%; visibility: hidden;">
+					You have <span id="cvts">0</span> cultivators.  Your cultivators are at level <span id="cvtlevel">0</span>.
+					<br><br>
+					<button onclick="buyCvt()">Buy 1 Cultivator for $<span id="cvtprice">20.00</span>.</button>
+					<button onclick="upCvt()">Upgrade Cultivator for $<span id="upcvtprice">2.00e4</span>.</button>
+					<br><br>
+					<b>You need at least one picked plant for cultivators to work.</b>
+				</div>
+				<br><hr><br>
+				<div id="Bees" style="width: 90%; visibility: hidden;">
+					You have <span id="bees">0</span> honeybees.
+					<br>
+					You have <span id="honey">0</span> honey.
+					<br><br>
+					<button id="sellhoney" onclick="sellHoney()">Sell 1 honey</button>
+					<br><br>
+					Price of 1 honey: $<span id="honeyprice">2.50</span>
+					<br><br>
+					<b>Tip: leave some plants unpicked so you can attract more bees and make more honey.</b>
+				</div>
 			</div>
-			<br><hr><br>
-			<div id="Pots" style="width: 90%; visibility: hidden;">
-				You have <span id="cvts">0</span> cultivators.
-				<br><br>
-				<button onclick="buyCvt()">Buy 1 Cultivator for $<span id="cvtprice">20.00</span>.</button>
-				<br>
-				<b>You need at least one picked plant for cultivators to work.</b>
-			</div>
-			<br><hr><br>
-			<div id="Bees" style="width: 90%; visibility: hidden;">
-				You have <span id="bees">0</span> honeybees.
-				<br>
-				You have <span id="honey">0</span> honey.
-				<br><br>
-				<b>Tip: leave some plants unpicked so you can attract more bees and make more honey.</b>
+			<div id="Plants2" style="width: 50%; visibility: hidden;">
+				Marketing level: <span id="marketinglevel">0</span>
 			</div>
 		</div>
-		<a href="https://bit.ly/2Bru1VR" title="Link to my Instagram"><s style="position: absolute; bottom: 0px; left: 0px; font-family: sans-serif; font-size: 10px">:.|:;</s></a>
+		<a href="https://bit.ly/2Bru1VR" title="https://bit.ly/2Bru1VR"><s style="position: absolute; bottom: 0px; left: 0px; font-family: sans-serif; font-size: 10px">:.|:;</s></a>
 	</body>
 </html>

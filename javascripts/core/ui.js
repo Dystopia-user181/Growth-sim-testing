@@ -3,8 +3,10 @@ function updateUI() {
 	$("plantsUn").innerText = toSci(player.plantUnpicked, 0);
 	$("moneycount").innerText = toSci(player.money, 2);
 	$("price").innerText = toSci(plantSell/10, 2);
+	$("honeyprice").innerText = toSci(plantSell/2, 2);
 	$("cvts").innerText = toSci(player.container, 0);
 	$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
+	$("cvtlevel").innerText = toSci(player.containerLevel, 0);
 	$("bees").innerText = toSci(player.bee, 0);
 	$("honey").innerText = toSci(player.honey, 0);
 	(player.tutorial.unlockedSell) ? $("sellplant").style.visibility = "visible" : $("sellplant").style.visibility = "hidden";
@@ -15,3 +17,6 @@ function updateUI() {
 	player.version = "0.0.0.3";
 }
 setInterval(updateUI, 50);
+function invert() {
+	$("html").style.filter=="invert(0)" ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
+}

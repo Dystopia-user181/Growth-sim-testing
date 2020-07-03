@@ -8,7 +8,7 @@ function unplant() {
 setInterval(function () {
 	player.plantUnpicked = player.plantUnpicked.add(1).add(player.plantUnpicked.min(player.bee));
 	if (player.plantUnpicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
-	player.honey = player.honey.add(player.bee.min(player.plantUnpicked));
+	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.7));
 }, 1000);
 function sell() {
 	if (player.plantPicked.lte(0)) return;

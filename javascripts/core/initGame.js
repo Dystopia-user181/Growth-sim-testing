@@ -8,10 +8,12 @@ var initPlayer = {
 	containerLevel: 0,
 	plantium: new Decimal(0),
 	machine: 0,
+	marketing: 0,
 	tutorial: {
 		unlockedSell: false,
 		unlockedPots: false,
-		unlockedHoneybee: false
+		unlockedHoneybee: false,
+		unlockedMarketing: false
 	},
 	version: "0.0.0.3"
 };
