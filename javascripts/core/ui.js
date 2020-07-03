@@ -14,6 +14,7 @@ function updateUI() {
 	(player.tutorial.unlockedSell) ? $("priceSpan").style.visibility = "visible" : $("priceSpan").style.visibility = "hidden";
 	(player.tutorial.unlockedPot) ? $("Pots").style.visibility = "visible" : $("Pots").style.visibility = "hidden";
 	(player.tutorial.unlockedHoneybee) ? $("Bees").style.visibility = "visible" : $("Bees").style.visibility = "hidden";
+	(player.tutorial.unlockedMarketing) ? $("Plants2").style.visibility = "visible" : $("Plants2").style.visibility = "hidden";
 	player.version = "0.0.0.3";
 }
 setInterval(updateUI, 50);

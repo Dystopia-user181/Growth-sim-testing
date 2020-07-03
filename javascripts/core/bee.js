@@ -9,4 +9,5 @@ function sellHoney() {
 	player.honey = player.honey.sub(1);
 	player.money = player.money.add(plantSell/2);
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
+	if (player.money.gte(1000)) player.tutorial.unlockedMarketing = true;
 }

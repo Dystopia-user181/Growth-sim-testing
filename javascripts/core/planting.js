@@ -15,6 +15,7 @@ function sell() {
 	player.plantPicked = player.plantPicked.sub(1);
 	player.money = player.money.add(plantSell/10);
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
+	if (player.money.gte(1000)) player.tutorial.unlockedMarketing = true;
 }
 function buyCvt() {
 	if (player.money.lt(player.container.mul(5).add(20))) return;
