@@ -8,7 +8,14 @@ var initPlayer = {
 	containerLevel: 0,
 	plantium: new Decimal(0),
 	machine: 0,
-	marketing: 0,
+	marketing: new Decimal(0),
+	automator: {
+		sellPlant: 0,
+		sellHoney: 0,
+		autobuycontainer: false,
+		autobuycontainerup: false,
+		autobuymarketing: false
+	}
 	tutorial: {
 		unlockedSell: false,
 		unlockedPots: false,

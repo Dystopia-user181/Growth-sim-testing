@@ -30,6 +30,8 @@ Object.keys(initPlayer).forEach(function (key, index) {
 				parsedSave[key][key2] = new Decimal(parsedSave[key][key2]);
 			}
 		});
+	} else if (typeof parsedSave[key] != typeof initPlayer[key]) {
+		parsedSave[key] = initPlayer[key];
 	}
 });
 player = parsedSave;

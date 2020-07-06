@@ -13,7 +13,7 @@ setInterval(function () {
 function sell() {
 	if (player.plantPicked.lte(0)) return;
 	player.plantPicked = player.plantPicked.sub(1);
-	player.money = player.money.add(plantSell/10);
+	player.money = player.money.add(Decimal.pow(1.1, player.marketing).mul(plantSell/10));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(1000)) player.tutorial.unlockedMarketing = true;
 }
