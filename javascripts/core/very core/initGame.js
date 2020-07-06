@@ -15,7 +15,7 @@ var initPlayer = {
 		autobuycontainer: false,
 		autobuycontainerup: false,
 		autobuymarketing: false
-	}
+	},
 	tutorial: {
 		unlockedSell: false,
 		unlockedPots: false,
