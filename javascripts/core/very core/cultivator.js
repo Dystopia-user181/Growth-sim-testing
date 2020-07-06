@@ -1,5 +1,5 @@
 function grow() {
-	player.plantPicked = player.plantPicked.add(player.plantPicked.min(player.container).pow(player.containerLevel/5+1).mul(player.honey.pow(0.4)));
+	player.plantPicked = player.plantPicked.add(player.plantPicked.min(player.container).pow(player.containerLevel/5+1).mul(player.honey.add(1).pow(0.4)));
 	if (player.plantPicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
 }
 setInterval(grow, 1000);
