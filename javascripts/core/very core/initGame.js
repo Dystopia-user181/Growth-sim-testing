@@ -5,16 +5,23 @@ var initPlayer = {
 	bee: new Decimal(0),
 	honey: new Decimal(0),
 	container: new Decimal(0),
-	containerLevel: 0,
+	containerLevel: new Decimal(0),
 	plantium: new Decimal(0),
 	machine: 0,
 	marketing: new Decimal(0),
 	automator: {
 		sellPlant: 0,
 		sellHoney: 0,
-		autobuycontainer: false,
-		autobuycontainerup: false,
-		autobuymarketing: false
+		buycontainer: false,
+		buycontainerup: false,
+		buymarketing: false
+	},
+	automatorUnlocked: {
+		sellPlant: false,
+		sellHoney: false,
+		buycontainer: false,
+		buycontainerup: false,
+		buymarketing: false
 	},
 	tutorial: {
 		unlockedSell: false,
@@ -22,7 +29,7 @@ var initPlayer = {
 		unlockedHoneybee: false,
 		unlockedMarketing: false
 	},
-	version: "0.0.0.3"
+	version: "0.0.0.4"
 };
 var player = initPlayer;
 var plantSell = 5;

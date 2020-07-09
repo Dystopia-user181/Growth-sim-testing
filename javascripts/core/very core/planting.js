@@ -8,7 +8,11 @@ function unplant() {
 setInterval(function () {
 	player.plantUnpicked = player.plantUnpicked.add(1).add(player.plantUnpicked.min(player.bee));
 	if (player.plantUnpicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
+	var prevHoney = player.honey;
 	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.7));
+	prevHoney = player.honey.sub(prevHoney);
+	player.money = player.money.add(prevHoney.mul(player.automator.sellHoney).mul(Decimal.pow(1.1, player.marketing).mul(plantSell/200)));
+	player.honey = player.honey.sub(prevHoney.mul(player.automator.sellHoney));
 }, 1000);
 function sell() {
 	if (player.plantPicked.lte(0)) return;

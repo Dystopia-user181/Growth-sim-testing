@@ -5,3 +5,10 @@
 4. Click "clone".
 5. Open the folder for the repository, and click on index.html.
 6. You can now play the test version of the game.
+
+# New update
+1. Open the repository on github desktop
+2. Click pull on origin on the top bar of github desktop
+3. Play it again
+
+## Also you can change the code a bit and make a pull request idk

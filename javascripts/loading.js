@@ -1,4 +1,3 @@
-if (localStorage.getItem("growthsimsave") === null) throw "Save Not found.";
 /*
 throw (truck)
 try 
@@ -14,9 +13,15 @@ Redfire has AD clone
 "Hello world";
 Why doesn't this code have "use strict";?
 ```js- wait I'm not in discord
+qwertyuiopasdfghjklzxcvbnm
+mnbvcxzlkjhgfdsapoiuytrewq
+qazwsxedcrfvtgbyhnujmikolp
+plmoknijbuhvygctfxrdzeswaq
+B
 */
+if (localStorage.getItem("growthsimsave") === null) throw "Save Not found.";
 var parsedSave = JSON.parse(localStorage.getItem("growthsimsave"));
-if (parsedSave.version !== "0.0.0.3") throw "Save Too Old, balancing incorrect";
+if (parsedSave.version !== "0.0.0.4") throw "Save Too Old, balancing incorrect";
 Object.keys(initPlayer).forEach(function (key, index) {
 	if (parsedSave[key] === undefined) {
 		parsedSave[key] = initPlayer[key];
@@ -35,3 +40,5 @@ Object.keys(initPlayer).forEach(function (key, index) {
 	}
 });
 player = parsedSave;
+$("plantinput").value = player.automator.sellPlant*100;
+$("honeyinput").value = player.automator.sellHoney*100;
