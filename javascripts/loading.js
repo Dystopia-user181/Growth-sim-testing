@@ -33,6 +33,8 @@ Object.keys(initPlayer).forEach(function (key, index) {
 				parsedSave[key] = initPlayer[key];
 			} else if (typeof parsedSave[key][key2] === "string" && typeof initPlayer[key][key2] === "object") {
 				parsedSave[key][key2] = new Decimal(parsedSave[key][key2]);
+			} else if (typeof parsedSave[key] != typeof initPlayer[key]) {
+				parsedSave[key][key2] = initPlayer[key][key2];
 			}
 		});
 	} else if (typeof parsedSave[key] != typeof initPlayer[key]) {
@@ -42,3 +44,6 @@ Object.keys(initPlayer).forEach(function (key, index) {
 player = parsedSave;
 $("plantinput").value = player.automator.sellPlant*100;
 $("honeyinput").value = player.automator.sellHoney*100;
+$("buycontainer").innerText = getnff(player.automator.buycontainer);
+$("buycontainerup").innerText = getnff(player.automator.buycontaineup);
+$("buymarketing").innerText = getnff(player.automator.buymarketing);

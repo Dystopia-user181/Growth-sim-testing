@@ -1,5 +1,5 @@
 var initPlayer = {
-	money: new Decimal(0),
+	money: new Decimal(20),
 	plantUnpicked: new Decimal(200),
 	plantPicked: new Decimal(0),
 	bee: new Decimal(0),

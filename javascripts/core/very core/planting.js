@@ -13,16 +13,17 @@ setInterval(function () {
 	prevHoney = player.honey.sub(prevHoney);
 	player.money = player.money.add(prevHoney.mul(player.automator.sellHoney).mul(Decimal.pow(1.1, player.marketing).mul(plantSell/200)));
 	player.honey = player.honey.sub(prevHoney.mul(player.automator.sellHoney));
+	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
+	if (player.automator.buymarketing) buyMaxMark(player.money);
+	if (player.automator.buycontainer) buyMaxCvt(player.money);
 }, 1000);
 function sell() {
 	if (player.plantPicked.lte(0)) return;
 	player.plantPicked = player.plantPicked.sub(1);
-	player.money = player.money.add(Decimal.pow(1.1, player.marketing).mul(plantSell/10));
+	player.money = player.money.add(Decimal.pow(1.1, player.marketing).mul(plantSell/5));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(1000)) player.tutorial.unlockedMarketing = true;
-}
-function buyCvt() {
-	if (player.money.lt(player.container.mul(5).add(20))) return;
-	player.money = player.money.sub(player.container.mul(5).add(20));
-	player.container = player.container.add(1);
+	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
+	if (player.automator.buymarketing) buyMaxMark(player.money);
+	if (player.automator.buycontainer) buyMaxCvt(player.money);
 }

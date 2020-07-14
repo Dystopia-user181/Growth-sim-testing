@@ -46,35 +46,51 @@
 					</div>
 				</div>
 				<br><hr><br>
+				<h3 id="tbuPots">Unlocked at $40.00</h3>
 				<div id="Pots" style="width: 90%; display: none;">
 					You have <span id="cvts">0</span> cultivators.  Your cultivators are at level <span id="cvtlevel">0</span>.
 					<br><br>
 					<button onclick="buyCvt()">Buy 1 Cultivator for $<span id="cvtprice">20.00</span>.</button>
 					<button onclick="upCvt()">Upgrade Cultivator for $<span id="upcvtprice">2.00e4</span>.</button>
 					<br><br>
+					<b>Cultivators make plants in your inventory regrow. You need at least one plant in your inventory for them to work.</b>
+				</div>
+				<div id="Hives" style="width: 90%; display: none;">
+					You have <span id="hives">0</span> hives.  Your hives are at level <span id="hiveslevel">0</span>.
+					<br><br>
+					<button onclick="buyHive()">Buy 1 Beehive for $<span id="hiveprice">20.00</span>.</button>
+					<button onclick="upHive()">Upgrade Beehives for $<span id="uphiveprice">2.00e4</span>.</button>
+					<br><br>
 					<b>You need at least one plant in your inventory.</b>
 				</div>
 			</div>
-			<div id="Plants2" style="width: 50%; display: none;">
-				Marketing level: <span id="marketingLevel">0</span>
-				<button onclick="upmarketing()">Upgrade Marketing for $<span id="marketingPrice">0.00</span></button>
-				<br><hr><br>
-				<b>Automators</b>
-				<br>
-				<button onclick="buyAuto('sellPlant', 1e3)" id="buyAutomatorSellPlant">Unlock Automator for selling plants for $1.00e3</button>
-				<div class="automatorDiv" id="plantAuto" style="display: none;">
-					Sell <input type="number" max="100" min="0" value="0" id="plantinput" style="width: 10em" onchange="updatePlantAuto()"/>% of plants produced
+			<div style="width: 50%;"><h3 id="tbuAuto">Unlocked at $1.00e3</h3>
+				<div id="Plants2" style="display: none;">
+					Marketing level: <span id="marketingLevel">0</span>
+					<button onclick="upmarketing()">Upgrade Marketing for $<span id="marketingPrice">0.00</span></button>
+					<br><hr><br>
+					<b>Automators</b>
+					<br>
+					<button onclick="buyAuto('sellPlant', new Decimal(500))" id="buyAutomatorSellPlant">Unlock Automator for selling plants for $500.00</button>
+					<div class="automatorDiv" id="plantAuto" style="display: none;">
+						Sell <input type="number" min="0" max="100" value="0" id="plantinput" style="width: 10em" onchange="updatePlantAuto()"/>% of plants produced
+					</div>
+					<button onclick="buyAuto('sellHoney', new Decimal(1e5))" id="buyAutomatorSellHoney">Unlock Automator for selling honey for $1.00e5</button>
+					<div class="automatorDiv" id="honeyAuto" style="display: none;">
+						Sell <input type="number" min="0" max="100" value="0" id="honeyinput" style="width: 10em" onchange="updateHoneyAuto()"/>% of honey produced 
+					</div>
+					<button onclick="buyAuto('buycontainer', new Decimal(1e8))" id="buyAutomatorSellCvt">Unlock Automator for buying cultivators and hives for $1.00e8 (requires 200 cultivators and hives)</button>
+					<button onclick="buyAuto('buycontainerup', new Decimal(1e10))" id="buyAutomatorSellCvtup">Unlock Automator for buying cultivator upgrades for $1.00e10</button>
+					<button onclick="buyAuto('buymarketing', new Decimal(1e12))" id="buyAutomatorSellMark">Unlock Automator for buying marketing for $1.00e12</button>
+					<div class="automatorDiv" id="autobuydiv" style="display: none;">
+						<span id="cvtautospan" style="display: none;">Cultivator autobuyer: <button id="buycontainer" onclick="toggleAuto('buycontainer')">OFF</button></span>
+						<br>
+						<span id="cvtautoupspan" style="display: none;">Cultivator Upgrade autobuyer: <button id="buycontainerup" onclick="toggleAuto('buycontainerup')">OFF</button></span>
+						<span id="markautospan" style="display: none;">Marketing autobuyer: <button id="buymarketing" onclick="toggleAuto('buymarketing')">OFF</button></span>
+					</div>
 				</div>
-				<button onclick="buyAuto('sellHoney', 1e6)" id="buyAutomatorSellHoney">Unlock Automator for selling honey for $1.00e6</button>
-				<div class="automatorDiv" id="honeyAuto" style="display: none;">
-					Sell <input type="number" max="100" min="0" value="0" id="honeyinput" style="width: 10em" onchange="updateHoneyAuto()"/>% of honey produced 
-				</div>
-				<button onclick="buyAuto('buycontainer', 1e9)" id="buyAutomatorSellCvt">Unlock Automator for buying cultivators for $1.00e9</button>
-				<div class="automatorDiv" style="display: none;"></div>
-				<button onclick="buyAuto('buycontainerup', 1e12)" id="buyAutomatorSellCvtup">Unlock Automator for buying cultivator upgrades for $1.00e12</button>
-				<div class="automatorDiv" style="display: none;"></div>
 			</div>
 		</div>
-		<a href="https://bit.ly/2Bru1VR" title="https://bit.ly/2Bru1VR"><s style="position: absolute; bottom: 0px; left: 0px; font-family: sans-serif; font-size: 10px">:.|:;</s></a>
+		<a href="https://bit.ly/2Bru1VR" title="Is this loss?"><s style="position: fixed; bottom: 0px; left: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 	</body>
 </html>
