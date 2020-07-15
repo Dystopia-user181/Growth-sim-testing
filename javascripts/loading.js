@@ -21,6 +21,8 @@ B
 */
 function load(save) {
 	if (save.version !== "0.0.0.4") return "Save Too Old, balancing incorrect";
+	if (typeof save !== "object") return;
+	if (save === null) return;
 	Object.keys(initPlayer).forEach(function (key, index) {
 		if (save[key] === undefined) {
 			save[key] = initPlayer[key];
@@ -52,4 +54,16 @@ function load(save) {
 var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
 if (localStorage.getItem("growthsimsave") !== null) {
 	load(parsedsave);
+}
+function expo() {
+	var sv = $("savetext");
+	sv.style.display = "block";
+	sv.innerText = btoa(JSON.stringify(player));
+	sv.focus();
+	sv.select();
+	document.execCommand('copy');
+	sv.style.display = "none";
+}
+function impo() {
+	load(JSON.parse(atob(prompt("Paste your save here."))));
 }
