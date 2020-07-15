@@ -5,12 +5,21 @@ function updateUI() {
 	$("price").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell/5), 2);
 	$("honeyprice").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell/2), 2);
 	$("cvts").innerText = toSci(player.container, 0);
+	$("hives").innerText = toSci(player.hive, 0);
 	if (player.container.lte(200)) {
 		$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
 	} else {
 		$("cvtprice").innerText = toSci(Decimal.pow(1.01, player.container.sub(200)).mul(1000), 2);
 	}
-	$("upcvtprice").innerText = toSci(Decimal.pow(2e3, player.containerLevel).mul(2e3, 2));
+	if (player.hive.lte(200)) {
+		$("hiveprice").innerText = toSci(player.hive.mul(5).add(20), 2);
+	} else {
+		$("hiveprice").innerText = toSci(Decimal.pow(1.01, player.hive.sub(200)).mul(1000), 2);
+	}
+	$("upcvtprice").innerText = toSci(Decimal.pow(2e3, player.containerLevel).mul(2e3), 2);
+	$("honeycombamt").innerText = toSci(player.honeycomb, 0);
+	$("honeycombpersec").innerText = toSci(player.hive.pow(2), 0);
+	$("combeffect").innerText = toSci(player.honeycomb.pow(0.6).add(1), 2);
 	$("cvtlevel").innerText = toSci(player.containerLevel, 0);
 	$("bees").innerText = toSci(player.bee, 0);
 	$("honey").innerText = toSci(player.honey, 0);
@@ -22,6 +31,7 @@ function updateUI() {
 	$("tbuAuto").style.display = getDisplay((!player.tutorial.unlockedMarketing) && (player.tutorial.unlockedSell));
 	$("Pots").style.display = getDisplay(player.tutorial.unlockedPot);
 	$("Bees").style.display = getDisplay(player.tutorial.unlockedHoneybee);
+	$("Hives").style.display = getDisplay(player.tutorial.unlockedPot && player.tutorial.unlockedHoneybee);
 	$("Plants2").style.display = getDisplay(player.tutorial.unlockedMarketing);
 	$("buyAutomatorSellPlant").style.display = getDisplay(!player.automatorUnlocked.sellPlant);
 	$("plantAuto").style.display = getDisplay(player.automatorUnlocked.sellPlant);
@@ -45,4 +55,5 @@ function getInlineDisplay (trueFalse) {
 setInterval(updateUI, 50);
 function invert() {
 	$("html").style.filter=="invert(0)" ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
+	player.option.invert = !player.option.invert;
 }

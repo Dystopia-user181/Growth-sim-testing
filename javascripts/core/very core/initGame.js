@@ -9,6 +9,8 @@ var initPlayer = {
 	plantium: new Decimal(0),
 	machine: 0,
 	marketing: new Decimal(0),
+	hive: new Decimal(0),
+	honeycomb: new Decimal(0),
 	automator: {
 		sellPlant: 0,
 		sellHoney: 0,
@@ -29,10 +31,17 @@ var initPlayer = {
 		unlockedHoneybee: false,
 		unlockedMarketing: false
 	},
+	option: {
+		invert: false,
+		autosave: true
+	},
 	version: "0.0.0.4"
 };
 var player = initPlayer;
 var plantSell = 5;
 function $(elmt) {
 	return document.getElementById(elmt);
+}
+function getnff(bool) {
+	if (bool) return "ON"; else return "OFF";
 }

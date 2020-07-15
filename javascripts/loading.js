@@ -19,31 +19,37 @@ qazwsxedcrfvtgbyhnujmikolp
 plmoknijbuhvygctfxrdzeswaq
 B
 */
-if (localStorage.getItem("growthsimsave") === null) throw "Save Not found.";
-var parsedSave = JSON.parse(localStorage.getItem("growthsimsave"));
-if (parsedSave.version !== "0.0.0.4") throw "Save Too Old, balancing incorrect";
-Object.keys(initPlayer).forEach(function (key, index) {
-	if (parsedSave[key] === undefined) {
-		parsedSave[key] = initPlayer[key];
-	} else if (typeof parsedSave[key] === "string" && typeof initPlayer[key] === "object") {
-		parsedSave[key] = new Decimal(parsedSave[key]);
-	} else if (typeof initPlayer[key] === "object" && typeof parsedSave[key] === "object") {
-		Object.keys(initPlayer).forEach(function (key2, index2) {
-			if (parsedSave[key] === undefined) {
-				parsedSave[key] = initPlayer[key];
-			} else if (typeof parsedSave[key][key2] === "string" && typeof initPlayer[key][key2] === "object") {
-				parsedSave[key][key2] = new Decimal(parsedSave[key][key2]);
-			} else if (typeof parsedSave[key] != typeof initPlayer[key]) {
-				parsedSave[key][key2] = initPlayer[key][key2];
-			}
-		});
-	} else if (typeof parsedSave[key] != typeof initPlayer[key]) {
-		parsedSave[key] = initPlayer[key];
-	}
-});
-player = parsedSave;
-$("plantinput").value = player.automator.sellPlant*100;
-$("honeyinput").value = player.automator.sellHoney*100;
-$("buycontainer").innerText = getnff(player.automator.buycontainer);
-$("buycontainerup").innerText = getnff(player.automator.buycontaineup);
-$("buymarketing").innerText = getnff(player.automator.buymarketing);
+function load(save) {
+	if (save.version !== "0.0.0.4") return "Save Too Old, balancing incorrect";
+	Object.keys(initPlayer).forEach(function (key, index) {
+		if (save[key] === undefined) {
+			save[key] = initPlayer[key];
+		} else if (typeof save[key] === "string" && typeof initPlayer[key] === "object") {
+			save[key] = new Decimal(save[key]);
+		} else if (typeof initPlayer[key] === "object" && typeof save[key] === "object") {
+			Object.keys(initPlayer).forEach(function (key2, index2) {
+				if (save[key] === undefined) {
+					save[key] = initPlayer[key];
+				} else if (typeof save[key][key2] === "string" && typeof initPlayer[key][key2] === "object") {
+					save[key][key2] = new Decimal(save[key][key2]);
+				} else if (typeof save[key] != typeof initPlayer[key]) {
+					save[key][key2] = initPlayer[key][key2];
+				}
+			});
+		} else if (typeof save[key] != typeof initPlayer[key]) {
+			save[key] = initPlayer[key];
+		}
+	});
+	player = save;
+	$("plantinput").value = player.automator.sellPlant*100;
+	$("honeyinput").value = player.automator.sellHoney*100;
+	$("buycontainer").innerText = getnff(player.automator.buycontainer);
+	$("buycontainerup").innerText = getnff(player.automator.buycontainerup);
+	$("buymarketing").innerText = getnff(player.automator.buymarketing);
+	(player.option.invert) ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
+	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
+}
+var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
+if (localStorage.getItem("growthsimsave") !== null) {
+	load(parsedsave);
+}

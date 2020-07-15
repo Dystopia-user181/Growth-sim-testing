@@ -16,6 +16,3 @@ function toggleAuto(name) {
 	player.automator[name] = !player.automator[name];
 	$(name).innerText = getnff(player.automator[name]);
 }
-function getnff(bool) {
-	if (bool) return "ON"; else return "OFF";
-}

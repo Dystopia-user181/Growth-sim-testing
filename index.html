@@ -11,6 +11,7 @@
 		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/very core/cultivator.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/very core/hive.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/very core/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
@@ -22,10 +23,16 @@
 		<a href="https://discord.gg/DVy4XjB">Discord</a>
 		<br><br>
 		<button onclick="tab('Plants')">Plants</button>
-		<button onclick="invert()" style="position: absolute; right: 0;">Toggle Dark Mode</button>
+		<div style="position: absolute; right: 0; transform: translateY(-100%);">
+			<button onclick="save()" class="optionsbtn">Save</button><button onclick="togglesave()" class="optionsbtn" id="autosave?">Autosave: ON</button>
+			<br>
+			<button onclick="expo()" class="optionsbtn">Export</button><button onclick="impo()" class="optionsbtn">Import</button>
+			<br>
+			<button onclick="reset()" class="optionsbtn">Reset the game</button><button onclick="invert()" class="optionsbtn">Toggle Theme</button>
+		</div>
 		<hr>
 		You have <span id="plants">0</span> Plants in your inventory.
-		<br><br>
+		<br>
 		There are <span id="plantsUn">200</span> Plants in the field.
 		<br><br>
 		<div id="Plants" class="tab" style="display: flex; align-items: flex-start;">
@@ -35,6 +42,7 @@
 					<button id="sellplant" onclick="sell()" style="display: none;">Sell 1 plant for  $<span id="price">0.50</span></button>
 					<br>
 					<p id="moneys" style="display: none;">You have $<span id="moneycount">0.00</span></p>
+					<br>
 					<div id="Bees" style="width: 90%; display: none;">
 						You have <span id="bees">0</span> honeybees.
 						<br>
@@ -55,16 +63,16 @@
 					<br><br>
 					<b>Cultivators make plants in your inventory regrow. You need at least one plant in your inventory for them to work.</b>
 				</div>
-				<div id="Hives" style="width: 90%; display: none;">
-					You have <span id="hives">0</span> hives.  Your hives are at level <span id="hiveslevel">0</span>.
+				<br>
+				<div id="Hives" style="width: 90%; display: block;">
+					You have <span id="hives">0</span> hives, producing <span id="honeycombpersec">0</span> honeycombs per second.
+					<br>
+					Your <span id="honeycombamt">0</span> honeycombs are boosting bee production by x<span id="combeffect">1.00</span>
 					<br><br>
 					<button onclick="buyHive()">Buy 1 Beehive for $<span id="hiveprice">20.00</span>.</button>
-					<button onclick="upHive()">Upgrade Beehives for $<span id="uphiveprice">2.00e4</span>.</button>
-					<br><br>
-					<b>You need at least one plant in your inventory.</b>
 				</div>
 			</div>
-			<div style="width: 50%;"><h3 id="tbuAuto">Unlocked at $1.00e3</h3>
+			<div style="width: 50%;"><h3 id="tbuAuto">Unlocked at $500.00</h3>
 				<div id="Plants2" style="display: none;">
 					Marketing level: <span id="marketingLevel">0</span>
 					<button onclick="upmarketing()">Upgrade Marketing for $<span id="marketingPrice">0.00</span></button>
@@ -92,6 +100,6 @@
 				</div>
 			</div>
 		</div>
-		<a href="https://bit.ly/2Bru1VR" title="Is this loss?"><s style="position: fixed; bottom: 0px; left: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
+		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 	</body>
 </html>
