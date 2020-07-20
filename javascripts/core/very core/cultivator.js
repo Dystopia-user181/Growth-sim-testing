@@ -1,8 +1,8 @@
 function grow() {
 	var prevPlants = player.plantPicked;
-	player.plantPicked = player.plantPicked.add(player.plantPicked.min(player.container).pow(player.containerLevel/2+1).mul(player.honey.add(1).pow(0.2)));
+	player.plantPicked = player.plantPicked.add(player.plantPicked.min(player.container).max(1).pow(player.containerLevel/1.8+1).mul(player.honey.add(1).pow(0.2)));
 	prevPlants = player.plantPicked.sub(prevPlants);
-	player.money = player.money.add(prevPlants.mul(player.automator.sellPlant).mul(Decimal.pow(1.1, player.marketing).mul(plantSell/5)));
+	player.money = player.money.add(prevPlants.mul(player.automator.sellPlant).mul(Decimal.pow(1.2, player.marketing).mul(plantSell/5)));
 	player.plantPicked = player.plantPicked.sub(prevPlants.mul(player.automator.sellPlant));
 	if (player.plantPicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
