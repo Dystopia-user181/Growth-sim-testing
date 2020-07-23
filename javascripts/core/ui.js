@@ -1,13 +1,13 @@
 function updateUI() {
-	$("plants").innerText = toSci(player.plantPicked, 0);
-	$("plantsUn").innerText = toSci(player.plantUnpicked, 0);
+	$("plants").innerText = toSci(player.plantPicked);
+	$("plantsUn").innerText = toSci(player.plantUnpicked);
 	$("moneycount").innerText = toSci(player.money, 2);
-	$("price").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell/5), 2);
-	$("priceof10").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell*2), 2);
-	$("honeyprice").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell/2), 2);
-	$("10honeyprice").innerText = toSci(Decimal.pow(1.1, player.marketing).mul(plantSell*5), 2);
-	$("cvts").innerText = toSci(player.container, 0);
-	$("hives").innerText = toSci(player.hive, 0);
+	$("price").innerText = toSci(Decimal.pow(1.5, player.marketing), 2);
+	$("priceof10").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(10), 2);
+	$("honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(5), 2);
+	$("10honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(50), 2);
+	$("cvts").innerText = toSci(player.container);
+	$("hives").innerText = toSci(player.hive);
 	if (player.container.lte(200)) {
 		$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
 	} else {
@@ -19,13 +19,13 @@ function updateUI() {
 		$("hiveprice").innerText = toSci(Decimal.pow(1.01, player.hive.sub(200)).mul(1000), 2);
 	}
 	$("upcvtprice").innerText = toSci(Decimal.pow(2e3, player.containerLevel).mul(2e3), 2);
-	$("honeycombamt").innerText = toSci(player.honeycomb, 0);
-	$("honeycombpersec").innerText = toSci(player.hive.pow(2), 0);
+	$("honeycombamt").innerText = toSci(player.honeycomb);
+	$("honeycombpersec").innerText = toSci(player.hive.pow(2));
 	$("combeffect").innerText = toSci(player.honeycomb.pow(0.3).add(1), 2);
-	$("cvtlevel").innerText = toSci(player.containerLevel, 0);
-	$("bees").innerText = toSci(player.bee, 0);
-	$("honey").innerText = toSci(player.honey, 0);
-	$("marketingLevel").innerText = toSci(player.marketing, 0);
+	$("cvtlevel").innerText = toSci(player.containerLevel);
+	$("bees").innerText = toSci(player.bee);
+	$("honey").innerText = toSci(player.honey);
+	$("marketingLevel").innerText = toSci(player.marketing);
 	$("marketingPrice").innerText = toSci(Decimal.pow(1e5, player.marketing).mul(1e3), 2);
 	$("sellplant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
 	$("sell10plant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
@@ -47,7 +47,8 @@ function updateUI() {
 	$("cvtautoupspan").style.display = getDisplay(player.automatorUnlocked.buycontainerup);
 	$("buyAutomatorSellMark").style.display = getDisplay(!player.automatorUnlocked.buymarketing);
 	$("markautospan").style.display = getDisplay(player.automatorUnlocked.buymarketing);
-	player.version = "0.0.0.4";
+	$("machinetabbtn").innerText = getInlineDisplay(player.tutorial.unlockedMachine);
+	player.version = "0.0.0.5";
 }
 function getDisplay (bool) {
 	return (bool ? "block" : "none");

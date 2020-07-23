@@ -29,16 +29,16 @@ var initPlayer = {
 		unlockedSell: false,
 		unlockedPots: false,
 		unlockedHoneybee: false,
-		unlockedMarketing: false
+		unlockedMarketing: false,
+		unlockedMachine: false
 	},
 	option: {
 		invert: false,
 		autosave: true
 	},
-	version: "0.0.0.4"
+	version: "0.0.0.5"
 };
 var player = initPlayer;
-var plantSell = 5;
 function $(elmt) {
 	return document.getElementById(elmt);
 }

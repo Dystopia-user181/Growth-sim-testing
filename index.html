@@ -3,19 +3,20 @@
 	<head>
 		<title>Growth</title>
 		<link rel="icon" type="image/png" href="icon.png"/>
-		<script defer src="javascripts/break_infinity.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/lib/break_infinity.js" charset="utf-8" type="text/javascript"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<script defer src="javascripts/core/very core/initGame.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/initGame.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/notation.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/very core/planting.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/planting.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/very core/cultivator.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/very core/hive.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/very core/bee.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/cultivator.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/hive.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/ui.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/tab.js" charset="utf-8" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
 	</head>
 	<body>
@@ -23,6 +24,7 @@
 		<a href="https://discord.gg/DVy4XjB">Discord</a>
 		<br><br>
 		<button onclick="tab('Plants')">Plants</button>
+		<button id="machinetabbtn" onclick="tab('Machine')" style="display: none;">Machine</button>
 		<div style="position: absolute; right: 0; transform: translateY(-100%);">
 			<button onclick="save()" class="optionsbtn">Save</button><button onclick="togglesave()" class="optionsbtn" id="autosave?">Autosave: ON</button>
 			<br>
@@ -40,9 +42,9 @@
 				<div id="Main" style="width: 80%;">
 					<button onclick="unplant()">Pick 1 plant.</button>
 					<button id="sellplant" onclick="sell()" style="display: none;">Sell 1 for $<span id="price">1.00</span></button>
-					<button id="sell10plant" onclick="sell10()" style="display: none;">Sell 10 for $<span id="priceof10">10.00</span></button>
+					<button id="sell10plant" onclick="sell(10)" style="display: none;">Sell 10 for $<span id="priceof10">10.00</span></button>
 					<br>
-					<p id="moneys" style="display: none;">You have $<span id="moneycount">0.00</span></p>
+					<p id="moneys" style="display: none;">You have $<span id="moneycount">{{money}}</span></p>
 					<br>
 					<div id="Bees" style="width: 90%; display: none;">
 						You have <span id="bees">0</span> honeybees.
@@ -50,7 +52,7 @@
 						You have <span id="honey">0</span> honey.
 						<br><br>
 						<button id="sellhoney" onclick="sellHoney()">Sell 100 honey for $<span id="honeyprice">2.50</span></button>
-						<button id="sell10honey" onclick="sell10Honey()">Sell 1000 honey for $<span id="10honeyprice">25.00</span></button>
+						<button id="sell10honey" onclick="sellHoney(1000)">Sell 1000 honey for $<span id="10honeyprice">25.00</span></button>
 					</div>
 				</div>
 				<br><hr><br>
@@ -89,7 +91,7 @@
 					<button onclick="buyAuto('buycontainerup', new Decimal(1e10))" id="buyAutomatorSellCvtup">Unlock Automator for buying cultivator upgrades for $1.00e10</button>
 					<button onclick="buyAuto('buymarketing', new Decimal(1e12))" id="buyAutomatorSellMark">Unlock Automator for buying marketing for $1.00e12</button>
 					<div class="automatorDiv" id="autobuydiv" style="display: none;">
-						<span id="cvtautospan" style="display: none;">Cultivator autobuyer: <button id="buycontainer" onclick="toggleAuto('buycontainer')">OFF</button></span>
+						<span id="cvtautospan" style="display: none;">Cultivator and hive autobuyer: <button id="buycontainer" onclick="toggleAuto('buycontainer')">OFF</button></span>
 						<br>
 						<span id="cvtautoupspan" style="display: none;">Cultivator Upgrade autobuyer: <button id="buycontainerup" onclick="toggleAuto('buycontainerup')">OFF</button></span>
 						<br>
@@ -98,6 +100,7 @@
 				</div>
 			</div>
 		</div>
+		<div id="Machine" class="tab" style="display: flex; align-items: flex-start;">Filler text</div>
 		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 		<textarea id="savetext" style="display: none;"></textarea>
 	</body>

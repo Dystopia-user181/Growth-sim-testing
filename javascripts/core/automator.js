@@ -1,6 +1,5 @@
 function buyAuto(name, cost) {
 	if (player.money.lt(cost) || player.automatorUnlocked[name]) return;
-	if (name == "buycontainer" && player.container.lt(200)) return;
 	player.automatorUnlocked[name] = true;
 	player.money = player.money.sub(cost);
 }

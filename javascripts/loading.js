@@ -20,7 +20,11 @@ plmoknijbuhvygctfxrdzeswaq
 B
 */
 function load(save) {
-	if (save.version !== "0.0.0.4") return "Save Too Old, balancing incorrect";
+	if (save.version !== "0.0.0.5") {
+		alert("Save is from an older version and thus is incompatible with the newer version.");
+		player = initPlayer;
+		return;
+	}
 	if (typeof save !== "object") return;
 	if (save === null) return;
 	Object.keys(initPlayer).forEach(function (key, index) {
