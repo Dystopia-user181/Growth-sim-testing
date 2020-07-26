@@ -20,33 +20,14 @@ plmoknijbuhvygctfxrdzeswaq
 B
 */
 function load(save) {
+	if (typeof save !== "object") return;
+	if (save === null) return;
 	if (save.version !== "0.0.0.5") {
 		alert("Save is from an older version and thus is incompatible with the newer version.");
 		player = initPlayer;
 		return;
 	}
-	if (typeof save !== "object") return;
-	if (save === null) return;
-	Object.keys(initPlayer).forEach(function (key, index) {
-		if (save[key] === undefined) {
-			save[key] = initPlayer[key];
-		} else if (typeof save[key] === "string" && typeof initPlayer[key] === "object") {
-			save[key] = new Decimal(save[key]);
-		} else if (typeof initPlayer[key] === "object" && typeof save[key] === "object") {
-			Object.keys(initPlayer).forEach(function (key2, index2) {
-				if (save[key] === undefined) {
-					save[key] = initPlayer[key];
-				} else if (typeof save[key][key2] === "string" && typeof initPlayer[key][key2] === "object") {
-					save[key][key2] = new Decimal(save[key][key2]);
-				} else if (typeof save[key] != typeof initPlayer[key]) {
-					save[key][key2] = initPlayer[key][key2];
-				}
-			});
-		} else if (typeof save[key] != typeof initPlayer[key]) {
-			save[key] = initPlayer[key];
-		}
-	});
-	player = save;
+	player = runParse(save, initPlayer);
 	$("plantinput").value = player.automator.sellPlant*100;
 	$("honeyinput").value = player.automator.sellHoney*100;
 	$("buycontainer").innerText = getnff(player.automator.buycontainer);
@@ -54,6 +35,22 @@ function load(save) {
 	$("buymarketing").innerText = getnff(player.automator.buymarketing);
 	(player.option.invert) ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
 	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
+}
+function runParse(obj, obj2) {
+	Object.keys(obj2).forEach(function (key, index) {
+		if (key != "proto") {
+			if (obj[key] === undefined) {
+				obj[key] = obj2[key];
+			} else if (typeof obj[key] === "string" && typeof obj2[key] === "object") {
+				obj[key] = new Decimal(obj[key]);
+			} else if (typeof initPlayer[key] === "object" && typeof obj[key] === "object") {
+				runParse(obj[key], obj2[key]);
+			} else if (typeof obj[key] != typeof obj2[key]) {
+				obj[key] = obj2[key];
+			}
+		}
+	});
+	return (obj);
 }
 var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
 if (localStorage.getItem("growthsimsave") !== null) {

@@ -47,7 +47,9 @@ function updateUI() {
 	$("cvtautoupspan").style.display = getDisplay(player.automatorUnlocked.buycontainerup);
 	$("buyAutomatorSellMark").style.display = getDisplay(!player.automatorUnlocked.buymarketing);
 	$("markautospan").style.display = getDisplay(player.automatorUnlocked.buymarketing);
-	$("machinetabbtn").innerText = getInlineDisplay(player.tutorial.unlockedMachine);
+	$("machinetabbtn").style.display = getInlineDisplay(player.tutorial.unlockedMachine);
+	$("mach1").style.display = getDisplay(player.machine > 0);
+	$("buyMach1").style.display = getDisplay(player.machine <= 0);
 	player.version = "0.0.0.5";
 }
 function getDisplay (bool) {

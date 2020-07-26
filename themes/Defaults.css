@@ -24,3 +24,9 @@ button:hover {
 .optionsbtn {
 	width: 150px;
 }
+.machine {
+	width: 70%;
+	text-align: center;
+	border: 3px dashed #333;
+	border-radius: 3px;
+}

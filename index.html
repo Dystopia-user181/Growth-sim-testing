@@ -15,6 +15,8 @@
 		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/plantium/makeplantium.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/ui.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/tab.js" charset="utf-8" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
@@ -100,7 +102,15 @@
 				</div>
 			</div>
 		</div>
-		<div id="Machine" class="tab" style="display: flex; align-items: flex-start;">Filler text</div>
+		<div id="Machine" class="tab" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+			<div class="machine" id="machine1" align="center">
+				<h3>Machine</h3>
+				<br>
+				<button onclick="buyMach()" id="buyMach1"><h4>Melt <span id="machCost">$1.00e14 worth of coins into a machine</span></h4></button>
+				<div id="mach1" style="display: none;">Help me this is hell</div>
+				<br>
+			</div>
+		</div>
 		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 		<textarea id="savetext" style="display: none;"></textarea>
 	</body>

@@ -11,4 +11,6 @@ function sellHoney(amt=100) {
 	player.money = player.money.add(Decimal.pow(1.5, player.marketing).mul(0.05).mul(amt));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
+	if (player.money.gte(1e15) && !player.tutorial.unlockedMachine) tab("Machine");
+	if (player.money.gte(1e15)) player.tutorial.unlockedMachine = true;
 }

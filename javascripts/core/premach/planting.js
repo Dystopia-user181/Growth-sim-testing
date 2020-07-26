@@ -28,6 +28,7 @@ function sell(amt = 1) {
 	player.money = player.money.add(Decimal.pow(1.5, player.marketing).mul(amt));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
+	if (player.money.gte(1e15) && !player.tutorial.unlockedMachine) tab("Machine");
 	if (player.money.gte(1e15)) player.tutorial.unlockedMachine = true;
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
 	if (player.automator.buymarketing) buyMaxMark(player.money);

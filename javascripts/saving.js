@@ -11,6 +11,7 @@ function reset() {
 		setTimeout(function () {
 			if (prompt("Type RESET in caps to confirm.") === "RESET") {
 				player = initPlayer;
+				tab("Plant");
 			}
 		}, 400);
 	}
