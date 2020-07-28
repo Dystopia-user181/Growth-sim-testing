@@ -5,11 +5,11 @@ function unplant(amt=1) {
 	player.plantPicked = player.plantPicked.add(amt);
 	sell(amt.mul(player.automator.sellPlant));
 	player.tutorial.unlockedSell = true;
-	if (player.plantPicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
+	if (player.plantPicked.gt(300)) player.tutorial.unlockedHoneybee = true;
 }
 setInterval(function () {
 	player.plantUnpicked = player.plantUnpicked.add(1).add(player.plantUnpicked.min(player.bee));
-	if (player.plantUnpicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
+	if (player.plantUnpicked.gt(300)) player.tutorial.unlockedHoneybee = true;
 	var prevHoney = player.honey;
 	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)));
 	prevHoney = player.honey.sub(prevHoney);

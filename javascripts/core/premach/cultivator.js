@@ -3,7 +3,7 @@ function grow() {
 	player.plantPicked = player.plantPicked.add(player.plantPicked.max(1).min(player.container).pow(player.containerLevel/1.8+1).mul(player.honey.add(1).pow(0.2)));
 	prevPlants = player.plantPicked.sub(prevPlants);
 	sell(prevPlants.mul(player.automator.sellPlant));
-	if (player.plantPicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
+	if (player.plantPicked.gt(300)) player.tutorial.unlockedHoneybee = true;
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
 	if (player.automator.buymarketing) buyMaxMark(player.money);
 	if (player.automator.buycontainer) buyMaxCvt(player.money);
