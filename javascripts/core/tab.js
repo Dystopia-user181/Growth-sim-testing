@@ -1,4 +1,4 @@
-function tab(tab) {
+function tabTo(tab) {
 	let tabs = document.getElementsByClassName("tab");
 	for (var i = 0; i < tabs.length; i++) {
 		if (tabs[i].id !== tab) {
@@ -8,4 +8,3 @@ function tab(tab) {
 		}
 	}
 }
-tab("Plants");

@@ -4,8 +4,10 @@ function updateUI() {
 	$("moneycount").innerText = toSci(player.money, 2);
 	$("price").innerText = toSci(Decimal.pow(1.5, player.marketing), 2);
 	$("priceof10").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(10), 2);
+	$("honeyboost").innerText = toSci(player.honey.add(1).pow(0.2), 2)
 	$("honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(5), 2);
 	$("10honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(50), 2);
+	$("honeypersec").innerText = toSci(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)), 0);
 	$("cvts").innerText = toSci(player.container);
 	$("hives").innerText = toSci(player.hive);
 	if (player.container.lte(200)) {
@@ -50,7 +52,9 @@ function updateUI() {
 	$("machinetabbtn").style.display = getInlineDisplay(player.tutorial.unlockedMachine);
 	$("mach1").style.display = getDisplay(player.machine > 0);
 	$("buyMach1").style.display = getDisplay(player.machine <= 0);
+	$("machinelore").style.display = getDisplay(player.plantium.gt(0));
 	player.version = "0.0.0.5";
+	tabTo(player.navigation.tab);
 }
 function getDisplay (bool) {
 	return (bool ? "block" : "none");

@@ -12,6 +12,9 @@ Why is css
 Redfire has AD clone
 "Hello world";
 Why doesn't this code have "use strict";?
+oh good idea*/
+"use strict";
+/*
 ```js- wait I'm not in discord
 qwertyuiopasdfghjklzxcvbnm
 mnbvcxzlkjhgfdsapoiuytrewq
@@ -35,6 +38,19 @@ function load(save) {
 	$("buymarketing").innerText = getnff(player.automator.buymarketing);
 	(player.option.invert) ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
 	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
+	if (player.plantiumprocess) {
+		$("pbar1").style.transition = "all 20s";
+		setTimeout(function () {
+			$("pbar1").style.width = "100%";
+		});
+		setTimeout(function () {
+			prestige(["plantium", "machine", "tutorial", "option", "version"]);
+			player.plantium = player.plantium.add(1);
+			player.plantiumprocess = false;
+			$("pbar1").style.transition = "";
+			$("pbar1").style.width = "100%";
+		}, 20100);
+	}
 }
 function runParse(obj, obj2) {
 	Object.keys(obj2).forEach(function (key, index) {

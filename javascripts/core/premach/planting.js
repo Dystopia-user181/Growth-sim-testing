@@ -11,7 +11,7 @@ setInterval(function () {
 	player.plantUnpicked = player.plantUnpicked.add(1).add(player.plantUnpicked.min(player.bee));
 	if (player.plantUnpicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
 	var prevHoney = player.honey;
-	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.3).mul(player.honeycomb.pow(0.3).add(1)));
+	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)));
 	prevHoney = player.honey.sub(prevHoney);
 	sellHoney(player.automator.sellHoney);
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
@@ -28,8 +28,8 @@ function sell(amt = 1) {
 	player.money = player.money.add(Decimal.pow(1.5, player.marketing).mul(amt));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
-	if (player.money.gte(1e15) && !player.tutorial.unlockedMachine) tab("Machine");
-	if (player.money.gte(1e15)) player.tutorial.unlockedMachine = true;
+	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) player.navigation.tab = "Machine";
+	if (player.money.gte(1e14)) player.tutorial.unlockedMachine = true;
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
 	if (player.automator.buymarketing) buyMaxMark(player.money);
 	if (player.automator.buycontainer) {

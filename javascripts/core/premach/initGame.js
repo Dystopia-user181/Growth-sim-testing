@@ -7,6 +7,7 @@ var initPlayer = {
 	container: new Decimal(0),
 	containerLevel: new Decimal(0),
 	plantium: new Decimal(0),
+	plantiumprocess: false,
 	machine: 0,
 	marketing: new Decimal(0),
 	hive: new Decimal(0),
@@ -35,6 +36,9 @@ var initPlayer = {
 	option: {
 		invert: false,
 		autosave: true
+	},
+	navigation: {
+		tab: "Plants"
 	},
 	version: "0.0.0.5"
 };

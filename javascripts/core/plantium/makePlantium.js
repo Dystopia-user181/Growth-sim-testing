@@ -3,9 +3,17 @@ function buyMach() {
 	player.machine++;
 }
 function makePlantium() {
-	alert(`The machine explodes violently. It destroys everything you haad previously. Amazingly, you, and the machine, are left unfazed.
-
-The machine outputs a glowing orb. It seems to be an extremely powerful substance, and potentially destructive. You decide to call it plantium because, uh, you couldn't think of a better name.
-
-Will it prove itself to be useful?`)
+	if (player.plantPicked.lt(1e15) || player.honey.lt(1e8) || player.plantiumprocess) return;
+	player.plantiumprocess = true;
+	$("pbar1").style.transition = "all 20s linear";
+	setTimeout(function () {
+		$("pbar1").style.width = "100%";
+	});
+	setTimeout(function () {
+		prestige(["plantium", "machine"]);
+		player.plantium = player.plantium.add(1);
+		player.plantiumprocess = false;
+		$("pbar1").style.transition = "";
+		$("pbar1").style.width = "0%";
+	}, 20100);
 }
