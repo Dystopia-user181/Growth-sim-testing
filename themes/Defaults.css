@@ -44,6 +44,6 @@ button:hover {
 }
 .pbarcontent {
 	height: 100%;
-	width: 0;
+	width: 2%;
 	background: linear-gradient(to right, #da0, #c71);
 }

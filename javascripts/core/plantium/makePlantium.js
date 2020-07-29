@@ -14,6 +14,6 @@ function makePlantium() {
 		player.plantium = player.plantium.add(1);
 		player.plantiumprocess = false;
 		$("pbar1").style.transition = "";
-		$("pbar1").style.width = "0%";
+		$("pbar1").style.width = "2%";
 	}, 20100);
 }

@@ -39,7 +39,7 @@ function load(save) {
 	(player.option.invert) ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
 	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
 	if (player.plantiumprocess) {
-		$("pbar1").style.transition = "all 20s";
+		$("pbar1").style.transition = "all 20s linear";
 		setTimeout(function () {
 			$("pbar1").style.width = "100%";
 		});
@@ -48,7 +48,7 @@ function load(save) {
 			player.plantium = player.plantium.add(1);
 			player.plantiumprocess = false;
 			$("pbar1").style.transition = "";
-			$("pbar1").style.width = "100%";
+			$("pbar1").style.width = "2%";
 		}, 20100);
 	}
 }
