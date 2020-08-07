@@ -31,7 +31,7 @@ function buyMaxCvt(money) {
 	if (player.money.lt(Decimal.pow(1.01, player.container.bought.sub(200)).mul(1000))) return;
 	var cvtamt = new Decimal(money.add(Decimal.pow(1.01, player.container.bought.sub(200)).mul(101000)).div(101000).log(1.01)).sub(player.container.bought.sub(200)).floor().max(0);
 	player.money = player.money.sub(Decimal.pow(1.01, player.container.bought.add(cvtamt).sub(200)).mul(101000).sub(Decimal.pow(1.01, player.container.bought.sub(200)).mul(101000))).max(0);
-	player.container.total.floor() = player.container.total.floor().add(cvtamt);
+	player.container.total = player.container.total.add(cvtamt);
 	player.container.bought = player.container.bought.add(cvtamt);
 }
 function buyMaxCvtUp(money) {
