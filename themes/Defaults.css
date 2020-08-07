@@ -1,12 +1,12 @@
 * {
 	transition: all 0.5s;
-	color: #fff;
-	background: #000;
+	color: var(--c-1);
+	background: var(--bg-1);
 	font-family: Lucida Console;
 	touch-action: manipulation;
 }
 button {
-	border: 2px solid #fff;
+	border: 2px solid var(--c-1);
 	outline: none;
 }
 button:hover {
@@ -14,7 +14,7 @@ button:hover {
 	box-shadow: 0px 0px 7px 1px #fb7;
 }
 .automatorDiv {
-	border: 3px solid #fff;
+	border: 3px solid var(--c-1);
 	border-radius: 3px;
 	width: 95%;
 	margin-top: 5px;
@@ -33,13 +33,13 @@ button:hover {
 	padding-right: 10%;
 	padding-left: 10%;
 	text-align: center;
-	border: 3px dashed #333;
+	border: 3px dashed #888;
 	border-radius: 3px;
 }
 .progressbarplantium {
 	width: 50%;
 	height: 50px;
-	border: 2px solid #fff;
+	border: 2px solid var(--c-1);
 	border-radius: 5px;
 }
 .pbarcontent {

@@ -25,7 +25,7 @@ B
 function load(save) {
 	if (typeof save !== "object") return;
 	if (save === null) return;
-	if (save.version !== "0.0.0.5") {
+	if (save.version !== "0.0.0.6") {
 		alert("Save is from an older version and thus is incompatible with the newer version.");
 		player = initPlayer;
 		return;
@@ -36,7 +36,7 @@ function load(save) {
 	$("buycontainer").innerText = getnff(player.automator.buycontainer);
 	$("buycontainerup").innerText = getnff(player.automator.buycontainerup);
 	$("buymarketing").innerText = getnff(player.automator.buymarketing);
-	(player.option.invert) ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
+	$("theme").setAttribute("href", `themes/${(player.option.invert) ? "Light" : "Dark"}.css`);
 	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
 	if (player.plantiumprocess) {
 		$("pbar1").style.transition = "all 20s linear";
@@ -44,11 +44,12 @@ function load(save) {
 			$("pbar1").style.width = "100%";
 		});
 		setTimeout(function () {
-			prestige(["plantium", "machine", "tutorial", "option", "version"]);
+			prestige(["plantium", "machine", "generators"]);
 			player.plantium = player.plantium.add(1);
 			player.plantiumprocess = false;
 			$("pbar1").style.transition = "";
 			$("pbar1").style.width = "2%";
+			player.tutorial.madeFirstPlantium = true;
 		}, 20100);
 	}
 }

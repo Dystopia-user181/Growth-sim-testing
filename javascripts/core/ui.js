@@ -7,28 +7,37 @@ function updateUI() {
 	$("honeyboost").innerText = toSci(player.honey.add(1).pow(0.2), 2)
 	$("honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(5), 2);
 	$("10honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(50), 2);
-	$("honeypersec").innerText = toSci(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)), 0);
-	$("cvts").innerText = toSci(player.container);
-	$("hives").innerText = toSci(player.hive);
-	if (player.container.lte(200)) {
-		$("cvtprice").innerText = toSci(player.container.mul(5).add(20), 2);
+	$("honeypersec").innerText = toSci(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)), 0);
+	$("cvts").innerText = toSci(player.container.total);
+	$("hives").innerText = toSci(player.hive.total.floor());
+	if (player.container.bought.lte(200)) {
+		$("cvtprice").innerText = toSci(player.container.bought.mul(5).add(20), 2);
 	} else {
-		$("cvtprice").innerText = toSci(Decimal.pow(1.01, player.container.sub(200)).mul(1000), 2);
+		$("cvtprice").innerText = toSci(Decimal.pow(1.01, player.container.bought.sub(200)).mul(1000), 2);
 	}
-	if (player.hive.lte(200)) {
-		$("hiveprice").innerText = toSci(player.hive.mul(5).add(20), 2);
+	if (player.hive.bought.lte(200)) {
+		$("hiveprice").innerText = toSci(player.hive.bought.mul(5).add(20), 2);
 	} else {
-		$("hiveprice").innerText = toSci(Decimal.pow(1.01, player.hive.sub(200)).mul(1000), 2);
+		$("hiveprice").innerText = toSci(Decimal.pow(1.01, player.hive.bought.sub(200)).mul(1000), 2);
 	}
 	$("upcvtprice").innerText = toSci(Decimal.pow(2e3, player.containerLevel).mul(2e3), 2);
 	$("honeycombamt").innerText = toSci(player.honeycomb);
-	$("honeycombpersec").innerText = toSci(player.hive.pow(2));
+	$("honeycombpersec").innerText = toSci(player.hive.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)));
 	$("combeffect").innerText = toSci(player.honeycomb.pow(0.3).add(1), 2);
 	$("cvtlevel").innerText = toSci(player.containerLevel);
 	$("bees").innerText = toSci(player.bee);
 	$("honey").innerText = toSci(player.honey);
 	$("marketingLevel").innerText = toSci(player.marketing);
-	$("marketingPrice").innerText = toSci(Decimal.pow(1e5, player.marketing).mul(1e3), 2);
+	$("marketingPrice").innerText = toSci(Decimal.pow(1e4, player.marketing).mul(1e3), 2);
+	$("generatoramt").innerText = toSci(player.generators);
+	$("plantpow").innerText = toSci(player.plantpow, 1);
+	$("plantpowpersec").innerText = toSci(player.generators.mul(0.1), 1);
+	$("plantpowboost").innerText = toSci(player.plantpow.add(1).pow(1.1), 2);
+	$("plantiumamt").innerText = toSci(player.plantium);
+	$("factoryamt").innerText = toSci(player.factories);
+	$("cvtpersec").innerText = toSci(player.factories, 1);
+	$("hivepersec").innerText = toSci(player.factories.mul(0.5), 1);
+	$("factoryprice").innerText = toSci(Decimal.pow(1.4, player.factories).mul(1e4));
 	$("sellplant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
 	$("sell10plant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
 	$("moneys").style.display = getDisplay(player.tutorial.unlockedSell);
@@ -52,8 +61,11 @@ function updateUI() {
 	$("machinetabbtn").style.display = getInlineDisplay(player.tutorial.unlockedMachine);
 	$("mach1").style.display = getDisplay(player.machine > 0);
 	$("buyMach1").style.display = getDisplay(player.machine <= 0);
-	$("machinelore").style.display = getDisplay(player.plantium.gt(0));
-	player.version = "0.0.0.5";
+	$("machinelore").style.display = getDisplay(player.plantium.gt(0) && player.display.lore);
+	$("collapseExpand").style.display = getInlineDisplay(player.plantium.gt(0));
+	$("plantiumtabbtn").style.display = getInlineDisplay(player.tutorial.madeFirstPlantium);
+	$("factoriesdiv").style.display = getDisplay(player.tutorial.madeFirstPlantium);
+	player.version = "0.0.0.6";
 	tabTo(player.navigation.tab);
 }
 function getDisplay (bool) {
@@ -64,6 +76,7 @@ function getInlineDisplay (bool) {
 }
 setInterval(updateUI, 50);
 function invert() {
-	$("html").style.filter=="invert(0)" ? $("html").style.filter="invert(1)" : $("html").style.filter="invert(0)";
 	player.option.invert = !player.option.invert;
+	$("theme").setAttribute("href", `themes/${(player.option.invert) ? "Light" : "Dark"}.css`);
+	$("updatethisfortheme").setAttribute("href", `themes/Defaults.css`);
 }
