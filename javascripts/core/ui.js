@@ -8,7 +8,7 @@ function updateUI() {
 	$("honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(5), 2);
 	$("10honeyprice").innerText = toSci(Decimal.pow(1.5, player.marketing).mul(50), 2);
 	$("honeypersec").innerText = toSci(player.bee.min(player.plantUnpicked).pow(0.5).mul(player.honeycomb.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)), 0);
-	$("cvts").innerText = toSci(player.container.total);
+	$("cvts").innerText = toSci(player.container.total.floor());
 	$("hives").innerText = toSci(player.hive.total.floor());
 	if (player.container.bought.lte(200)) {
 		$("cvtprice").innerText = toSci(player.container.bought.mul(5).add(20), 2);
@@ -35,9 +35,9 @@ function updateUI() {
 	$("plantpowboost").innerText = toSci(player.plantpow.add(1).pow(1.1), 2);
 	$("plantiumamt").innerText = toSci(player.plantium);
 	$("factoryamt").innerText = toSci(player.factories);
-	$("cvtpersec").innerText = toSci(player.factories, 1);
-	$("hivepersec").innerText = toSci(player.factories.mul(0.5), 1);
-	$("factoryprice").innerText = toSci(Decimal.pow(1.4, player.factories).mul(1e4));
+	$("cvtpersec").innerText = toSci(player.factories.mul(0.2), 1);
+	$("hivepersec").innerText = toSci(player.factories.mul(0.1), 1);
+	$("factoryprice").innerText = toSci(Decimal.pow(2, player.factories).mul(1e4));
 	$("sellplant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
 	$("sell10plant").style.display = getInlineDisplay(player.tutorial.unlockedSell);
 	$("moneys").style.display = getDisplay(player.tutorial.unlockedSell);

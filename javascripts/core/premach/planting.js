@@ -17,8 +17,8 @@ setInterval(function () {
 	player.honeycomb = player.honeycomb.add(player.hive.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)));
 	addHoneyBee();
 	grow();
-	player.container.total = player.container.total.add(player.factories);
-	player.hive.total = player.hive.total.add(player.factories.mul(0.5));
+	player.container.total = player.container.total.add(player.factories.mul(0.2));
+	player.hive.total = player.hive.total.add(player.factories.mul(0.1));
 	if (player.automator.buycontainerup) buyMaxCvtUp(player.money);
 	if (player.automator.buymarketing) buyMaxMark(player.money);
 	if (player.automator.buycontainer) {

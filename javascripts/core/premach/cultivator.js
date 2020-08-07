@@ -1,6 +1,6 @@
 function grow() {
 	var prevPlants = player.plantPicked;
-	player.plantPicked = player.plantPicked.add(player.plantPicked.max(1).min(player.container.total).pow(player.containerLevel.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)));
+	player.plantPicked = player.plantPicked.add(player.plantPicked.max(1).min(player.container.total.floor()).pow(player.containerLevel.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)));
 	prevPlants = player.plantPicked.sub(prevPlants);
 	sell(prevPlants.mul(player.automator.sellPlant));
 	if (player.plantPicked.gt(300)) player.tutorial.unlockedHoneybee = true;
@@ -31,7 +31,7 @@ function buyMaxCvt(money) {
 	if (player.money.lt(Decimal.pow(1.01, player.container.bought.sub(200)).mul(1000))) return;
 	var cvtamt = new Decimal(money.add(Decimal.pow(1.01, player.container.bought.sub(200)).mul(101000)).div(101000).log(1.01)).sub(player.container.bought.sub(200)).floor().max(0);
 	player.money = player.money.sub(Decimal.pow(1.01, player.container.bought.add(cvtamt).sub(200)).mul(101000).sub(Decimal.pow(1.01, player.container.bought.sub(200)).mul(101000))).max(0);
-	player.container.total = player.container.total.add(cvtamt);
+	player.container.total.floor() = player.container.total.floor().add(cvtamt);
 	player.container.bought = player.container.bought.add(cvtamt);
 }
 function buyMaxCvtUp(money) {
