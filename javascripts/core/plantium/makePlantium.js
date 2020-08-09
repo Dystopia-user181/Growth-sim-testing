@@ -4,7 +4,7 @@ function buyMach() {
 	player.machine++;
 }
 function makePlantium() {
-	if (player.plantPicked.lt(1e15) || player.honey.lt(1e8) || player.plantiumprocess) return;
+	if (player.plantPicked.lt(1e15) || player.honey.lt(1e10) || player.plantiumprocess) return;
 	player.plantiumprocess = true;
 	$("pbar1").style.transition = "all 20s linear";
 	setTimeout(function () {

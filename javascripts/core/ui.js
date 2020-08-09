@@ -65,6 +65,7 @@ function updateUI() {
 	$("collapseExpand").style.display = getInlineDisplay(player.plantium.gt(0));
 	$("plantiumtabbtn").style.display = getInlineDisplay(player.tutorial.madeFirstPlantium);
 	$("factoriesdiv").style.display = getDisplay(player.tutorial.madeFirstPlantium);
+	$("hrDisplayOnPlantium").style.visibility = getVisibility(player.tutorial.madeFirstPlantium);
 	player.version = "0.0.0.6";
 	tabTo(player.navigation.tab);
 }
@@ -73,6 +74,9 @@ function getDisplay (bool) {
 }
 function getInlineDisplay (bool) {
 	return (bool ? "inline-block" : "none");
+}
+function getVisibility (bool) {
+	return (bool ? "visible" : "hidden");
 }
 setInterval(updateUI, 50);
 function invert() {

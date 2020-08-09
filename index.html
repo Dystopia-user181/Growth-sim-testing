@@ -16,7 +16,7 @@
 		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/plantium/makeplantium.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/plantPower.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/factory.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/ui.js" charset="utf-8" type="text/javascript"></script>
@@ -96,18 +96,18 @@
 					<div class="automatorDiv" id="honeyAuto" style="display: none;">
 						Sell <input type="number" min="0" max="100" value="0" id="honeyinput" style="width: 10em" onchange="updateHoneyAuto()"/>% of honey produced 
 					</div>
-					<button onclick="buyAuto('buycontainer', new Decimal(1e8))" id="buyAutomatorSellCvt">Unlock Automator for buying cultivators<span id="factorydisplayspan">, factories</span> and hives for $1.00e8</button>
+					<button onclick="buyAuto('buycontainer', new Decimal(1e8))" id="buyAutomatorSellCvt">Unlock Automator for buying cultivators and hives for $1.00e8</button>
 					<button onclick="buyAuto('buycontainerup', new Decimal(1e10))" id="buyAutomatorSellCvtup">Unlock Automator for buying cultivator upgrades for $1.00e10</button>
 					<button onclick="buyAuto('buymarketing', new Decimal(1e12))" id="buyAutomatorSellMark">Unlock Automator for buying marketing for $1.00e12</button>
 					<div class="automatorDiv" id="autobuydiv" style="display: none;">
-						<span id="cvtautospan" style="display: none;">Cultivator<span id="factorydisplayspan2">, factory</span> and hive autobuyer: <button id="buycontainer" onclick="toggleAuto('buycontainer')">OFF</button></span>
+						<span id="cvtautospan" style="display: none;">Cultivator and hive autobuyer: <button id="buycontainer" onclick="toggleAuto('buycontainer')">OFF</button></span>
 						<br>
 						<span id="cvtautoupspan" style="display: none;">Cultivator Upgrade autobuyer: <button id="buycontainerup" onclick="toggleAuto('buycontainerup')">OFF</button></span>
 						<br>
 						<span id="markautospan" style="display: none;">Marketing autobuyer: <button id="buymarketing" onclick="toggleAuto('buymarketing')">OFF</button></span>
 					</div>
 				</div>
-				<br><hr><br>
+				<br><hr style="visibility: hidden;" id="hrDisplayOnPlantium"><br>
 				<div id="factoriesdiv" style="display: block;">
 					You have <span id="factoryamt">0</span> factories, producing <span id="cvtpersec">0</span> cultivators and <span id="hivepersec">0</span> hives every second.
 					<br>
@@ -125,7 +125,7 @@
 					<div id="pbar1" class="pbarcontent"></div>
 				</div>
 				<br>
-				<div id="mach1" style="display: none;"><button onclick="makePlantium()">Throw 1e15 plants and 1e9 honey into the machine and see what happens!</button></div>
+				<div id="mach1" style="display: none;"><button onclick="makePlantium()">Throw 1e15 plants and 1e10 honey into the machine and see what happens!</button></div>
 				<br>
 				<div id="machinelore" style="display: none;">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
 				<br><br>
@@ -142,7 +142,7 @@
 			<div>
 				You have <span id="generatoramt">0</span> assigned generators, producing <span id="plantpowpersec">0</span> plant power every second.
 				<br>
-				You have <span id="plantpow">0</span> plant power, boosting all production by x<span id="plantpowboost">1.00</span>.
+				You have <span id="plantpow">0</span> plant power, boosting cultivators and bees by x<span id="plantpowboost">1.00</span>.
 				<br><br>
 				<button onclick="assign()">Assign 1 Plantium to a generator</button>
 				<button onclick="assign(player.plantium.div(2))">Assign half of all Plantium to generators</button>
