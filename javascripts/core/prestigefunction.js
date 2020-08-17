@@ -1,5 +1,5 @@
 function prestige(keystokeep) {
-	keystokeep.push("navigation", "version", "tutorial", "option");
+	keystokeep.push("navigation", "version", "tutorial", "option", "display");
 	var keys = {};
 	keystokeep.forEach(function (item) {
 		keys[item] = player[item];

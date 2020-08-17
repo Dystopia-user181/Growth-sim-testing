@@ -24,8 +24,8 @@
 		<link rel="stylesheet" type="text/css" href="themes/Defaults.css" id="updatethisfortheme"/>
 		<link rel="stylesheet" type="text/css" href="themes/Dark.css" id="theme"/>
 	</head>
-	<body>
-		<h2>Welcome to growth simulator</h2>
+	<body><div id="mainGame">
+		<h2>Welcome to Plants of Instability</h2>
 		<a href="https://discord.gg/DVy4XjB" target="newtab">Discord</a>
 		<br><br>
 		<button onclick="player.navigation.tab = 'Plants'">Plants</button>
@@ -39,42 +39,43 @@
 			<button onclick="reset()" class="optionsbtn">Reset the game</button><button onclick="invert()" class="optionsbtn">Toggle Theme</button>
 		</div>
 		<hr>
-		<div id="plantiumamounts" style="display: block; position: absolute; left: 50vw">
-			You have <span id="plantiumamt" style="color: #da2;">0</span> Plantium.
+		<div id="resourceamt">
+			<span v-if="player.tutorial.unlockedPlantium" style="display: block; position: absolute; left: 50vw">You have <span style="color: #da2;">{{toSci(player.plantium)}}</span> Plantium.</span>
+			You have {{toSci(player.plants.picked)}} Plants in your inventory.
+			<br>
+			There are {{toSci(player.plants.field)}} Plants in the field.
+			<br><br>
 		</div>
-		You have <span id="plants">0</span> Plants in your inventory.
-		<br>
-		There are <span id="plantsUn">200</span> Plants in the field.
-		<br><br>
 		<div id="Plants" class="tab" style="display: flex; align-items: flex-start;">
 			<div id="Plants1" style="width: 50%;">
 				<div id="Main" style="width: 80%;">
 					<button onclick="unplant()">Pick 1 plant.</button>
-					<button id="sellplant" onclick="sell()" style="display: none;">Sell 1 for $<span id="price">1.00</span></button>
-					<button id="sell10plant" onclick="sell(10)" style="display: none;">Sell 10 for $<span id="priceof10">10.00</span></button>
+					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell 1 for ${{toSci(price, 2)}}</button>
+					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell 10 for ${{toSci(price.mul(10), 2)}}</button>
 					<br>
-					<p id="moneys" style="display: none;">You have $<span id="moneycount">{{money}}</span></p>
+					<p v-if="player.tutorial.unlockedSell">You have ${{toSci(player.money, 2)}}</p>
 					<br>
-					<div id="Bees" style="width: 90%; display: none;">
-						You have <span id="bees">0</span> honeybees, producing <span id="honeypersec">0.00</span> honey per sec.
+					<div style="width: 90%;" v-if="player.tutorial.unlockedHoneybee">
+						You have {{toSci(player.bees)}} honeybees, producing {{toSci(honeyps)}} honey per sec.
 						<br><br>
-						You have <span id="honey">0</span> honey, providing a x<span id="honeyboost">1.00</span> boost to cultivators.
+						You have {{toSci(player.honey)}} honey, providing a x{{toSci(honeyboost)}} boost to cultivators.
 						<br><br>
-						<button id="sellhoney" onclick="sellHoney()">Sell 100 honey for $<span id="honeyprice">2.50</span></button>
-						<button id="sell10honey" onclick="sellHoney(1000)">Sell 1000 honey for $<span id="10honeyprice">25.00</span></button>
+						<button onclick="sellHoney()">Sell 200 honey for {{toSci(price.mul(20), 2)}}</button>
+						<button onclick="sellHoney(500)">Sell 500 honey for ${{toSci(price.mul(50), 2)}}</button>
 					</div>
+					<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at 300 plants in the field</h3>
 				</div>
 				<br><hr><br>
-				<h3 id="tbuPots">Unlocked at $40.00</h3>
-				<div id="Pots" style="width: 90%; display: none;">
-					You have <span id="cvts">0</span> level <span id="cvtlevel">0</span> cultivators.
+				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
+					You have {{toSci(cvts)}} level {{toSci(player.cvt.level)}} cultivators.
 					<br><br>
-					<button onclick="buyCvt()">Buy 1 Cultivator for $<span id="cvtprice">20.00</span>.</button>
-					<button onclick="upCvt()">Upgrade Cultivator for $<span id="upcvtprice">2.00e4</span>.</button>
+					<button onclick="buyCvt()">Buy 1 Cultivator for ${{toSci(getCvtScal(player.cvt.bought), 2)}}.</button>
+					<button onclick="upCvt()">Upgrade Cultivator for ${{toSci(cvtlevelprice, 2)}}.</button>
 				</div>
+				<h3 v-else>Unlocked at $40.00</h3>
 				<br>
-				<div id="Hives" style="width: 90%; display: block;">
-					You have <span id="hives">0</span> hives, producing <span id="honeycombpersec">0</span> honeycombs per second.
+				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
+					You have {{toSci(player.hives)}} hives, producing <span id="honeycombpersec">0</span> honeycombs per second.
 					<br>
 					Your <span id="honeycombamt">0</span> honeycombs are boosting bee production by x<span id="combeffect">1.00</span>
 					<br><br>
@@ -131,9 +132,7 @@
 				<br><br>
 				The machine outputs a glowing orb. You can feel the heat of it even from a distance. It seems to be an extremely powerful (and potentially destructive) substance. You decide to call it plantium because, uh, you couldn't think of a better name.
 				<br><br>
-				<s>Will it prove itself to be useful?</s> of course it will this is a fricking incremental game
-				<br><br>
-				You should really be checking out the "Plantium" tab.
+				Hint: You should really be checking out the "Plantium" tab.
 				</div>
 				<button id="collapseExpand" onclick="player.display.lore = !player.display.lore;" style="display: none;">Collapse/Expand lore</button>
 			</div>
@@ -150,5 +149,5 @@
 		</div>
 		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 		<textarea id="savetext" style="display: none;"></textarea>
-	</body>
+	</div></body>
 </html>
