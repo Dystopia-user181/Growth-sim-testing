@@ -47,7 +47,7 @@
 			<br><br>
 		</div>
 		<div id="Plants" class="tab" style="display: flex; align-items: flex-start;">
-			<div id="Plants1" style="width: 50%;">
+			<div style="width: 50%;">
 				<div id="Main" style="width: 80%;">
 					<button onclick="unplant()">Pick 1 plant.</button>
 					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell 1 for ${{toSci(price, 2)}}</button>
@@ -69,22 +69,22 @@
 				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
 					You have {{toSci(cvts)}} level {{toSci(player.cvt.level)}} cultivators.
 					<br><br>
-					<button onclick="buyCvt()">Buy 1 Cultivator for ${{toSci(getCvtScal(player.cvt.bought), 2)}}.</button>
+					<button onclick="buyCvt()">Buy 1 Cultivator for ${{getCvtScal(player.cvt)}}.</button>
 					<button onclick="upCvt()">Upgrade Cultivator for ${{toSci(cvtlevelprice, 2)}}.</button>
 				</div>
-				<h3 v-else>Unlocked at $40.00</h3>
+				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
 				<br>
 				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
-					You have {{toSci(player.hives)}} hives, producing <span id="honeycombpersec">0</span> honeycombs per second.
+					You have {{toSci(player.hives.bought)}} hives, producing {{toSci(player.hives.bought)}}
 					<br>
-					Your <span id="honeycombamt">0</span> honeycombs are boosting bee production by x<span id="combeffect">1.00</span>
+					Your {{player.honeycombs}} honeycombs are boosting bee production by x{{toSci(player.honeycombs.pow(0.3), 2)}}
 					<br><br>
-					<button onclick="buyHive()">Buy 1 Beehive for $<span id="hiveprice">20.00</span>.</button>
+					<button onclick="buyHive()">Buy 1 Beehive for ${{getCvtScal(player.hives)}}.</button>
 				</div>
 			</div>
-			<div style="width: 50%;"><h3 id="tbuAuto">Unlocked at $500.00</h3>
-				<div id="Plants2" style="display: none;">
-					Marketing level: <span id="marketingLevel">0</span>
+			<div style="width: 50%;">
+				<div v-if="player.tutorial.unlockedMarketing">
+					Marketing level: {{toSci(player.marketing)}}
 					<button onclick="upmarketing()">Upgrade Marketing for $<span id="marketingPrice">0.00</span></button>
 					<br><hr><br>
 					<b>Automators</b>
@@ -108,6 +108,7 @@
 						<span id="markautospan" style="display: none;">Marketing autobuyer: <button id="buymarketing" onclick="toggleAuto('buymarketing')">OFF</button></span>
 					</div>
 				</div>
+				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $500.00</h3>
 				<br><hr style="visibility: hidden;" id="hrDisplayOnPlantium"><br>
 				<div id="factoriesdiv" style="display: block;">
 					You have <span id="factoryamt">0</span> factories, producing <span id="cvtpersec">0</span> cultivators and <span id="hivepersec">0</span> hives every second.

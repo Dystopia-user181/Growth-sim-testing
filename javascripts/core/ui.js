@@ -68,11 +68,6 @@ var vues = new Vue({
 	computed: {
 		price: () => {return Decimal.pow(1.5, player.marketing)},
 		cvts: () => {return player.cvt.total.floor()},
-		cvtprice: () => {
-			return toSci(player.cvt.bought.lte(200) ? 
-				player.cvt.bought.mul(5).add(20) : 
-				Decimal.pow(1.01, player.cvt.bought.sub(200)).mul(1000), 2);
-		},
 		cvtlevel: () => {return player.cvt.level},
 		cvtlevelprice: () => {return Decimal.pow(2e3, player.cvt.level.add(1))},
 		bees: () => {return player.bees},
@@ -84,6 +79,11 @@ var vues = new Vue({
 		toSci: (decimal, places=0) => {
 			decimal = new Decimal(decimal);
 			if (decimal.e < 3) return (Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toFixed(places); else return `${decimal.m.toFixed(2)}e${decimal.e.toString()}`;
+		},
+		getCvtScal: (obj) => {
+			return toSci(obj.bought.lte(200) ? 
+				obj.bought.mul(5).add(20) : 
+				Decimal.pow(1.01, obj.bought.sub(200)).mul(1000), 2);
 		}
 	}
 })
