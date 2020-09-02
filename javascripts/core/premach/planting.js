@@ -38,9 +38,6 @@ setInterval(function () {
 }, 50);
 function sell(amt = 1) {
 	amt = new Decimal(amt);
-	if (player.plantPicked.lt(amt)) return;
-	player.plantPicked = player.plantPicked.sub(amt);
-	player.money = player.money.add(Decimal.pow(1.6, player.marketing).mul(amt));
 	if (player.plants.picked.lt(amt)) return;
 	player.plants.picked = player.plants.picked.sub(amt);
 	player.money = player.money.add(Decimal.pow(1.5, player.marketing).mul(amt));
