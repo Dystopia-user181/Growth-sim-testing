@@ -1,27 +1,3 @@
-/*
-throw (truck)
-try 
-catch (truck)
-
-//Output: Failed to catch (truck): Too heavy
-
-Something something Python 🐍
-0.1+0.2 ahhhhhhh
-php bad lollolol funny
-Why is css
-Redfire has AD clone
-"Hello world";
-Why doesn't this code have "use strict";?
-oh good idea*/
-"use strict";
-/*
-```js- wait I'm not in discord
-qwertyuiopasdfghjklzxcvbnm
-mnbvcxzlkjhgfdsapoiuytrewq
-qazwsxedcrfvtgbyhnujmikolp
-plmoknijbuhvygctfxrdzeswaq
-B
-*/
 function load(save) {
 	if (typeof save !== "object") return;
 	if (save === null) return;
@@ -31,28 +7,6 @@ function load(save) {
 		return;
 	}
 	player = runParse(save, initPlayer);
-<<<<<<< Updated upstream
-	$("plantinput").value = player.automator.sellPlant*100;
-	$("honeyinput").value = player.automator.sellHoney*100;
-	$("buycontainer").innerText = getnff(player.automator.buycontainer);
-	$("buycontainerup").innerText = getnff(player.automator.buycontainerup);
-	$("buymarketing").innerText = getnff(player.automator.buymarketing);
-	$("theme").setAttribute("href", `themes/${(player.option.invert) ? "Light" : "Dark"}.css`);
-	$("autosave?").innerText=`Autosave: ${getnff(player.option.autosave)}`;
-	if (player.plantiumprocess) {
-		$("pbar1").style.transition = "all 20s linear";
-		setTimeout(function () {
-			$("pbar1").style.width = "100%";
-		});
-		setTimeout(function () {
-			prestige(["plantium", "machine", "generators"]);
-			player.plantium = player.plantium.add(1);
-			player.plantiumprocess = false;
-			$("pbar1").style.transition = "";
-			$("pbar1").style.width = "2%";
-			player.tutorial.madeFirstPlantium = true;
-		}, 20100);
-=======
 	if (player.plantiumprocess > 2) {
 		function pbarplus() {
 			player.plantiumprocess += 98/400;
@@ -65,7 +19,6 @@ function load(save) {
 			}
 		}
 		pbarplus();
->>>>>>> Stashed changes
 	}
 }
 function runParse(obj, obj2) {
