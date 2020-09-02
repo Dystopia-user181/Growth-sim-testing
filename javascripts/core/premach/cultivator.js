@@ -1,18 +1,18 @@
 function upCvt() {
-	if (player.money.lt(Decimal.pow(2e3, player.containerLevel.add(1)))) return;
+	if (player.money.lt(Decimal.pow(2e3, player.cvt.level.add(1)))) return;
 	player.cvt.level = player.cvt.level.add(1);
-	player.money = player.money.sub(Decimal.pow(2e3, player.containerLevel));
+	player.money = player.money.sub(Decimal.pow(2e3, player.cvt.level));
 }
 function buyCvt() {
-	if (player.container.bought.lte(200)) {
-		if (player.money.lt(player.container.bought.mul(5).add(20))) return;
-		player.money = player.money.sub(player.container.bought.mul(5).add(20));
+	if (player.cvt.bought.lte(200)) {
+		if (player.money.lt(player.cvt.bought.mul(5).add(20))) return;
+		player.money = player.money.sub(player.cvt.bought.mul(5).add(20));
 		player.cvt.total = player.cvt.total.add(1);
 		player.cvt.bought = player.cvt.bought.add(1);
 	} else {
-		if (player.money.lt(Decimal.pow(1.01, player.container.bought.sub(200)).mul(1000))) return;
-		player.money = player.money.sub(Decimal.pow(1.01, player.container.bought.sub(200)).mul(1000));
-		player.cvt.total = player.ctv.total.add(1);
+		if (player.money.lt(Decimal.pow(1.01, player.cvt.bought.sub(200)).mul(1000))) return;
+		player.money = player.money.sub(Decimal.pow(1.01, player.cvt.bought.sub(200)).mul(1000));
+		player.cvt.total = player.cvt.total.add(1);
 		player.cvt.bought = player.cvt.bought.add(1);
 	}
 }
