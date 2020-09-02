@@ -1,8 +1,8 @@
 function unplant(amt=1) {
 	amt = new Decimal(amt);
-	if (player.plantUnpicked.lt(amt)) return;
-	player.plantUnpicked = player.plantUnpicked.sub(amt);
-	player.plantPicked = player.plantPicked.add(amt);
+	if (player.plants.field.lt(amt)) return;
+	player.plants.field = player.plants.field.sub(amt);
+	player.plants.picked = player.plants.picked.add(amt);
 	sell(amt.mul(player.automator.sellPlant));
 	player.tutorial.unlockedSell = true;
 	if (player.plants.picked.gt(300) && player.tutorial.unlockedSell) player.tutorial.unlockedHoneybee = true;
