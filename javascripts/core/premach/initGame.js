@@ -18,7 +18,7 @@ var initPlayer = {
 	factories: new Decimal(0),
 	machines: new Decimal(0),
 	marketing: new Decimal(0),
-	hive: {
+	hives: {
 		bought: new Decimal(0),
 		total: new Decimal(0)
 	},
