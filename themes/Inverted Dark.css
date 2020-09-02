@@ -3,3 +3,6 @@
 	--bg-2: #111;
 	--c-1: #fff;
 }
+html {
+	filter: invert(1);
+}

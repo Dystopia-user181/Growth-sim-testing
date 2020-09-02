@@ -10,7 +10,7 @@ var initPlayer = {
 	},
 	containerLevel: new Decimal(0),
 	plantium: new Decimal(0),
-	plantiumprocess: false,
+	plantiumprocess: 2,
 	plantpow: new Decimal(0),
 	generators: new Decimal(0),
 	factories: new Decimal(0),
@@ -20,12 +20,27 @@ var initPlayer = {
 		bought: new Decimal(0),
 		total: new Decimal(0)
 	},
+<<<<<<< Updated upstream
 	honeycomb: new Decimal(0),
 	automator: {
 		sellPlant: 0,
 		sellHoney: 0,
 		buycontainer: false,
 		buycontainerup: false,
+=======
+	honeycombs: new Decimal(0),
+	queens: {
+		amt: new Decimal(0),
+		honey: new Decimal(0),
+		beeproduction: 1,
+		upgrades: []
+	},
+	automator: {
+		sellPlant: "0",
+		sellHoney: "0",
+		buycvt: false,
+		buycvtup: false,
+>>>>>>> Stashed changes
 		buymarketing: false
 	},
 	automatorUnlocked: {
@@ -39,12 +54,15 @@ var initPlayer = {
 		unlockedSell: false,
 		unlockedPots: false,
 		unlockedHoneybee: false,
+		unlockedQueen: false,
 		unlockedMarketing: false,
 		unlockedMachine: false,
 		madeFirstPlantium: false
 	},
 	option: {
-		invert: false,
+		theme: "Dark",
+		font: "Monospace",
+		notation: "Scientific",
 		autosave: true
 	},
 	display: {
@@ -53,7 +71,7 @@ var initPlayer = {
 	navigation: {
 		tab: "Plants"
 	},
-	version: "0.0.0.6"
+	version: "1.0.0.0-vue"
 };
 var player = initPlayer;
 function $(elmt) {

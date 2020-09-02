@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 function grow() {
 	var prevPlants = player.plantPicked;
 	player.plantPicked = player.plantPicked.add(player.plantPicked.max(1).min(player.container.total.floor()).pow(player.containerLevel.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)));
@@ -9,6 +10,8 @@ function grow() {
 	if (player.automator.buycontainer) buyMaxCvt(player.money);
 	if (player.automator.buycontainer) buyMaxHive(player.money);
 }
+=======
+>>>>>>> Stashed changes
 function upCvt() {
 	if (player.money.lt(Decimal.pow(2e3, player.containerLevel.add(1)))) return;
 	player.containerLevel = player.containerLevel.add(1);

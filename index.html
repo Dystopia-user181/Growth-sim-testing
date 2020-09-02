@@ -6,7 +6,8 @@
 		<script defer src="javascripts/lib/break_infinity.js" charset="utf-8" type="text/javascript"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script defer src="javascripts/core/premach/initGame.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/notation.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/display/notation.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/display/themes.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/planting.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
@@ -19,12 +20,11 @@
 		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/plantPower.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/factory.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/ui.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/tab.js" charset="utf-8" type="text/javascript"></script>
-		<link rel="stylesheet" type="text/css" href="themes/Defaults.css" id="updatethisfortheme"/>
-		<link rel="stylesheet" type="text/css" href="themes/Dark.css" id="theme"/>
+		<script defer src="javascripts/display/vues.js" charset="utf-8" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
 	</head>
 	<body>
+<<<<<<< Updated upstream
 		<h2>Welcome to growth simulator</h2>
 		<a href="https://discord.gg/DVy4XjB" target="newtab">Discord</a>
 		<br><br>
@@ -112,13 +112,101 @@
 					You have <span id="factoryamt">0</span> factories, producing <span id="cvtpersec">0</span> cultivators and <span id="hivepersec">0</span> hives every second.
 					<br>
 					<button onclick="buyFactory()">Buy 1 Factory for <span id="factoryprice">$1.00e3</span></button>
+=======
+		<div id="main">
+		<link rel="stylesheet" type="text/css" :href="`themes/${player.option.theme}.css`" id="theme"/>
+		<link rel="stylesheet" type="text/css" :href="`themes/${player.option.font}.css`"/>
+		<h2>Welcome to Plants of Instability</h2>
+		<a href="https://discord.gg/DVy4XjB" target="newtab">Discord</a>
+		<br><br>
+		<div id="tabbtns">
+			<tabbtn v-for="tabbtn in tabbtns" :onclick="tabbtn.onclick" :tab="tabbtn.tabname" :key="tabbtn.id"  :style="{display: (tabbtn.req?'inline-block':'none')}"></tabbtn>
+		</div>
+		<hr>
+		<div id="resourceamt">
+			<span v-if="player.tutorial.unlockedPlantium" style="display: block; position: absolute; left: 50vw">You have <span style="color: #da2;">{{toNot(player.plantium)}}</span> Plantium.</span>
+			You have {{toNot(player.plants.picked)}} Plants in your inventory.
+			<br>
+			There are {{toNot(player.plants.field)}} Plants in the field.
+			<br><br>
+		</div>
+		<div v-if="player.navigation.tab == 'Plants'" class="tab" style="display: flex; align-items: flex-start;">
+			<div style="width: 50%;">
+				<div id="Main" style="width: 80%;">
+					<button onclick="unplant()">Pick {{toNot(1)}} plant.</button>
+					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(price, 2)}}</button>
+					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(price.mul(10), 2)}}</button>
+					<br>
+					<p v-if="player.tutorial.unlockedSell">You have ${{toNot(player.money, 2)}}</p>
+					<br>
+					<div style="width: 90%;" v-if="player.tutorial.unlockedHoneybee">
+						You have {{toNot(player.bees)}} honeybees, producing {{toNot(player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)))}} honey per sec.
+						<br><br>
+						You have {{toNot(player.honey)}} honey, providing a x{{toNot(player.honey.add(1).pow(0.2), 2)}} boost to cultivators.
+						<br><br>
+						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for {{toNot(price.mul(20), 2)}}</button>
+						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(price.mul(50), 2)}}</button>
+						<br><br>
+						<div v-if="player.tutorial.unlockedQueen"></div>
+						<h3 v-else>Unlocked at 1.00e6 Bees</h3>
+					</div>
+					<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at {{toNot(300)}} plants in the field</h3>
+				</div>
+				<br><hr><br>
+				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
+					You have {{toNot(player.cvt.total.floor())}} level {{toNot(player.cvt.level)}} cultivators, making {{toNot(player.plants.picked.max(1).min(player.cvt.total.floor()).pow(player.cvt.level.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)))}} plants per second.
+					<br><br>
+					<button onclick="buyCvt()">Buy {{toNot(1)}} Cultivator for ${{getCvtScal(player.cvt)}}.</button>
+					<button onclick="upCvt()">Upgrade Cultivator for ${{getNSca(2e3, player.cvt.level, 2e3)}}.</button>
+				</div>
+				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
+				<br>
+				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
+					You have {{toNot(player.hives.total.floor())}} hives, producing {{toNot(player.hives.total.pow(2))}} honeycombs per second.
+					<br>
+					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
+					<br><br>
+					<button onclick="buyHive()">Buy {{toNot(1)}} Beehive for ${{getCvtScal(player.hives)}}.</button>
+				</div>
+			</div>
+			<div style="width: 50%;">
+				<div v-if="player.tutorial.unlockedMarketing">
+					Marketing level: {{toNot(player.marketing)}}
+					<button onclick="upmarketing()">Upgrade Marketing for ${{getNSca(1e4, player.marketing, 1e3)}}</button>
+					<br><hr><br>
+					<b>Automators</b>
+					<br>
+					<div class="automatorDiv">
+						<span v-if="player.automatorUnlocked.sellPlant">Sell Plants <input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellPlant"/> Keep Plants</span>
+						<button onclick="buyAuto('sellPlant', new Decimal(500))" v-else>Unlock Automator for selling plants for ${{toNot(500)}}</button>
+						<br><br>
+						<span v-if="player.automatorUnlocked.sellHoney">
+							Sell Honey &nbsp;<input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellHoney"/> Keep Honey
+						</span>
+						<button onclick="buyAuto('sellHoney', new Decimal(1e5))" v-else-if="player.tutorial.unlockedHoneybee">Unlock Automator for selling honey for ${{toNot(1e5)}}</button>
+						<br><br>
+						<span v-if="player.automatorUnlocked.buycvt">
+							Cultivator and hive autobuyer: <button onclick="toggleAuto('buycvt')">{{getnff(player.automator.buycvt)}}</button>
+							<br>
+						</span>
+						<button onclick="buyAuto('buycvt', new Decimal(1e8))" v-else-if="player.tutorial.unlockedHoneybee">Unlock Automator for buying cultivators and hives for ${{toNot(1e8)}}</button>
+					</div>
+				</div>
+				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at ${{toNot(500, 2)}}</h3>
+				<br><hr v-if="player.tutorial.madeFirstPlantium"><br>
+				<div v-if="player.tutorial.madeFirstPlantium" style="display: block;">
+					You have {{toNot(player.factories)}} factories, producing {{toNot(player.factories.mul(0.2), 1)}} cultivators and {{toNot(player.factories.mul(0.1), 1)}} hives every second.
+					<br>
+					<button onclick="buyFactory()">Buy {{toNot(1)}} Factory for {{getNSca(10, player.factories, 1e4)}}</button>
+>>>>>>> Stashed changes
 				</div>
 			</div>
 		</div>
-		<div id="Machine" class="tab" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+		<div v-else-if="player.navigation.tab == 'Machine'" class="tab" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
 			<div class="machine" id="machine1" align="center">
 				<h3>Machine</h3>
 				<br>
+<<<<<<< Updated upstream
 				<button onclick="buyMach()" id="buyMach1"><h4>Melt <span id="machCost">$1.00e14 worth of coins into a machine</span></h4></button>
 				<br><br>
 				<div class="progressbarplantium">
@@ -136,19 +224,52 @@
 				You should really be checking out the "Plantium" tab.
 				</div>
 				<button id="collapseExpand" onclick="player.display.lore = !player.display.lore;" style="display: none;">Collapse/Expand lore</button>
+=======
+				<button onclick="buyMach()" id="buyMach1" v-if="player.machines.lt(1)"><h4>Melt ${{getNSca(1e8, player.machines, 1e14)}} worth of coins into a machine</h4></button>
+				<br><br>
+				<div class="progressbarplantium" v-if="player.machines.gt(0)">
+					<div :style="{width: `${player.plantiumprocess}%`}" class="pbarcontent"></div>
+				</div>
+				<br>
+				<div id="mach1" v-if="player.machines.gt(0)"><button onclick="makePlantium()">Throw {{toNot(1e15)}} plants and {{toNot(1e10)}} honey into the machine and see what happens!</button></div>
+				<br>
+				<div id="machinelore" v-if="player.plantium.gt(0)&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
+				<br><br>
+				The machine outputs a glowing orb. You can feel the heat of it even from a distance. It seems to be an extremely powerful (and potentially destructive) substance. You decide to call it plantium because, uh, you couldn't think of a better name.
+				<br><br>
+				Hint: You should really be checking out the "Plantium" tab.
+				</div>
+				<button onclick="player.display.lore = !player.display.lore;" v-if="player.machines.gt(0)">Collapse/Expand lore</button>
+>>>>>>> Stashed changes
 			</div>
 		</div>
-		<div id="Plantium" class="tab" style="display: flex; justify-content: center; width: 100%;">
+		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" style="display: flex; justify-content: center; width: 100%;">
 			<div>
+<<<<<<< Updated upstream
 				You have <span id="generatoramt">0</span> assigned generators, producing <span id="plantpowpersec">0</span> plant power every second.
 				<br>
 				You have <span id="plantpow">0</span> plant power, boosting cultivators and bees by x<span id="plantpowboost">1.00</span>.
+=======
+				You have {{toNot(player.generators)}} assigned generators, producing {{toNot(player.generators.mul(0.1), 1)}} plant power every second.
+				<br>
+				You have {{toNot(player.plantpow, 1)}} plant power, boosting cultivators and bees by x{{toNot(player.plantpow.pow(1.1), 2)}}.
+>>>>>>> Stashed changes
 				<br><br>
 				<button onclick="assign()">Assign 1 Plantium to a generator</button>
 				<button onclick="assign(player.plantium.div(2))">Assign half of all Plantium to generators</button>
 			</div>
 		</div>
+		<div v-else-if="player.navigation.tab == 'Options'" class="tab" style="width: 100%;" align="center">
+			<optionsbtn v-for="btn in options.row1" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
+			<optionsbtn v-for="btn in options.row2" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
+			<optionsbtn v-for="btn in options.row3" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
+		</div>
 		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
+<<<<<<< Updated upstream
 		<textarea id="savetext" style="display: none;"></textarea>
+=======
+		<textarea id="savetext" style="display: none;">{{btoa(JSON.stringify(player))}}</textarea>
+	</div>
+>>>>>>> Stashed changes
 	</body>
 </html>

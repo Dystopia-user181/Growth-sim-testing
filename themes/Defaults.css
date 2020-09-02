@@ -1,17 +1,30 @@
 * {
-	transition: all 0.5s;
+	transition: all 0.3s linear;
 	color: var(--c-1);
-	background: var(--bg-1);
-	font-family: Lucida Console;
+	font-family: var(--font);
 	touch-action: manipulation;
 }
+body {
+	background: var(--bg-1);
+}
+
 button {
 	border: 2px solid var(--c-1);
+	background: var(--bg-1);
 	outline: none;
 }
 button:hover {
 	border: 2px solid #fb7;
 	box-shadow: 0px 0px 7px 1px #fb7;
+}
+button:active {
+	background: var(--bg-2);
+}
+
+.tab {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background: var(--bg-2);
 }
 .automatorDiv {
 	border: 3px solid var(--c-1);
@@ -22,7 +35,10 @@ button:hover {
 	padding: 11px;
 }
 .optionsbtn {
-	width: 150px;
+	width: 300px;
+	height: 160px;
+	margin: 5px;
+	font-size: 20px;
 }
 .machine {
 	display: flex;
