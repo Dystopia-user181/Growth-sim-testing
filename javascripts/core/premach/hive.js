@@ -2,13 +2,13 @@ function buyHive() {
 	if (player.hives.bought.lte(200)) {
 		if (player.money.lt(player.hives.bought.mul(5).add(20))) return;
 		player.money = player.money.sub(player.hive.bought.mul(5).add(20));
-		player.hive.total = player.hive.total.add(1);
-		player.hive.bought = player.hive.bought.add(1);
+		player.hives.total = player.hives.total.add(1);
+		player.hives.bought = player.hives.bought.add(1);
 	} else {
-		if (player.money.lt(Decimal.pow(1.01, player.hive.bought.sub(200)).mul(1000))) return;
-		player.money = player.money.sub(Decimal.pow(1.01, player.hive.bought.sub(200)).mul(1000));
-		player.hive.total = player.hive.total.add(1);
-		player.hive.bought = player.hive.bought.add(1);
+		if (player.money.lt(Decimal.pow(1.01, player.hives.bought.sub(200)).mul(1000))) return;
+		player.money = player.money.sub(Decimal.pow(1.01, player.hives.bought.sub(200)).mul(1000));
+		player.hives.total = player.hives.total.add(1);
+		player.hives.bought = player.hives.bought.add(1);
 	}
 }
 function buyMaxHive(money) {
