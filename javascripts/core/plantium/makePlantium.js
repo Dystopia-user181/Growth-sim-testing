@@ -1,11 +1,7 @@
 function buyMach() {
 	if (player.money.lt(Decimal.pow(1e8, player.machine).mul(1e14)) || player.machine >= 10) return;
 	player.money = player.money.sub(Decimal.pow(1e8, player.machine).mul(1e14));
-<<<<<<< Updated upstream
-	player.machine++;
-=======
 	player.machines = player.machines.add(1);
->>>>>>> Stashed changes
 }
 function makePlantium() {
 	if (player.plantPicked.lt(1e15) || player.honey.lt(1e10) || player.plantiumprocess) return;
