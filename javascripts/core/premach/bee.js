@@ -1,13 +1,4 @@
-<<<<<<< Updated upstream
-function addHoneyBee() {
-	if (player.tutorial.unlockedHoneybee) {
-		player.bee = player.bee.add(player.plantUnpicked.pow(0.55).mul(player.honeycomb.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1))).min(player.plantUnpicked.div(50).mul(player.honeycomb.pow(Decimal.div(1, player.honeycomb.add(100).log(100))).add(1)));
-	}
-}
-function sellHoney(amt=100) {
-=======
 function sellHoney(amt=200) {
->>>>>>> Stashed changes
 	amt = new Decimal(amt);
 	if (player.honey.lt(amt)) return;
 	player.honey = player.honey.sub(amt);
