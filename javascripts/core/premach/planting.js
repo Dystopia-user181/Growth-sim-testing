@@ -10,6 +10,7 @@ function unplant(amt=1) {
 setInterval(function () {
 	player.plants.field = player.plants.field.add(0.05).add(player.plants.field.min(player.bees).mul(player.plantpow.add(1).pow(1.1)).mul(0.05));
 	if (player.plants.field.gt(300) && player.tutorial.unlockedSell) player.tutorial.unlockedHoneybee = true;
+	if (player.bees.gt(1e6)) player.tutorial.unlockedQueen = true;
 	var prevHoney = player.honey;
 	player.honey = player.honey.add(player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1))).mul(0.05));
 	prevHoney = player.honey.sub(prevHoney);
@@ -27,10 +28,11 @@ setInterval(function () {
 	if (player.plants.picked.gt(300)) player.tutorial.unlockedHoneybee = true;
 	if (player.automator.buycvtup) buyMaxCvtUp(player.money);
 	if (player.automator.buymarketing) buyMaxMark(player.money);
-	if (player.automator.buycvt) buyMaxCvt(player.money);
+	if (player.automator.buycvt) buyMaxCvt(player.money.div(1.5));
 	if (player.automator.buycvt) buyMaxHive(player.money);
-	player.cvt.total = player.cvt.total.add(player.factories.mul(0.2));
-	player.hives.total = player.hives.total.add(player.factories.mul(0.1));
+	player.cvt.total = player.cvt.total.add(player.factories.mul(0.01));
+	player.hives.total = player.hives.total.add(player.factories.mul(0.005));
+	player.plantpow = player.plantpow.add(player.generators.mul(0.005));
 	if (player.automator.buycvt) {
 		buyMaxCvt(player.money);
 		buyMaxHive(player.money);

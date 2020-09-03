@@ -29,7 +29,7 @@ var mainVue = new Vue({
 			return {
 				row1: [
 					{id: 5, text: "Save", onclick: "save()"},
-					{id: 6, text: "Load", onclick: "load(JSON.parse(localStorage.getItem('growthsimsave')))"},
+					{id: 6, text: "Load", onclick: "load(JSON.parse(localStorage.getItem('growthsimsave'))); mainVue.player = player; mainVue.$forceUpdate()"},
 					{id: 7, text: `Autosave: ${this.getnff(this.player.option.autosave)}`, onclick: "player.option.autosave = !player.option.autosave;"},
 				],
 				row2: [

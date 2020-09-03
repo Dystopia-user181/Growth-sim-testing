@@ -26,7 +26,7 @@ function runParse(obj, obj2) {
 		if (key != "proto") {
 			if (obj[key] === undefined) {
 				obj[key] = obj2[key];
-			} else if (typeof obj[key] === "string" && typeof obj2[key] === "object") {
+			} else if (typeof obj[key] === "string" && typeof obj2[key] === "object" && !isNaN(new Decimal(obj[key]).e)) {
 				obj[key] = new Decimal(obj[key]);
 			} else if (typeof obj2[key] === "object" && typeof obj[key] === "object") {
 				runParse(obj[key], obj2[key]);

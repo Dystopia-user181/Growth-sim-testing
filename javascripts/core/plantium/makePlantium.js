@@ -4,13 +4,13 @@ function buyMach() {
 	player.machines = player.machines.add(1);
 }
 function makePlantium() {
-	if (player.plantPicked.lt(1e15) || player.honey.lt(1e10) || player.plantiumprocess) return;
-	player.plantiumprocess = true;
+	if (player.plants.picked.lt(1e15) || player.honey.lt(1e10) || player.plantiumprocess > 2) return;
+	player.plantiumprocess = 2;
 	function pbarplus() {
 		player.plantiumprocess += 98/400;
 		if (player.plantiumprocess < 100) setTimeout(pbarplus, 50);
 		else {
-			prestige(["plantium", "machine", "generators"]);
+			prestige(["plantium", "machines", "generators"]);
 			player.plantium = player.plantium.add(1);
 			player.plantiumprocess = 2;
 			player.tutorial.madeFirstPlantium = true;

@@ -35,15 +35,15 @@
 		</div>
 		<hr>
 		<div id="resourceamt">
-			<span v-if="player.tutorial.unlockedPlantium" style="display: block; position: absolute; left: 50vw">You have <span style="color: #da2;">{{toNot(player.plantium)}}</span> Plantium.</span>
+			<span v-if="player.tutorial.madeFirstPlantium" style="display: block; position: absolute; left: 50vw">You have <span style="color: #da2;">{{toNot(player.plantium)}}</span> Plantium.</span>
 			You have {{toNot(player.plants.picked)}} Plants in your inventory.
 			<br>
 			There are {{toNot(player.plants.field)}} Plants in the field.
 			<br><br>
 		</div>
 		<div v-if="player.navigation.tab == 'Plants'" class="tab" style="display: flex; align-items: flex-start;">
-			<div style="width: 50%;">
-				<div id="Main" style="width: 80%;">
+			<div style="width: 50%; transition: none;">
+				<div id="Main" style="width: 80%; transition: all 0s;">
 					<button onclick="unplant()">Pick {{toNot(1)}} plant.</button>
 					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(price, 2)}}</button>
 					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(price.mul(10), 2)}}</button>
@@ -55,11 +55,11 @@
 						<br><br>
 						You have {{toNot(player.honey)}} honey, providing a x{{toNot(player.honey.add(1).pow(0.2), 2)}} boost to cultivators.
 						<br><br>
-						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for {{toNot(price.mul(20), 2)}}</button>
+						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(price.mul(20), 2)}}</button>
 						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(price.mul(50), 2)}}</button>
 						<br><br>
-						<div v-if="player.tutorial.unlockedQueen"></div>
-						<h3 v-else>Unlocked at 1.00e6 Bees</h3>
+						<div v-if="player.tutorial.unlockedQueen">Reset thing</div>
+						<h3 v-else>Unlocked at {{toNot(1e6)}} Bees</h3>
 					</div>
 					<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at {{toNot(300)}} plants in the field</h3>
 				</div>
@@ -80,7 +80,7 @@
 					<button onclick="buyHive()">Buy {{toNot(1)}} Beehive for ${{getCvtScal(player.hives)}}.</button>
 				</div>
 			</div>
-			<div style="width: 50%;">
+			<div style="width: 50%; transition: none;">
 				<div v-if="player.tutorial.unlockedMarketing">
 					Marketing level: {{toNot(player.marketing)}}
 					<button onclick="upmarketing()">Upgrade Marketing for ${{getNSca(1e4, player.marketing, 1e3)}}</button>
@@ -112,7 +112,8 @@
 				</div>
 			</div>
 		</div>
-		<div v-else-if="player.navigation.tab == 'Machine'" class="tab" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+		<div v-else-if="player.navigation.tab == 'Machine'" class="tab" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+			<div style="width: 70%; transition: none">
 			<div class="machine" id="machine1" align="center">
 				<h3>Machine</h3>
 				<br>
@@ -131,6 +132,7 @@
 				Hint: You should really be checking out the "Plantium" tab.
 				</div>
 				<button onclick="player.display.lore = !player.display.lore;" v-if="player.machines.gt(0)">Collapse/Expand lore</button>
+			</div>
 			</div>
 		</div>
 		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" style="display: flex; justify-content: center; width: 100%;">

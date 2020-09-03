@@ -1,4 +1,4 @@
-var initPlayer = {
+const initPlayer = {
 	money: new Decimal(20),
 	plants: {
 		picked: new Decimal(0),
@@ -45,7 +45,7 @@ var initPlayer = {
 	},
 	tutorial: {
 		unlockedSell: false,
-		unlockedPots: false,
+		unlockedPot: false,
 		unlockedHoneybee: false,
 		unlockedQueen: false,
 		unlockedMarketing: false,

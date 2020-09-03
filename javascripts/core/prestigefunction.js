@@ -4,8 +4,12 @@ function prestige(keystokeep) {
 	keystokeep.forEach(function (item) {
 		keys[item] = player[item];
 	});
-	player = reseter(player, initPlayer);
+	console.log(keys);
+	player = initPlayer;
 	keystokeep.forEach(function (key) {
 		player[key] = keys[key];
 	});
+	mainVue.player = player;
+	mainVue.$forceUpdate();
+	player.tutorial.madeFirstPlantium = true;
 }

@@ -1,7 +1,7 @@
 function buyHive() {
 	if (player.hives.bought.lte(200)) {
 		if (player.money.lt(player.hives.bought.mul(5).add(20))) return;
-		player.money = player.money.sub(player.hive.bought.mul(5).add(20));
+		player.money = player.money.sub(player.hives.bought.mul(5).add(20));
 		player.hives.total = player.hives.total.add(1);
 		player.hives.bought = player.hives.bought.add(1);
 	} else {
