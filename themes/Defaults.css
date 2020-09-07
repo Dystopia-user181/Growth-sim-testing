@@ -18,7 +18,7 @@ button:hover {
 	box-shadow: 0px 0px 7px 1px #fb7;
 }
 button:active {
-	background: var(--c-1)88;
+	background: var(--bg-3);
 }
 
 .tab {

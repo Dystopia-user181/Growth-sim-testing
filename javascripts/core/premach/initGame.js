@@ -27,7 +27,7 @@ const initPlayer = {
 		amt: new Decimal(0),
 		honey: new Decimal(0),
 		beeproduction: 1,
-		upgrades: []
+		upgrades: 0
 	},
 	automator: {
 		sellPlant: "0",

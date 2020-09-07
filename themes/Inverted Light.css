@@ -1,7 +1,8 @@
 :root {
 	--bg-1: #fed;
 	--bg-2: #edc;
-	--c-1: #222;
+	--bg-3: #a98;
+	--c-1: #000;
 }
 html {
 	filter: invert(1);

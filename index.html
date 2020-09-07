@@ -14,6 +14,7 @@
 		<script defer src="javascripts/core/premach/cultivator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/hive.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/premach/queen.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
@@ -43,7 +44,7 @@
 		</div>
 		<div v-if="player.navigation.tab == 'Plants'" class="tab" style="display: flex; align-items: flex-start;">
 			<div style="width: 50%; transition: none;">
-				<div id="Main" style="width: 80%; transition: all 0s;">
+				<div id="Main" style="width: 95%; transition: all 0s;">
 					<button onclick="unplant()">Pick {{toNot(1)}} plant.</button>
 					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(price, 2)}}</button>
 					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(price.mul(10), 2)}}</button>
@@ -58,7 +59,14 @@
 						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(price.mul(20), 2)}}</button>
 						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(price.mul(50), 2)}}</button>
 						<br><br>
-						<div v-if="player.tutorial.unlockedQueen">Reset thing</div>
+						<div v-if="player.tutorial.unlockedQueen">
+							<hr><br>
+							You have {{toNot(player.queens.amt)}} Queen Bees, boosting honeycomb production by {{getNSca(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt, 1)}}
+							<br><br>
+							You have {{toNot(player.queens.honey)}} Queen Honey. <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
+							<br><br>
+							<button onclick="queenReset()">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(1e3, player.queens.amt, 1e5)}} bees</button>
+						</div>
 						<h3 v-else>Unlocked at {{toNot(1e6)}} Bees</h3>
 					</div>
 					<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at {{toNot(300)}} plants in the field</h3>

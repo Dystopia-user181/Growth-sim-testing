@@ -15,7 +15,7 @@ setInterval(function () {
 	player.honey = player.honey.add(player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1))).mul(0.05));
 	prevHoney = player.honey.sub(prevHoney);
 	sellHoney(player.automator.sellHoney);
-	player.honeycombs = player.honeycombs.add(player.hives.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)).mul(0.05));
+	player.honeycombs = player.honeycombs.add(player.hives.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt)));
 	if (player.tutorial.unlockedHoneybee) {
 		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Math.pow(player.queens.beeproduction, 6))).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
 	}
