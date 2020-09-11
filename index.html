@@ -52,16 +52,17 @@
 					<p v-if="player.tutorial.unlockedSell">You have ${{toNot(player.money, 2)}}</p>
 					<br>
 					<div style="width: 90%;" v-if="player.tutorial.unlockedHoneybee">
-						You have {{toNot(player.bees)}} honeybees, producing {{toNot(player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)))}} honey per sec.
+						You have {{toNot(player.bees)}} honeybees, producing {{toNot(hps)}} honey per sec.
+						<b v-if="beecapped"><br><br>Bee Production is softcapped, get more queens to increase the softcap</b>
 						<br><br>
-						You have {{toNot(player.honey)}} honey, providing a x{{toNot(player.honey.add(1).pow(0.2), 2)}} boost to cultivators.
+						You have {{toNot(player.honey)}} honey, providing a x{{toNot(hcvtboost, 2)}} boost to cultivators.
 						<br><br>
 						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(price.mul(20), 2)}}</button>
 						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(price.mul(50), 2)}}</button>
 						<br><br>
 						<div v-if="player.tutorial.unlockedQueen">
 							<hr><br>
-							You have {{toNot(player.queens.amt)}} Queen Bees, boosting honeycomb production by {{getNSca(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt, 1)}}
+							You have {{toNot(player.queens.amt)}} Queen Bees, boosting honeycomb production by x{{getNSca(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt, 1)}} and boosting bee cap by x{{toNot(queenbeecap)}}
 							<br><br>
 							You have {{toNot(player.queens.honey)}} Queen Honey. <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
 							<br><br>
@@ -71,9 +72,10 @@
 					</div>
 					<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at {{toNot(300)}} plants in the field</h3>
 				</div>
-				<br><hr><br>
+			</div>
+			<div style="width: 50%; transition: none;">
 				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
-					You have {{toNot(player.cvt.total.floor())}} level {{toNot(player.cvt.level)}} cultivators, making {{toNot(player.plants.picked.max(1).min(player.cvt.total.floor()).pow(player.cvt.level.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)))}} plants per second.
+					You have {{toNot(player.cvt.total.floor())}} level {{toNot(player.cvt.level)}} cultivators, making {{toNot(pps)}} plants per second.
 					<br><br>
 					<button onclick="buyCvt()">Buy {{toNot(1)}} Cultivator for ${{getCvtScal(player.cvt)}}.</button>
 					<button onclick="upCvt()">Upgrade Cultivator for ${{getNSca(2e3, player.cvt.level, 2e3)}}.</button>
@@ -81,18 +83,17 @@
 				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
 				<br>
 				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
-					You have {{toNot(player.hives.total.floor())}} hives, producing {{toNot(player.hives.total.pow(2))}} honeycombs per second.
+					You have {{toNot(player.hives.total.floor())}} hives, producing {{toNot(combps)}} honeycombs per second.
 					<br>
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>
 					<button onclick="buyHive()">Buy {{toNot(1)}} Beehive for ${{getCvtScal(player.hives)}}.</button>
 				</div>
-			</div>
-			<div style="width: 50%; transition: none;">
+				<br><hr><br>
 				<div v-if="player.tutorial.unlockedMarketing">
 					Marketing level: {{toNot(player.marketing)}}
 					<button onclick="upmarketing()">Upgrade Marketing for ${{getNSca(1e4, player.marketing, 1e3)}}</button>
-					<br><hr><br>
+					<br><br><br>
 					<b>Automators</b>
 					<br>
 					<div class="automatorDiv">
@@ -115,7 +116,7 @@
 				<br><hr v-if="player.tutorial.madeFirstPlantium"><br>
 				<div v-if="player.tutorial.madeFirstPlantium" style="display: block;">
 					You have {{toNot(player.factories)}} factories, producing {{toNot(player.factories.mul(0.2), 1)}} cultivators and {{toNot(player.factories.mul(0.1), 1)}} hives every second.
-					<br>
+					<br><br>
 					<button onclick="buyFactory()">Buy {{toNot(1)}} Factory for {{getNSca(10, player.factories, 1e4)}}</button>
 				</div>
 			</div>

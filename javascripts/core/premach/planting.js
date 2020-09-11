@@ -12,15 +12,16 @@ setInterval(function () {
 	if (player.plants.field.gt(300) && player.tutorial.unlockedSell) player.tutorial.unlockedHoneybee = true;
 	if (player.bees.gt(1e6)) player.tutorial.unlockedQueen = true;
 	var prevHoney = player.honey;
-	player.honey = player.honey.add(player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1))).mul(0.05));
+	player.honey = player.honey.add(vm.hps.mul(0.05));
 	prevHoney = player.honey.sub(prevHoney);
 	sellHoney(player.automator.sellHoney);
-	player.honeycombs = player.honeycombs.add(player.hives.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt)));
+	player.honeycombs = player.honeycombs.add(vm.combps.mul(0.05));
 	if (player.tutorial.unlockedHoneybee) {
-		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Math.pow(player.queens.beeproduction, 6))).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
+		var softcap = (vm.beecapped ? player.bees.pow(0.7) : 1)
+		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Math.pow(player.queens.beeproduction, 6)).div(softcap)).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
 	}
 	var prevPlants = player.plants.picked;
-	player.plants.picked = player.plants.picked.add(player.plants.picked.max(1).min(player.cvt.total.floor()).pow(player.cvt.level.div(2).add(1)).mul(player.honey.add(1).pow(0.2)).mul(player.plantpow.add(1).pow(1.1)).mul(0.05));
+	player.plants.picked = player.plants.picked.add(vm.pps.mul(0.05));
 	prevPlants = player.plants.picked.sub(prevPlants);
 	sell(prevPlants.mul(player.automator.sellPlant));
 	if (player.queens.beeproduction < 1) player.queens.beeproduction += 0.0006;
@@ -42,7 +43,7 @@ function sell(amt = 1) {
 	amt = new Decimal(amt);
 	if (player.plants.picked.lt(amt)) return;
 	player.plants.picked = player.plants.picked.sub(amt);
-	player.money = player.money.add(Decimal.pow(1.5, player.marketing).mul(amt));
+	player.money = player.money.add(vm.price.mul(amt));
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
 	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) player.navigation.tab = "Machine";

@@ -10,18 +10,24 @@ Vue.component("optionsbtn", {
 	},
 	template: `<button class="optionsbtn">{{text}}</button>`
 })
-var mainVue = new Vue({
+var vm = new Vue({
 	el: "#main",
 	data: {
 		player: player
 	},
 	computed: {
-		price: function () {return Decimal.pow(1.5, this.player.marketing)},
+		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
+		price: function () {return Decimal.pow(1.5, player.marketing);},
+		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
+		hcvtboost: function () {return player.honey.add(1).pow(0.2);},
+		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1)));},
+		comps: function () {return player.hives.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt));},
+		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(6400).add(1).pow(0.5).pow(player.queens.amt);},
 		tabbtns: function () {
 			return [
 				{id: 1, req: true, tabname: "Plants", onclick: "player.navigation.tab = 'Plants'"},
-				{id: 2, req: this.player.tutorial.unlockedMachine, tabname: "Machine", onclick: "player.navigation.tab = 'Machine'"},
-				{id: 3, req: this.player.tutorial.madeFirstPlantium, tabname: "Plantium", onclick: "player.navigation.tab = 'Plantium'"},
+				{id: 2, req: player.tutorial.unlockedMachine, tabname: "Machine", onclick: "player.navigation.tab = 'Machine'"},
+				{id: 3, req: player.tutorial.madeFirstPlantium, tabname: "Plantium", onclick: "player.navigation.tab = 'Plantium'"},
 				{id: 4, req: true, tabname: "Options", onclick: "player.navigation.tab = 'Options'"}
 			];
 		},
@@ -29,8 +35,8 @@ var mainVue = new Vue({
 			return {
 				row1: [
 					{id: 5, text: "Save", onclick: "save()"},
-					{id: 6, text: "Load", onclick: "load(JSON.parse(localStorage.getItem('growthsimsave'))); mainVue.player = player; mainVue.$forceUpdate()"},
-					{id: 7, text: `Autosave: ${this.getnff(this.player.option.autosave)}`, onclick: "player.option.autosave = !player.option.autosave;"},
+					{id: 6, text: "Load", onclick: "load(JSON.parse(localStorage.getItem('growthsimsave'))); vm.player = player; vm.$forceUpdate()"},
+					{id: 7, text: `Autosave: ${getnff(this.player.option.autosave)}`, onclick: "player.option.autosave = !player.option.autosave;"},
 				],
 				row2: [
 					{id: 8, text: "Export", onclick: "expo()"},
@@ -73,4 +79,4 @@ var mainVue = new Vue({
 		font: font
 	}
 });
-setTimeout(mainVue.$forceUpdate, 100);
+setTimeout(vm.$forceUpdate, 100);

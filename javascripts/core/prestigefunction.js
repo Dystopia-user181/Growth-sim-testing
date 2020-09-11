@@ -1,5 +1,5 @@
 function prestige(keystokeep) {
-	keystokeep.push("navigation", "version", "tutorial", "option");
+	keystokeep.push("navigation", "version", "tutorial", "option", "display");
 	var keys = {};
 	keystokeep.forEach(function (item) {
 		keys[item] = player[item];
@@ -9,7 +9,7 @@ function prestige(keystokeep) {
 	keystokeep.forEach(function (key) {
 		player[key] = keys[key];
 	});
-	mainVue.player = player;
-	mainVue.$forceUpdate();
+	vm.player = player;
+	vm.$forceUpdate();
 	player.tutorial.madeFirstPlantium = true;
 }

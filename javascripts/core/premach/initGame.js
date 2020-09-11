@@ -66,6 +66,7 @@ const initPlayer = {
 	},
 	version: "1.0.0.0-vue"
 };
+Object.seal(initPlayer);
 var player = initPlayer;
 function $(elmt) {
 	return document.getElementById(elmt);

@@ -51,4 +51,6 @@ function expo() {
 }
 function impo() {
 	load(JSON.parse(atob(prompt("Paste your save here."))));
+	vm.player = player;
+	vm.$forceUpdate();
 }
