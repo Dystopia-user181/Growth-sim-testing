@@ -1,6 +1,7 @@
 Vue.component("tabbtn", {
 	props: {
-		tab: String
+		tab: String,
+		req: Boolean
 	},
 	template: `<button>{{tab}}</button>`
 })

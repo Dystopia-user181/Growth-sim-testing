@@ -83,7 +83,7 @@
 				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
 				<br>
 				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
-					You have {{toNot(player.hives.total.floor())}} hives, producing {{toNot(combps)}} honeycombs per second.
+					You have {{toNot(player.hives.total.floor())}} hives, producing {{toNot(comps)}} honeycombs per second.
 					<br>
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>

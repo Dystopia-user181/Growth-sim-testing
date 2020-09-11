@@ -15,7 +15,7 @@ setInterval(function () {
 	player.honey = player.honey.add(vm.hps.mul(0.05));
 	prevHoney = player.honey.sub(prevHoney);
 	sellHoney(player.automator.sellHoney);
-	player.honeycombs = player.honeycombs.add(vm.combps.mul(0.05));
+	player.honeycombs = player.honeycombs.add(vm.comps.mul(0.05));
 	if (player.tutorial.unlockedHoneybee) {
 		var softcap = (vm.beecapped ? player.bees.pow(0.7) : 1)
 		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(player.plantpow.add(1).pow(1.1)).mul(0.05).mul(Math.pow(player.queens.beeproduction, 6)).div(softcap)).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
