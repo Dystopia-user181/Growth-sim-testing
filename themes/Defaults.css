@@ -22,8 +22,7 @@ button:active {
 }
 
 .tab {
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding: 5px;
 	background: var(--bg-2);
 	transition: none;
 }

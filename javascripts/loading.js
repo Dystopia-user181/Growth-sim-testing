@@ -3,7 +3,6 @@ function load(save) {
 	if (save === null) return;
 	if (save.version !== "1.0.0.0-vue") {
 		alert("Save is from an older version and thus is incompatible with the newer version.");
-		player = initPlayer;
 		return;
 	}
 	player = runParse(save, initPlayer);

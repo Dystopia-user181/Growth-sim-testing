@@ -15,7 +15,6 @@
 		<script defer src="javascripts/core/premach/hive.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/queen.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/marketing.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
@@ -46,8 +45,8 @@
 			<div style="width: 50%; transition: none;">
 				<div id="Main" style="width: 95%; transition: all 0s;">
 					<button onclick="unplant()">Pick {{toNot(1)}} plant.</button>
-					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(price, 2)}}</button>
-					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(price.mul(10), 2)}}</button>
+					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(1, 2)}}</button>
+					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(10, 2)}}</button>
 					<br>
 					<p v-if="player.tutorial.unlockedSell">You have ${{toNot(player.money, 2)}}</p>
 					<br>
@@ -57,8 +56,8 @@
 						<br><br>
 						You have {{toNot(player.honey)}} honey, providing a x{{toNot(hcvtboost, 2)}} boost to cultivators.
 						<br><br>
-						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(price.mul(20), 2)}}</button>
-						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(price.mul(50), 2)}}</button>
+						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(20, 2)}}</button>
+						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(50, 2)}}</button>
 						<br><br>
 						<div v-if="player.tutorial.unlockedQueen">
 							<hr><br>
@@ -91,9 +90,6 @@
 				</div>
 				<br><hr><br>
 				<div v-if="player.tutorial.unlockedMarketing">
-					Marketing level: {{toNot(player.marketing)}}
-					<button onclick="upmarketing()">Upgrade Marketing for ${{getNSca(1e4, player.marketing, 1e3)}}</button>
-					<br><br><br>
 					<b>Automators</b>
 					<br>
 					<div class="automatorDiv">

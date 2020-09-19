@@ -1,9 +1,0 @@
-:root {
-	--bg-1: #000;
-	--bg-2: #111;
-	--bg-3: #444;
-	--c-1: #fff;
-}
-html {
-	filter: invert(1);
-}

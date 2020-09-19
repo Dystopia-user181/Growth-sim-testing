@@ -34,6 +34,7 @@ setInterval(function () {
 	player.cvt.total = player.cvt.total.add(player.factories.mul(0.01));
 	player.hives.total = player.hives.total.add(player.factories.mul(0.005));
 	player.plantpow = player.plantpow.add(player.generators.mul(0.005));
+	player.queens.honey = player.queens.honey.sub(Decimal.pow(1.5, player.queens).sub(1).mul(1e3)).max(0);
 	if (player.automator.buycvt) {
 		buyMaxCvt(player.money);
 		buyMaxHive(player.money);
@@ -43,7 +44,7 @@ function sell(amt = 1) {
 	amt = new Decimal(amt);
 	if (player.plants.picked.lt(amt)) return;
 	player.plants.picked = player.plants.picked.sub(amt);
-	player.money = player.money.add(vm.price.mul(amt));
+	player.money = player.money.add(amt);
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
 	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) player.navigation.tab = "Machine";

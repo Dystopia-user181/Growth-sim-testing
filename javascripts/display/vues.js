@@ -18,7 +18,6 @@ var vm = new Vue({
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
-		price: function () {return Decimal.pow(1.5, player.marketing);},
 		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
 		hcvtboost: function () {return player.honey.add(1).pow(0.2);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1)));},
@@ -54,7 +53,26 @@ var vm = new Vue({
 	},
 	methods: {
 		toNot: (decimal, places=0) => {
-			return Function("decimal", "places", `"use strict";return to${(player.option.notation)}(decimal, places)`)(decimal, places);
+			switch (player.option.notation) {
+				case "Scientific":
+				return toScientific(decimal, places);
+				break;
+				case "Engineering":
+				return toEngineering(decimal, places);
+				break;
+				case "Logarithm":
+				return toLogarithm(decimal, places);
+				break;
+				case "Binary":
+				return toBinary(decimal, places);
+				break;
+				case "YESNO":
+				return toYESNO(decimal, places);
+				break;
+				case "Blind":
+				return "";
+				break;
+			};
 		},
 		getCvtScal: function (obj) {
 			return this.toNot(obj.bought.lte(200) ? 
@@ -80,4 +98,7 @@ var vm = new Vue({
 		font: font
 	}
 });
-setTimeout(vm.$forceUpdate, 100);
+setTimeout(function () {
+	vm.$forceUpdate();
+	console.log("Update forced.");
+}, 1000);

@@ -1,4 +1,4 @@
-const themes = ["Dark", "Light", "Inverted Light", "Inverted Dark"];
+const themes = ["Dark", "Light", "Inverted Light", "Metro"];
 const fonts = ["Monospace", "Serif", "Sans"]
 function theme() {
 	if (themes.indexOf(player.option.theme)+1 >= 4) {

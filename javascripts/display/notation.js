@@ -26,6 +26,3 @@ function toYESNO (decimal, places) {
 	decimal = new Decimal(decimal);
 	return decimal.lte(0) ? "NO" : "YES";
 }
-function toBlind (decimal, places) {
-	return "";
-}
