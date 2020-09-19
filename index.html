@@ -150,7 +150,7 @@
 				<button onclick="assign(player.plantium.div(2))">Assign half of all Plantium to generators</button>
 			</div>
 		</div>
-		<div v-else-if="player.navigation.tab == 'Options'" class="tab" style="width: 100%;" align="center">
+		<div v-else-if="player.navigation.tab == 'Options'" class="tab" align="center">
 			<optionsbtn v-for="btn in options.row1" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
 			<optionsbtn v-for="btn in options.row2" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
 			<optionsbtn v-for="btn in options.row3" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
