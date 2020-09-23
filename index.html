@@ -31,7 +31,7 @@
 		<a href="https://discord.gg/DVy4XjB" target="newtab">Discord</a>
 		<br><br>
 		<div id="tabbtns">
-			<tabbtn v-for="tabbtn in tabbtns" :onclick="tabbtn.onclick" :tab="tabbtn.tabname" :key="tabbtn.id"  :style="{display: (tabbtn.req?'inline-block':'none')}"></tabbtn>
+			<tabbtn v-for="tabbtn in tabbtns" :obj="tabbtn" :key="tabbtn.key" v-on:click="player.navigation.tab = tabbtn.tab"></tabbtn>
 		</div>
 		<hr>
 		<div id="resourceamt">
@@ -117,7 +117,7 @@
 				</div>
 			</div>
 		</div>
-		<div v-else-if="player.navigation.tab == 'Machine'" class="tab" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+		<div v-else-if="player.navigation.tab == 'Machine'" class="tab" style="display: flex; align-items: center; justify-content: center;;">
 			<div style="width: 70%; transition: none">
 			<div class="machine" id="machine1" align="center">
 				<h3>Machine</h3>
@@ -140,7 +140,7 @@
 			</div>
 			</div>
 		</div>
-		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" style="display: flex; justify-content: center; width: 100%;">
+		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" style="display: flex; justify-content: center;">
 			<div>
 				You have {{toNot(player.generators)}} assigned generators, producing {{toNot(player.generators.mul(0.1), 1)}} plant power every second.
 				<br>

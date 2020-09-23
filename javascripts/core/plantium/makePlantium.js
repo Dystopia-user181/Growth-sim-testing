@@ -11,6 +11,11 @@ function makePlantium() {
 		if (player.plantiumprocess < 100) setTimeout(pbarplus, 50);
 		else {
 			prestige(["plantium", "machines", "generators"]);
+			if (player.plantium.lt(1)) {
+				let temp = player.option.theme;
+				player.option.theme = "a";
+				setTimeout(()=>player.option.theme=temp, 30);
+			}
 			player.plantium = player.plantium.add(1);
 			player.plantiumprocess = 2;
 			player.tutorial.madeFirstPlantium = true;

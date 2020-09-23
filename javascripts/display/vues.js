@@ -1,9 +1,8 @@
 Vue.component("tabbtn", {
 	props: {
-		tab: String,
-		req: Boolean
+		obj: Object
 	},
-	template: `<button>{{tab}}</button>`
+	template: `<button v-if="obj.req" :onclick="obj.onclick">{{obj.tab}}</button>`
 })
 Vue.component("optionsbtn", {
 	props: {
@@ -25,10 +24,10 @@ var vm = new Vue({
 		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(6400).add(1).pow(0.5).pow(player.queens.amt);},
 		tabbtns: function () {
 			return [
-				{id: 1, req: true, tabname: "Plants", onclick: "player.navigation.tab = 'Plants'"},
-				{id: 2, req: player.tutorial.unlockedMachine, tabname: "Machine", onclick: "player.navigation.tab = 'Machine'"},
-				{id: 3, req: player.tutorial.madeFirstPlantium, tabname: "Plantium", onclick: "player.navigation.tab = 'Plantium'"},
-				{id: 4, req: true, tabname: "Options", onclick: "player.navigation.tab = 'Options'"}
+				{id: 1, req: true, tab: "Plants", onclick: `player.navigation.tab = "Plants"`},
+				{id: 2, req: player.tutorial.unlockedMachine, tab: "Machine", onclick: `player.navigation.tab = "Machine"`},
+				{id: 3, req: player.tutorial.madeFirstPlantium, tab: "Plantium", onclick: `player.navigation.tab = "Plantium"`},
+				{id: 4, req: true, tab: "Options", onclick: `player.navigation.tab = "Options"`}
 			];
 		},
 		options: function () {
@@ -44,9 +43,9 @@ var vm = new Vue({
 					{id: 10, text: "Hard Rest", onclick: "reset()"}
 				],
 				row3: [
-					{id: 11, text: `Theme: ${this.player.option.theme}`, onclick: "theme()"},
-					{id: 12, text: `Notation: ${this.player.option.notation}`, onclick: "notation()"},
-					{id: 13, text: `Font: ${this.player.option.font}`, onclick: "font()"}
+					{id: 11, text: `Theme: ${this.player.option.theme}`, onclick: ""},
+					{id: 12, text: `Notation: ${this.player.option.notation}`, onclick: ""},
+					{id: 13, text: `Font: ${this.player.option.font}`, onclick: ""}
 				]
 			}
 		}

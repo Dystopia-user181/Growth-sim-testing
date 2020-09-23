@@ -47,7 +47,12 @@ function sell(amt = 1) {
 	player.money = player.money.add(amt);
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
-	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) player.navigation.tab = "Machine";
+	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) {
+		player.navigation.tab = "Machine";
+		let tmp = player.option.theme;
+		player.option.theme="a";
+		setTimeout(()=>player.option.theme=temp, 30);
+	}
 	if (player.money.gte(1e14)) player.tutorial.unlockedMachine = true;
 	if (player.automator.buycontainer) {
 		buyMaxCvt(player.money);
