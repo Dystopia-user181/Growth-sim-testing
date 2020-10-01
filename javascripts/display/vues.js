@@ -91,7 +91,7 @@ var vm = new Vue({
 				row3: [
 					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
 					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro"], it: "theme"},
-					{id: 13, text: `Font`, el: ["Monospace", "Serif", "Sans"], it: "font"}
+					{id: 13, text: `Font`, el: ["Monospace", "Serif", "Sans", "Iosevka"], it: "font"}
 				]
 			}
 		},
@@ -144,10 +144,7 @@ var vm = new Vue({
 		load: load,
 		expo: expo,
 		impo: impo,
-		reset: reset,
-		theme: theme,
-		notation: notation,
-		font: font
+		reset: reset
 	}
 });
 setTimeout(function () {
