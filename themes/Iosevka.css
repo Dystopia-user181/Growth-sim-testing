@@ -1,0 +1,52 @@
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 200;
+    font-style: normal;
+    src: url("../fonts/iosevka-term-ss08-extralight.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 200;
+    font-style: italic;
+    src: url("../fonts/iosevka-term-ss08-extralightitalic.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 400;
+    font-style: normal;
+    src: url("../fonts/iosevka-term-ss08-regular.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 400;
+    font-style: italic;
+    src: url("../fonts/iosevka-term-ss08-italic.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 600;
+    font-style: normal;
+    src: url("../fonts/iosevka-term-ss08-semibold.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 600;
+    font-style: italic;
+    src: url("../fonts/iosevka-term-ss08-semibolditalic.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 800;
+    font-style: normal;
+    src: url("../fonts/iosevka-term-ss08-extrabold.woff") format("woff")
+}
+@font-face {
+	font-family: 'Iosevka Term SS08 Web';
+    font-weight: 800;
+    font-style: italic;
+    src: url("../fonts/iosevka-term-ss08-extrabolditalic.woff") format("woff")
+}
+
+:root {
+	--font: "Iosevka Term SS08 Web", Monaco, monospace;
+}
