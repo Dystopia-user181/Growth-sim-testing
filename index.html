@@ -65,7 +65,9 @@
 							<br><br>
 							You have {{toNot(player.queens.honey)}} Queen Honey. <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
 							<br><br>
-							<button onclick="queenReset()">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(1e3, player.queens.amt, 1e5)}} bees</button>
+							<button onclick="queenReset()">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(qus[2].bought?500:1e3, player.queens.amt, 1e5)}} bees</button>
+							<br><hr><br>
+							<qubtn v-for="obj in qus" :obj="obj" :key="obj.id+14"></qubtn>
 						</div>
 						<h3 v-else>Unlocked at {{toNot(1e6)}} Bees</h3>
 					</div>
@@ -87,18 +89,18 @@
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>
 					<button onclick="buyHive()">Buy {{toNot(1)}} Beehive for ${{getCvtScal(player.hives)}}.</button>
+					<button onclick="upHive()">Upgrade Beehive for ${{getNSca(2e3, player.hives.level, 2e3)}}.</button>
 				</div>
 				<br><hr><br>
 				<div v-if="player.tutorial.unlockedMarketing">
 					<b>Automators</b>
 					<br>
 					<div class="automatorDiv">
-						<span v-if="player.automatorUnlocked.sellPlant">Sell Plants <input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellPlant"/> Keep Plants</span>
+						<span v-if="player.automatorUnlocked.sellPlant">Keep Plants <input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellPlant"/> Sell Plants</span>
 						<button onclick="buyAuto('sellPlant', new Decimal(500))" v-else>Unlock Automator for selling plants for ${{toNot(500)}}</button>
 						<br><br>
 						<span v-if="player.automatorUnlocked.sellHoney">
-							Sell Honey &nbsp;<input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellHoney"/> Keep Honey
-						</span>
+							Keep Honey &nbsp;<input type="range" max="1" step="0.01" style="width: 10em" v-model="player.automator.sellHoney"/> Sell Honey</span>
 						<button onclick="buyAuto('sellHoney', new Decimal(1e5))" v-else-if="player.tutorial.unlockedHoneybee">Unlock Automator for selling honey for ${{toNot(1e5)}}</button>
 						<br><br>
 						<span v-if="player.automatorUnlocked.buycvt">
@@ -142,18 +144,18 @@
 		</div>
 		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" style="display: flex; justify-content: center;">
 			<div>
-				You have {{toNot(player.generators)}} assigned generators, producing {{toNot(player.generators.mul(0.1), 1)}} plant power every second.
+				You have {{toNot(player.generators)}} generators, producing {{toNot(player.generators.mul(0.1), 1)}} plant power every second.
 				<br>
 				You have {{toNot(player.plantpow, 1)}} plant power, boosting cultivators and bees by x{{toNot(player.plantpow.pow(1.1), 2)}}.
 				<br><br>
-				<button onclick="assign()">Assign 1 Plantium to a generator</button>
-				<button onclick="assign(player.plantium.div(2))">Assign half of all Plantium to generators</button>
+				<button onclick="assign()">Buy 1 generator. Cost: 1 plantium</button>
+				<button onclick="assign(player.plantium.div(2))">Buy generators with half of plantium amount</button>
 			</div>
 		</div>
 		<div v-else-if="player.navigation.tab == 'Options'" class="tab" align="center">
 			<optionsbtn v-for="btn in options.row1" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
 			<optionsbtn v-for="btn in options.row2" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
-			<optionsbtn v-for="btn in options.row3" :text="btn.text" :key="btn.id" :onclick="btn.onclick"></optionsbtn><br>
+			<tbtn v-for="btn in options.row3" :text="btn.text" :el="btn.el" :it="btn.it" :key="btn.id"></tbtn><br>
 		</div>
 		<a href="https://bit.ly/2Bru1VR" title="Is this loss?" target="newtab"><s style="position: fixed; top: 0px; right: 0px; font-family: sans-serif; font-size: 7px">:.|:;</s></a>
 		<textarea id="savetext" style="display: none;">{{btoa(JSON.stringify(player))}}</textarea>

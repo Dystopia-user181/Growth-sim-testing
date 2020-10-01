@@ -1,3 +1,8 @@
+function upHive() {
+	if (player.money.lt(Decimal.pow(2e3, player.hives.level.add(1)))) return;
+	player.hives.level = player.hives.level.add(1);
+	player.money = player.money.sub(Decimal.pow(2e3, player.hives.level));
+}
 function buyHive() {
 	if (player.hives.bought.lte(200)) {
 		if (player.money.lt(player.hives.bought.mul(5).add(20))) return;

@@ -20,6 +20,9 @@ button:hover {
 button:active {
 	background: var(--bg-3);
 }
+select {
+	background: var(--bg-1) !important;
+}
 
 .tab {
 	padding: 5px;
@@ -66,4 +69,16 @@ button:active {
 	height: 100%;
 	width: 2%;
 	background: linear-gradient(to right, #da0, #c71);
+}
+.qu {
+	height: 8em;
+	width: 135px;
+	font-size: 12px;
+	vertical-align: top;
+}
+.qu.d {
+	background: #f003;
+}
+.qu.b {
+	background: #0f03;
 }

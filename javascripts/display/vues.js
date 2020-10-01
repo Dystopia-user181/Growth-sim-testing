@@ -1,15 +1,60 @@
+var toNot = (decimal, places=0) => {
+	switch (player.option.notation) {
+		case "Scientific":
+		return toScientific(decimal, places);
+		break;
+		case "Engineering":
+		return toEngineering(decimal, places);
+		break;
+		case "Logarithm":
+		return toLogarithm(decimal, places);
+		break;
+		case "Binary":
+		return toBinary(decimal, places);
+		break;
+		case "YESNO":
+		return toYESNO(decimal, places);
+		break;
+		case "Blind":
+		return "";
+		break;
+	};
+}
 Vue.component("tabbtn", {
 	props: {
 		obj: Object
 	},
 	template: `<button v-if="obj.req" :onclick="obj.onclick">{{obj.tab}}</button>`
-})
+});
 Vue.component("optionsbtn", {
 	props: {
 		text: String
 	},
 	template: `<button class="optionsbtn">{{text}}</button>`
+});
+Vue.component("tbtn", {
+	props: {
+		text: String,
+		it: String,
+		el: Array
+	},
+	template: `<button class="optionsbtn">{{text}}: <select v-model=player.option[it]><option v-for="els in el">{{els}}</option></select></button>`,
+	data: () => {
+		return {player: player}
+	}
 })
+Vue.component("qubtn", {
+	props: {
+		obj: Object
+	},
+	template: `<button :class="'qu '+(obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" :onclick="'if ('+!obj.bought+' && player.queens.amt.gte('+obj.cost+')) {player.queens.upgrades += ' + Math.pow(2, obj.id) + ';player.queens.amt = player.queens.amt.sub('+obj.cost+')}'">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
+	data: () => {
+		return {player: player}
+	},
+	methods: {
+		toNot: toNot
+	}
+});
 var vm = new Vue({
 	el: "#main",
 	data: {
@@ -17,11 +62,12 @@ var vm = new Vue({
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
-		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
+		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(2, player.queens.amt):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
 		hcvtboost: function () {return player.honey.add(1).pow(0.2);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1)));},
-		comps: function () {return player.hives.total.floor().pow(2).mul(player.plantpow.add(1).pow(1.1)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt));},
-		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(6400).add(1).pow(0.5).pow(player.queens.amt);},
+		qulimit: function () {return Decimal.pow(10000, this.qus[1].bought?1.5:1)},
+		comps: function () {return player.hives.total.floor().pow(this.qus[0].bought?2:1).mul(player.plantpow.add(1).pow(1.1)).mul(Decimal.pow(1.5, player.hives.level)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(10).log(10), player.queens.amt));},
+		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(1).pow(0.5).pow(player.queens.amt);},
 		tabbtns: function () {
 			return [
 				{id: 1, req: true, tab: "Plants", onclick: `player.navigation.tab = "Plants"`},
@@ -43,36 +89,43 @@ var vm = new Vue({
 					{id: 10, text: "Hard Rest", onclick: "reset()"}
 				],
 				row3: [
-					{id: 11, text: `Theme: ${this.player.option.theme}`, onclick: ""},
-					{id: 12, text: `Notation: ${this.player.option.notation}`, onclick: ""},
-					{id: 13, text: `Font: ${this.player.option.font}`, onclick: ""}
+					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
+					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro"], it: "theme"},
+					{id: 13, text: `Font`, el: ["Monospace", "Serif", "Sans"], it: "font"}
 				]
 			}
+		},
+		qus: function () {
+			return [
+				{
+					desc: "Cultivator and hives base production ^2.",
+					cost: new Decimal(2),
+					id: 0,
+					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-1] == "1"
+				},
+				{
+					desc: "Queen honey effect cap is ^1.5.",
+					cost: new Decimal(3),
+					id: 1,
+					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-2] == "1"
+				},
+				{
+					desc: "Queen scaling is reduced by 50%.",
+					cost: new Decimal(5),
+					id: 2,
+					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-3] == "1"
+				},
+				{
+					desc: "Cultivator production is boosted by Queens.",
+					cost: new Decimal(5),
+					id: 3,
+					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-4] == "1"
+				},
+			]
 		}
 	},
 	methods: {
-		toNot: (decimal, places=0) => {
-			switch (player.option.notation) {
-				case "Scientific":
-				return toScientific(decimal, places);
-				break;
-				case "Engineering":
-				return toEngineering(decimal, places);
-				break;
-				case "Logarithm":
-				return toLogarithm(decimal, places);
-				break;
-				case "Binary":
-				return toBinary(decimal, places);
-				break;
-				case "YESNO":
-				return toYESNO(decimal, places);
-				break;
-				case "Blind":
-				return "";
-				break;
-			};
-		},
+		toNot: toNot,
 		getCvtScal: function (obj) {
 			return this.toNot(obj.bought.lte(200) ? 
 				obj.bought.mul(5).add(20) : 

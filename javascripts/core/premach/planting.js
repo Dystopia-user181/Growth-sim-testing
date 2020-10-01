@@ -14,7 +14,7 @@ setInterval(function () {
 	var prevHoney = player.honey;
 	player.honey = player.honey.add(vm.hps.mul(0.05));
 	prevHoney = player.honey.sub(prevHoney);
-	sellHoney(player.automator.sellHoney);
+	sellHoney(prevHoney.mul(player.automator.sellHoney));
 	player.honeycombs = player.honeycombs.add(vm.comps.mul(0.05));
 	if (player.tutorial.unlockedHoneybee) {
 		var softcap = (vm.beecapped ? player.bees.pow(0.7) : 1)

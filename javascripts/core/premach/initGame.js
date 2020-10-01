@@ -20,7 +20,8 @@ const initPlayer = {
 	marketing: new Decimal(0),
 	hives: {
 		bought: new Decimal(0),
-		total: new Decimal(0)
+		total: new Decimal(0),
+		level: new Decimal(0)
 	},
 	honeycombs: new Decimal(0),
 	queens: {
