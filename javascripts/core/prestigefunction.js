@@ -9,6 +9,7 @@ function prestige(keystokeep) {
 	keystokeep.forEach(function (key) {
 		player[key] = keys[key];
 	});
+	vm._data.player = player;
 	vm.player = player;
 	vm.$forceUpdate();
 	player.tutorial.madeFirstPlantium = true;

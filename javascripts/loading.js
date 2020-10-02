@@ -53,3 +53,11 @@ function impo() {
 	vm.player = player;
 	vm.$forceUpdate();
 }
+
+try {
+	vm._data.player = player;
+	vm.player = player;
+	vm.$forceUpdate();
+} catch (e) {
+	console.log("First load with Vue");
+}
