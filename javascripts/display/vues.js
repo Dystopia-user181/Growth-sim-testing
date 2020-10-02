@@ -147,3 +147,7 @@ var vm = new Vue({
 		reset: reset
 	}
 });
+setTimeout(function () {
+	vm.$forceUpdate();
+	console.log("Update forced.");
+}, 1000);
