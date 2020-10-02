@@ -11,6 +11,5 @@ function prestige(keystokeep) {
 	});
 	vm._data.player = player;
 	vm.player = player;
-	vm.$forceUpdate();
 	player.tutorial.madeFirstPlantium = true;
 }
