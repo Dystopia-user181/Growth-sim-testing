@@ -50,3 +50,6 @@
 :root {
 	--font: "Iosevka Term SS08 Web", Monaco, monospace;
 }
+html {
+    font-size: 15px;
+}

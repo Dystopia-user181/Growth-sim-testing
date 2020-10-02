@@ -62,8 +62,8 @@ var vm = new Vue({
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
-		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(2, player.queens.amt):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
-		hcvtboost: function () {return player.honey.add(1).pow(0.2);},
+		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(3, player.queens.amt).mul(player.queens.honey.add(10).log(10)):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(player.plantpow.add(1).pow(1.1));},
+		hcvtboost: function () {return player.honey.add(1).pow(0.3);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(player.plantpow.add(1).pow(1.1)));},
 		qulimit: function () {return Decimal.pow(10000, this.qus[1].bought?1.5:1)},
 		comps: function () {return player.hives.total.floor().pow(this.qus[0].bought?2:1).mul(player.plantpow.add(1).pow(1.1)).mul(Decimal.pow(1.5, player.hives.level)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(10).log(10), player.queens.amt));},
@@ -116,7 +116,7 @@ var vm = new Vue({
 					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-3] == "1"
 				},
 				{
-					desc: "Cultivator production is boosted by Queens.",
+					desc: "Cultivator production is boosted by Queens and Queen honey.",
 					cost: new Decimal(5),
 					id: 3,
 					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-4] == "1"

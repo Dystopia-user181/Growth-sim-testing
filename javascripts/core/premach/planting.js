@@ -34,7 +34,7 @@ setInterval(function () {
 	player.cvt.total = player.cvt.total.add(player.factories.mul(0.01));
 	player.hives.total = player.hives.total.add(player.factories.mul(0.005));
 	player.plantpow = player.plantpow.add(player.generators.mul(0.005));
-	player.queens.honey = player.queens.honey.sub(Decimal.pow(1.5, player.queens).sub(1).mul(1e3)).max(0);
+	player.queens.honey = player.queens.honey.sub(Decimal.pow(10, player.queens.amt).sub(1).mul(1e3)).max(0);
 	if (player.automator.buycvt) {
 		buyMaxCvt(player.money);
 		buyMaxHive(player.money);

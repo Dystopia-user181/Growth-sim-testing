@@ -62,7 +62,7 @@
 							<hr><br>
 							You have {{toNot(player.queens.amt)}} Queen Bees, boosting honeycomb production by x{{getNSca(player.queens.honey.div(player.queens.amt).max(0).min(1e4).add(10).log(10), player.queens.amt, 1)}} and boosting bee cap by x{{toNot(queenbeecap)}}
 							<br><br>
-							You have {{toNot(player.queens.honey)}} Queen Honey. <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
+							<span style="cursor: pointer;" onclick="alert('Queen Honey makes Queens more effective.')" title="Queen Honey makes Queens more effective.">You have {{toNot(player.queens.honey)}} Queen Honey.</span> <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
 							<br><br>
 							<button onclick="queenReset()">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(qus[2].bought?500:1e3, player.queens.amt, 1e5)}} bees</button>
 							<br><hr><br>

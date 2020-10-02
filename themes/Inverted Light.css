@@ -7,3 +7,6 @@
 html {
 	filter: invert(1);
 }
+option {
+	filter: invert(1) !important;
+}
