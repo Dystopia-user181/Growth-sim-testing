@@ -69,3 +69,6 @@ const initPlayer = {
 };
 Object.seal(initPlayer);
 var player = initPlayer;
+function getnff(bool) {
+	if (bool) return "ON"; else return "OFF";
+}
