@@ -39,6 +39,9 @@ function runParse(obj, obj2) {
 var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
 if (localStorage.getItem("growthsimsave") !== null) {
 	load(parsedsave);
+} else {
+	localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));
+	location.reload();
 }
 function expo() {
 	var sv = $("savetext");

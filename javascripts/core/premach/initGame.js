@@ -69,9 +69,3 @@ const initPlayer = {
 };
 Object.seal(initPlayer);
 var player = initPlayer;
-function $(elmt) {
-	return document.getElementById(elmt);
-}
-function getnff(bool) {
-	if (bool) return "ON"; else return "OFF";
-}
