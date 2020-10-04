@@ -87,7 +87,7 @@
 					<br>
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>
-					<button onclick="buyHive()" :disabled="getCvtScal(player.cvt).lt(player.money)">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2))}}.</button>
+					<button onclick="buyHive()" :disabled="getCvtScal(player.cvt).lt(player.money)">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2)}}.</button>
 					<button onclick="upHive()">Upgrade Beehive for ${{getNSca(2e3, player.hives.level, 2e3)}}.</button>
 				</div>
 				<br><hr><br>
