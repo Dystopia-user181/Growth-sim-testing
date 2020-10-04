@@ -64,7 +64,7 @@
 							<br><br>
 							<span style="cursor: pointer;" onclick="alert('Queen Honey makes Queens more effective.')" title="Queen Honey makes Queens more effective.">You have {{toNot(player.queens.honey)}} Queen Honey.</span> <button onclick="giveHoney()">Give half of all Honey to Queens.</button>
 							<br><br>
-							<button onclick="queenReset()" :disabled="Decimal.pow(qus[2].bought?500:1e3, player.queens.amt).mul(1e3).lt(player.bees)">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(qus[2].bought?500:1e3, player.queens.amt, 1e5)}} bees</button>
+							<button onclick="queenReset()" :disabled="player.bees.lt(Decimal.pow(qus[2].bought?500:1e3, player.queens.amt).mul(1e5))">Reset Bees and Honey for {{toNot(1)}} Queen Bees. Requires {{getNSca(qus[2].bought?500:1e3, player.queens.amt, 1e5)}} bees</button>
 							<br><hr><br>
 							<qubtn v-for="obj in qus" :obj="obj" :key="obj.id+14"></qubtn>
 						</div>
@@ -77,7 +77,7 @@
 				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
 					You have {{toNot(player.cvt.total.floor())}} level {{toNot(player.cvt.level)}} cultivators, making {{toNot(pps)}} plants per second.
 					<br><br>
-					<button onclick="buyCvt()" :disabled="getCvtScal(player.cvt).lt(player.money)">Buy {{toNot(1)}} Cultivator for ${{toNot(getCvtScal(player.cvt), 2)}}.</button>
+					<button onclick="buyCvt()" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Cultivator for ${{toNot(getCvtScal(player.cvt), 2)}}.</button>
 					<button onclick="upCvt()">Upgrade Cultivator for ${{getNSca(2e3, player.cvt.level, 2e3)}}.</button>
 				</div>
 				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
@@ -87,7 +87,7 @@
 					<br>
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>
-					<button onclick="buyHive()" :disabled="getCvtScal(player.cvt).lt(player.money)">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2)}}.</button>
+					<button onclick="buyHive()" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2)}}.</button>
 					<button onclick="upHive()">Upgrade Beehive for ${{getNSca(2e3, player.hives.level, 2e3)}}.</button>
 				</div>
 				<br><hr><br>
