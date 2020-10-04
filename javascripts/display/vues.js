@@ -47,7 +47,7 @@ Vue.component("qubtn", {
 	props: {
 		obj: Object
 	},
-	template: `<button :class="'qu '+(obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" :onclick="'if ('+!obj.bought+' && player.queens.amt.gte('+obj.cost+')) {player.queens.upgrades += ' + Math.pow(2, obj.id) + ';player.queens.amt = player.queens.amt.sub('+obj.cost+')}'">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
+	template: `<button :class="'qu '+(obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" :onclick="'if ('+!obj.bought+' && player.queens.amt.gte('+obj.cost+')) {player.queens.upgrades += ' + Math.pow(2, obj.id) + ';player.queens.amt = player.queens.amt.sub('+obj.cost+')}'" :disabled="player.queens.amt.gte(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
 	data: () => {
 		return {player: player}
 	},
@@ -58,7 +58,8 @@ Vue.component("qubtn", {
 var vdata = {
 	el: "#main",
 	data: {
-		player: player
+		player: player,
+		Decimal: Decimal
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
@@ -127,9 +128,9 @@ var vdata = {
 	methods: {
 		toNot: toNot,
 		getCvtScal: function (obj) {
-			return this.toNot(obj.bought.lte(200) ? 
+			return obj.bought.lte(200) ? 
 				obj.bought.mul(5).add(20) : 
-				Decimal.pow(1.01, obj.bought.sub(200)).mul(1000), 2);
+				Decimal.pow(1.01, obj.bought.sub(200)).mul(1000);
 		},
 		getNSca: function (scal, num, normal) {
 			return this.toNot(Decimal.pow(scal, num).mul(normal), 2);
