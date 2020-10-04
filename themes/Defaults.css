@@ -20,6 +20,9 @@ button:hover {
 button:active {
 	background: var(--bg-3);
 }
+button:disabled {
+	opacity: 0.5;
+}
 select {
 	background: var(--bg-1) !important;
 }

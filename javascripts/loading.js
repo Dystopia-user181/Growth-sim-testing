@@ -9,9 +9,11 @@ function load(save) {
 	if (player.plantiumprocess > 2) {
 		function pbarplus() {
 			player.plantiumprocess += 98/400;
+			player.plants.picked = player.plants.picked.sub(2.5e12);
+			player.honey = player.honey.sub(2.5e11);
 			if (player.plantiumprocess < 100) setTimeout(pbarplus, 50);
 			else {
-				prestige(["plantium", "machine", "generators"]);
+				setTimeout(()=>{prestige(["plantium", "machines", "generators"])});
 				player.plantium = player.plantium.add(1);
 				player.plantiumprocess = 2;
 				player.tutorial.madeFirstPlantium = true;
@@ -44,7 +46,7 @@ if (localStorage.getItem("growthsimsave") !== null) {
 	location.reload();
 }
 function expo() {
-	var sv = $("savetext");
+	var sv = document.getElementById("savetext");
 	sv.style.display = "block";
 	sv.focus();
 	sv.select();
@@ -53,6 +55,5 @@ function expo() {
 }
 function impo() {
 	load(JSON.parse(atob(prompt("Paste your save here."))));
-	vm.player = player;
-	vm.$forceUpdate();
+	location.reload();
 }

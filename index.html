@@ -4,7 +4,7 @@
 		<title>Growth</title>
 		<link rel="icon" type="image/png" href="icon.png"/>
 		<script defer src="javascripts/lib/break_infinity.js" charset="utf-8" type="text/javascript"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="javascripts/lib/vue.js"></script>
 		<script defer src="javascripts/core/premach/initGame.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/display/notation.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/planting.js" charset="utf-8" type="text/javascript"></script>
@@ -44,8 +44,8 @@
 			<div style="width: 50%; transition: none;">
 				<div id="Main" style="width: 95%; transition: all 0s;">
 					<button onclick="unplant()">Pick {{toNot(1)}} plant.</button>
-					<button onclick="sell()" v-if="player.tutorial.unlockedSell">Sell {{toNot(1)}} for ${{toNot(1, 2)}}</button>
-					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell">Sell {{toNot(10)}} for ${{toNot(10, 2)}}</button>
+					<button onclick="sell()" v-if="player.tutorial.unlockedSell" v-bind:disabled="player.plants.picked.lt(1)">Sell {{toNot(1)}} for ${{toNot(1, 2)}}</button>
+					<button onclick="sell(10)" v-if="player.tutorial.unlockedSell" v-bind:disabled="player.plants.picked.lt(10)">Sell {{toNot(10)}} for ${{toNot(10, 2)}}</button>
 					<br>
 					<p v-if="player.tutorial.unlockedSell">You have ${{toNot(player.money, 2)}}</p>
 					<br>
@@ -55,8 +55,8 @@
 						<br><br>
 						You have {{toNot(player.honey)}} honey, providing a x{{toNot(hcvtboost, 2)}} boost to cultivators.
 						<br><br>
-						<button onclick="sellHoney()">Sell {{toNot(200)}} honey for ${{toNot(20, 2)}}</button>
-						<button onclick="sellHoney(500)">Sell {{toNot(500)}} honey for ${{toNot(50, 2)}}</button>
+						<button onclick="sellHoney()" v-bind:disabled="player.honey.lt(200)">Sell {{toNot(200)}} honey for ${{toNot(20, 2)}}</button>
+						<button onclick="sellHoney(500)" v-bind:disabled="player.honey.lt(500)">Sell {{toNot(500)}} honey for ${{toNot(50, 2)}}</button>
 						<br><br>
 						<div v-if="player.tutorial.unlockedQueen">
 							<hr><br>
@@ -129,7 +129,7 @@
 					<div :style="{width: `${player.plantiumprocess}%`}" class="pbarcontent"></div>
 				</div>
 				<br>
-				<div id="mach1" v-if="player.machines.gt(0)"><button onclick="makePlantium()">Throw {{toNot(1e15)}} plants and {{toNot(1e10)}} honey into the machine and see what happens!</button></div>
+				<div id="mach1" v-if="player.machines.gt(0)"><button onclick="makePlantium()">Throw {{toNot(1e15)}} plants and {{toNot(1e14)}} honey into the machine and see what happens!</button></div>
 				<br>
 				<div id="machinelore" v-if="player.plantium.gt(0)&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
 				<br><br>

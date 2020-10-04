@@ -55,7 +55,7 @@ Vue.component("qubtn", {
 		toNot: toNot
 	}
 });
-var vm = new Vue({
+var vdata = {
 	el: "#main",
 	data: {
 		player: player
@@ -86,7 +86,7 @@ var vm = new Vue({
 				row2: [
 					{id: 8, text: "Export", onclick: "expo()"},
 					{id: 9, text: "Import", onclick: "impo()"},
-					{id: 10, text: "Hard Rest", onclick: "reset()"}
+					{id: 10, text: "Hard Reset", onclick: "reset()"}
 				],
 				row3: [
 					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
@@ -146,4 +146,5 @@ var vm = new Vue({
 		impo: impo,
 		reset: reset
 	}
-});
+}
+var vm = new Vue(vdata);
