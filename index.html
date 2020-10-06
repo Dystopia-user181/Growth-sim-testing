@@ -147,8 +147,8 @@
 				<br>
 				You have {{toNot(player.plantpow, 1)}} plant power, boosting cultivators and bees by x{{toNot(player.plantpow.pow(1.1), 2)}}.
 				<br><br>
-				<button onclick="assign()">Buy 1 generator. Cost: 1 plantium</button>
-				<button onclick="assign(player.plantium.div(2))">Buy generators with half of plantium amount</button>
+				<button onclick="assign()">Buy 1 generator. Cost: {{getNSca(2, player.generators, 1)}} plantium</button>
+				<button onclick="assignMax(player.plantium)">Buy max generators</button>
 			</div>
 		</div>
 		<div v-else-if="player.navigation.tab == 'Options'" class="tab" align="center">
