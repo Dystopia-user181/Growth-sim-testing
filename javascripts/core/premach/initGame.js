@@ -13,6 +13,7 @@ const initPlayer = {
 	},
 	plantium: new Decimal(0),
 	plantiumprocess: 2,
+	plantiumupgrades: 0,
 	plantpow: new Decimal(0),
 	generators: new Decimal(0),
 	factories: new Decimal(0),

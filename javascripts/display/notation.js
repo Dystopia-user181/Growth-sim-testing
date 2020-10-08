@@ -12,7 +12,7 @@ function toLogarithm (decimal, places=0) {
 }
 function toBinary (decimal, places=0) {
 	decimal = new Decimal(decimal);
-	if (decimal.log(2) < 5) return (Number((Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toString(2))).toFixed(places); else return `${Number(Math.pow(2, (decimal.log(2)%1)).toString(2)).toFixed(3)}e${Math.floor(decimal.log(2)).toString(2)}`;
+	if (Math.abs(decimal.log(2)) < 4) return (Number((Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toString(2))).toFixed(places); else return `${Number(Math.pow(2, (decimal.log(2)%1)).toString(2)).toFixed(3)}e${decimal<0?"-":""}${toBinary(Math.floor(Decimal.abs(decimal).log(2)), 0)}`;
 }
 function toYESNO (decimal, places) {
 	decimal = new Decimal(decimal);

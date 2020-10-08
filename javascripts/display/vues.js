@@ -42,12 +42,24 @@ Vue.component("tbtn", {
 	data: () => {
 		return {player: player}
 	}
-})
+});
 Vue.component("qubtn", {
 	props: {
 		obj: Object
 	},
 	template: `<button :class="'qu '+(obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" :onclick="'if ('+!obj.bought+' && player.queens.amt.gte('+obj.cost+')) {player.queens.upgrades += ' + Math.pow(2, obj.id) + ';player.queens.amt = player.queens.amt.sub('+obj.cost+')}'" :disabled="player.queens.amt.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
+	data: () => {
+		return {player: player}
+	},
+	methods: {
+		toNot: toNot
+	}
+});
+Vue.component("pubtn", {
+	props: {
+		obj: Object
+	},
+	template: `<button :class="'pu '+(obj.bought?'b':(player.plantium.gte(obj.cost)?'u':'d'))" :onclick="'if ('+!obj.bought+' && player.plantium.gte('+obj.cost+')) {player.plantiumupgrades += ' + Math.pow(2, obj.id) + ';player.plantium = player.plantium.sub('+obj.cost+')}'" :disabled="player.plantium.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
 	data: () => {
 		return {player: player}
 	},
