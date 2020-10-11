@@ -1,5 +1,6 @@
 const initPlayer = {
 	money: new Decimal(20),
+	automoney: new Decimal(0),
 	plants: {
 		picked: new Decimal(0),
 		field: new Decimal(200)
@@ -12,13 +13,13 @@ const initPlayer = {
 		level: new Decimal(0)
 	},
 	plantium: new Decimal(0),
+	onplantiumgain: new Decimal(0),
 	plantiumprocess: 2,
 	plantiumupgrades: 0,
 	plantpow: new Decimal(0),
 	generators: new Decimal(0),
 	factories: new Decimal(0),
 	machines: new Decimal(0),
-	marketing: new Decimal(0),
 	hives: {
 		bought: new Decimal(0),
 		total: new Decimal(0),
@@ -36,14 +37,16 @@ const initPlayer = {
 		sellHoney: "0",
 		buycvt: false,
 		buycvtup: false,
-		buymarketing: false
+		buycvtr: 0,
+		buycvtratio: false,
+		autoplantium: false
 	},
 	automatorUnlocked: {
 		sellPlant: false,
 		sellHoney: false,
 		buycvt: false,
 		buycvtup: false,
-		buymarketing: false
+		autoplantium: false
 	},
 	tutorial: {
 		unlockedSell: false,

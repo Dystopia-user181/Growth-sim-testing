@@ -1,0 +1,18 @@
+:root {
+	--bg-1: #040;
+	--bg-2: #030;
+	--bg-3: #060;
+	--c-1: #d80;
+}
+.automatorDiv {
+	border-color: #fc0 !important;
+}
+button {
+	border-color: #fc0 !important;
+}
+.qu.d {
+	background-color: #f008 !important;
+}
+.qu.b {
+	background-color: #1f15 !important;
+}

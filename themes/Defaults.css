@@ -72,6 +72,7 @@ select {
 	height: 100%;
 	width: 2%;
 	background: linear-gradient(to right, #da0, #c71);
+	transition: all 0.03s;
 }
 
 .qu {
@@ -87,15 +88,14 @@ select {
 	background: #0f03;
 }
 .pu {
-	height: 8em;
-	width: 135px;
-	font-size: 12px;
+	height: 10em;
+	width: 250px;
 	vertical-align: top;
 	background: #0f03;
 }
 .pu.d {
-	background: #fe05;
+	background: #f005;
 }
 .pu.b {
-	background: #0f05;
+	background: #fe05;
 }

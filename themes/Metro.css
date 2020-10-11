@@ -16,9 +16,9 @@ button:hover {
 }
 
 @keyframes shift {
-	0% {border: 3px solid #bbb !important; box-shadow: 2px 2px 4px 1px #999;}
-	25% {border: 3px solid #bba !important; box-shadow: -2px 2px 4px 1px #998;}
-	50% {border: 3px solid #bab !important; box-shadow: -2px -2px 4px 1px #989;}
-	75% {border: 3px solid #abb !important; box-shadow: 2px -2px 4px 1px #899;}
-	100% {border: 3px solid #bbb !important; box-shadow: 2px 2px 4px 1px #999;}
+	0% {border: 3px solid #bbb !important; box-shadow: 0px 0px 4px 1px #999;}
+	25% {border: 3px solid #bba !important; box-shadow: 0px 0px 4px 1px #998;}
+	50% {border: 3px solid #bab !important; box-shadow: 0px 0px 4px 1px #989;}
+	75% {border: 3px solid #abb !important; box-shadow: 0px 0px 4px 1px #899;}
+	100% {border: 3px solid #bbb !important; box-shadow: 0px 0px 4px 1px #999;}
 }
