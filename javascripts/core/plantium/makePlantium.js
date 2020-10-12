@@ -12,7 +12,7 @@ function buyMach() {
 function makePlantium() {
 	if (player.plants.picked.lt(1e15) || player.honey.lt(1e14) || player.plantiumprocess > 2) return;
 	player.plantiumprocess = 2;
-	player.onplantiumgain = player.plants.picked.div(1e15).min(player.machines.mul(vm.pus[5].bought?5:1)).min(player.honey.div(1e14).min(player.machines.mul(vm.pus[5].bought?5:1)));
+	player.onplantiumgain = player.plants.picked.div(1e15).min(player.honey.div(1e14).min(player.machines.mul(vm.pus[5].bought?5:1)));
 	function pbarplus() {
 		if (vm.pus[1].bought) {
 			player.plantiumprocess += 98/2;
