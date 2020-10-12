@@ -134,7 +134,7 @@
 					<br>
 					<div id="mach1" v-if="player.machines.gt(0)"><button onclick="makePlantium()" :disabled="player.plants.picked.lt(1e15) && player.honey.lt(1e14)">Throw {{toNot(1e15)}} plants and {{toNot(1e14)}} honey into the machine and see what happens!</button></div>
 					<br>
-					<div id="machinelore" v-if="player.plantium.gt(0)&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
+					<div id="machinelore" v-if="player.madeFirstPlantium&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
 					<br><br>
 					The machine outputs a glowing orb. You can feel the heat of it even from a distance. It seems to be an extremely powerful (and potentially destructive) substance. You decide to call it plantium because, uh, you couldn't think of a better name.
 					<br><br>

@@ -25,11 +25,11 @@ function makePlantium() {
 		}
 		if (player.plantiumprocess <= 100) setTimeout(pbarplus, 50);
 		else {
-			if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades"]);
+			if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
 			if (player.plantium.lt(1)) {
-				let temp = player.option.theme;
+				window.tmp = player.option.theme;
 				player.option.theme = "Dark";
-				setTimeout(()=>player.option.theme=temp, 30);
+				setTimeout(()=>player.option.theme=window.tmp, 30);
 			}
 			player.plantium = player.plantium.add(player.onplantiumgain);
 			player.plantiumprocess = 2;

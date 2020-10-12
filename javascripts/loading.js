@@ -19,7 +19,7 @@ function load(save) {
 			}
 			if (player.plantiumprocess < 100) setTimeout(pbarplus, 50);
 			else {
-				if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades"]);
+				if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
 				if (player.plantium.lt(1)) {
 					let temp = player.option.theme;
 					player.option.theme = "Dark";
