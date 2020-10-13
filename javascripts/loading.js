@@ -1,8 +1,12 @@
-function load(save) {
+function load(save, isOnload) {
 	if (typeof save !== "object") return;
 	if (save === null) return;
 	if (save.version !== "1.0.0.0-vue") {
 		alert("Save is from an older version and thus is incompatible with the newer version.");
+		if (isOnload) {
+			localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));
+			location.reload();
+		}
 		return;
 	}
 	player = runParse(save, initPlayer);
@@ -17,15 +21,15 @@ function load(save) {
 				player.plants.picked = player.plants.picked.sub(player.onplantiumgain.mul(2.5e12));
 				player.honey = player.honey.sub(player.onplantiumgain.mul(2.5e11));
 			}
-			if (player.plantiumprocess < 100) setTimeout(pbarplus, 50);
+			if (player.plantiumprocess <= 100) setTimeout(pbarplus, 50);
 			else {
 				if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
 				if (player.plantium.lt(1)) {
-					let temp = player.option.theme;
+					window.tmp = player.option.theme;
 					player.option.theme = "Dark";
-					setTimeout(()=>player.option.theme=temp, 30);
+					setTimeout(()=>player.option.theme=window.tmp, 30);
 				}
-				player.plantium = player.plantium.add(onplantiumgain);
+				player.plantium = player.plantium.add(player.onplantiumgain.mul(Decimal.pow(1.5, player.plantiumplantamt.log(10)-15)));
 				player.plantiumprocess = 2;
 				player.tutorial.madeFirstPlantium = true;
 			}
@@ -51,7 +55,7 @@ function runParse(obj, obj2) {
 }
 var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
 if (localStorage.getItem("growthsimsave") !== null) {
-	load(parsedsave);
+	load(parsedsave, true);
 } else {
 	localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));
 	location.reload();

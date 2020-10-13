@@ -1,19 +1,19 @@
-var toNot = (decimal, places=0) => {
+var toNot = (decimal, places=0, placesafter1000=2, evalue=3) => {
 	switch (player.option.notation) {
 		case "Scientific":
-		return toScientific(decimal, places);
+		return toScientific(decimal, places, placesafter1000, evalue);
 		break;
 		case "Engineering":
-		return toEngineering(decimal, places);
+		return toEngineering(decimal, places, placesafter1000, evalue);
 		break;
 		case "Logarithm":
-		return toLogarithm(decimal, places);
+		return toLogarithm(decimal, places, placesafter1000, evalue);
 		break;
 		case "Binary":
-		return toBinary(decimal, places);
+		return toBinary(decimal, places, placesafter1000, evalue);
 		break;
 		case "YESNO":
-		return toYESNO(decimal, places);
+		return toYESNO(decimal, places, placesafter1000, evalue);
 		break;
 		case "Blind":
 		return "";
@@ -71,7 +71,8 @@ var vdata = {
 	el: "#main",
 	data: {
 		player: player,
-		Decimal: Decimal
+		Decimal: Decimal,
+		toScientific: toScientific
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
@@ -184,7 +185,7 @@ var vdata = {
 				},
 				{
 					title: "Conversion",
-					desc: "You can input more plants into the machine, which returns more plantium. This value is adjustable in the machines tab. <WIP>",
+					desc: "You can input more plants into the machine, which returns more plantium (x1.5 for every OoM). This value is adjustable in the machines tab.",
 					cost: new Decimal(1e4),
 					id: 6,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-7] == "1"

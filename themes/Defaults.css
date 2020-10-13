@@ -4,6 +4,9 @@
 	font-family: var(--font);
 	touch-action: manipulation;
 }
+input {
+	background: var(--b-1);
+}
 body {
 	background: var(--bg-1);
 }
@@ -72,7 +75,7 @@ select {
 	height: 100%;
 	width: 2%;
 	background: linear-gradient(to right, #da0, #c71);
-	transition: all 0.03s;
+	transition: all 0.05s;
 }
 
 .qu {

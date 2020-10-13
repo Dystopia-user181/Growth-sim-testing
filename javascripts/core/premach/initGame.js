@@ -13,6 +13,8 @@ const initPlayer = {
 		level: new Decimal(0)
 	},
 	plantium: new Decimal(0),
+	plantiumplantamt: new Decimal(1e15),
+	tmpplantiumplantamt: "1e15",
 	onplantiumgain: new Decimal(0),
 	plantiumprocess: 2,
 	plantiumupgrades: 0,

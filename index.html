@@ -8,6 +8,7 @@
 		<script defer src="javascripts/core/premach/initGame.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/display/notation.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/planting.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/cultivator.js" charset="utf-8" type="text/javascript"></script>
@@ -16,7 +17,6 @@
 		<script defer src="javascripts/core/premach/queen.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/plantPower.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/factory.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/display/vues.js" charset="utf-8" type="text/javascript"></script>
@@ -126,13 +126,16 @@
 				<div class="machine" id="machine1" align="center">
 					<h3>Machine</h3>
 					<br>
-					<button onclick="buyMach()" id="buyMach1" v-if="player.machines.lt(1)" :disabled="player.money.lt(1e14)"><h4>Melt ${{getNSca(1e8, player.machines, 1e14)}} worth of coins into a machine</h4></button>
+					<button onclick="buyMach()" id="buyMach1" v-if="player.machines.lt(1)" :disabled="player.money.lt(1e14)"><h4>Melt ${{toNot(1e14)}} worth of coins into a machine</h4></button>
 					<br><br>
 					<div class="progressbarplantium" v-if="player.machines.gt(0)">
 						<div :style="{width: `${player.plantiumprocess}%`}" class="pbarcontent"></div>
 					</div>
 					<br>
-					<div id="mach1" v-if="player.machines.gt(0)"><button onclick="makePlantium()" :disabled="player.plants.picked.lt(1e15) || player.honey.lt(1e14)">Throw {{toNot(1e15)}} plants and {{toNot(1e14)}} honey into the machine and see what happens!</button></div>
+					<div id="mach1" v-if="player.machines.gt(0)">
+						You have {{toNot(player.plants.picked)}} plants and {{toNot(player.honey)}} honey.
+						<button onclick="makePlantium()" :disabled="player.plants.picked.lt(1e15) || player.honey.lt(1e14)">Throw {{toNot(player.plantiumplantamt)}} plants and {{toNot(player.plantiumplantamt.div(10))}} honey into the machine and see what happens!</button>
+					</div>
 					<br>
 					<div id="machinelore" v-if="player.madeFirstPlantium&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
 					<br><br>
@@ -146,6 +149,10 @@
 						You have {{toNot(player.machines)}} machines.
 						<br>
 						<button :disabled="player.plantium.lt(Decimal.pow(10, player.machines).mul(1e2))" onclick="buyMach()">Buy a machine for {{getNSca(10, player.machines, 100)}} plantium.</button>
+					</div>
+					<div v-if="pus[6].bought">
+						<br><br>
+						Plants to dump on plantium: <input v-model="player.tmpplantiumplantamt" v-on:change="var err = false; try {new Decimal(player.tmpplantiumplantamt)} catch {err = true} if (err) player.tmpplantiumplantamt = '1e15'; else if (new Decimal(player.tmpplantiumplantamt).lt(1e15)) player.tmpplantiumplantamt = '1e15'; player.plantiumplantamt = new Decimal(player.tmpplantiumplantamt)"/>
 					</div>
 				</div>
 			</div>
