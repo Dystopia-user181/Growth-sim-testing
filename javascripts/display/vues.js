@@ -106,7 +106,7 @@ var vdata = {
 				],
 				row3: [
 					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
-					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Planty", "Cancer"], it: "theme"},
+					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Planty", "Cancer(BEWARE)"], it: "theme"},
 					{id: 13, text: `Font`, el: ["Monospace", "Serif", "Sans", "Iosevka"], it: "font"}
 				]
 			}

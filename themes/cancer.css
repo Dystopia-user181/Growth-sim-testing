@@ -1,9 +1,0 @@
-:root {
-	--bg-1: #00f;
-	--bg-2: #0f0;
-	--bg-3: #0ff;
-	--c-1: #f0f;
-}
-* {
-	cursor: url(cancer.bmp), auto !important;
-}

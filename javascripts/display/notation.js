@@ -4,7 +4,7 @@ function toScientific (decimal, places=0, placesafter1000=2, evalue=3) {
 }
 function toEngineering (decimal, places=0, placesafter1000=2, evalue=3) {
 	decimal = new Decimal(decimal);
-	if (Math.abs(decimal.e) < evalue) return (Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toFixed(places); else return `${Math.min(decimal.m*Math.pow(10, decimal.e%3), 999.99).toFixed(placesafter1000)}e${toScientific(Math.floor(decimal.e/3*3), 0, 4, 6)}`;
+	if (Math.abs(decimal.e) < evalue) return (Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toFixed(places); else return `${Math.min(decimal.m*Math.pow(10, decimal.e%3), 999.99).toFixed(placesafter1000)}e${toScientific(Math.floor(decimal.e/3)*3, 0, 4, 6)}`;
 }
 function toLogarithm (decimal, places=0, placesafter1000=2, evalue=3) {
 	decimal = new Decimal(decimal);
