@@ -9,3 +9,8 @@ function assignMax(money) {
 	player.plantium = player.plantium.sub(Decimal.pow(2, player.generators.add(genamt)).mul(2).sub(Decimal.pow(2, player.generators).mul(2))).max(0);
 	player.generators = player.generators.add(genamt);
 }
+function buybattery() {
+	if (player.generators.lt(Decimal.pow(2, player.batteries))) return;
+	player.generators = player.generators.sub(Decimal.pow(2, player.batteries));
+	player.batteries = player.batteries.add(1);
+}

@@ -90,6 +90,18 @@ select {
 .qu.b {
 	background: #0f03;
 }
+.cu {
+	height: 8em;
+	width: 175px;
+	font-size: 12px;
+	vertical-align: top;
+}
+.cu.d {
+	background: #f003;
+}
+.cu.b {
+	background: #0f03;
+}
 .pu {
 	height: 10em;
 	width: 250px;
@@ -101,4 +113,22 @@ select {
 }
 .pu.b {
 	background: #fe05;
+}
+.hc {
+	height: 8.5em;
+	font-size: 0.7em;
+	width: 150px;
+	border: 1px solid var(--c-1);
+	border-radius: 3px;
+	background: #da0;
+	color: #000 !important;
+}
+.hc > b {
+	color: #000 !important;
+}
+.hc:hover {
+	border: 1px solid var(--c-1) !important;
+}
+.hc:active {
+	background: #b80 !important;
 }

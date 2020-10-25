@@ -18,8 +18,10 @@ const initPlayer = {
 	onplantiumgain: new Decimal(0),
 	plantiumprocess: 2,
 	plantiumupgrades: 0,
+	cvtupgrades: 0,
 	plantpow: new Decimal(0),
 	generators: new Decimal(0),
+	batteries: new Decimal(0),
 	factories: new Decimal(0),
 	machines: new Decimal(0),
 	hives: {
@@ -28,6 +30,7 @@ const initPlayer = {
 		level: new Decimal(0)
 	},
 	honeycombs: new Decimal(0),
+	combstructures: [0, 0, 0, 0, 0],
 	queens: {
 		amt: new Decimal(0),
 		honey: new Decimal(0),
@@ -41,14 +44,18 @@ const initPlayer = {
 		buycvtup: false,
 		buycvtr: 0,
 		buycvtratio: false,
-		autoplantium: false
+		autoupgrades: false,
+		autoplantium: false,
+		autoqueen: false
 	},
 	automatorUnlocked: {
 		sellPlant: false,
 		sellHoney: false,
 		buycvt: false,
 		buycvtup: false,
-		autoplantium: false
+		autoupgrades: false,
+		autoplantium: false,
+		autoqueen: false
 	},
 	tutorial: {
 		unlockedSell: false,
@@ -73,6 +80,8 @@ const initPlayer = {
 	},
 	version: "1.0.0.0-vue"
 };
+var lastTick = new Date().getTime();
+var thisTick = new Date().getTime();
 Object.seal(initPlayer);
 var player = initPlayer;
 function getnff(bool) {

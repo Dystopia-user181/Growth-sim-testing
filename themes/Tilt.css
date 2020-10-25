@@ -1,0 +1,14 @@
+:root {
+	--bg-1: #000;
+	--bg-2: #111;
+	--bg-3: #555;
+	--c-1: #fff;
+}
+* {
+	animation: tilt 100s linear infinite;
+}
+@keyframes tilt {
+	0% {transform: rotate(0deg);}
+	50% {transform: rotate(5deg);}
+	100% {transform: rotate(0deg);}
+}

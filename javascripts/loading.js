@@ -1,10 +1,11 @@
-function load(save, isOnload) {
+function load(save, isOnload=false) {
 	if (typeof save !== "object") return;
 	if (save === null) return;
 	if (save.version !== "1.0.0.0-vue") {
 		alert("Save is from an older version and thus is incompatible with the newer version.");
 		if (isOnload) {
 			localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));
+			localStorage.setItem("growthsimofflineprogress", JSON.stringify(new Date().getTime()))
 			location.reload();
 		}
 		return;
@@ -56,8 +57,14 @@ function runParse(obj, obj2) {
 var parsedsave = JSON.parse(localStorage.getItem("growthsimsave"));
 if (localStorage.getItem("growthsimsave") !== null) {
 	load(parsedsave, true);
+	setTimeout(function () {
+		for (var i = 0; i < 1000; i++) {
+			mainGameLoop((new Date().getTime()-JSON.parse(localStorage.getItem("growthsimofflineprogress")))/1000000);
+		}
+	}, 50);
 } else {
 	localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));
+	localStorage.setItem("growthsimofflineprogress", JSON.stringify(new Date().getTime()))
 	location.reload();
 }
 function expo() {

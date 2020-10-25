@@ -1,5 +1,6 @@
 function save() {
 	localStorage.setItem("growthsimsave", JSON.stringify(player));
+	localStorage.setItem("growthsimofflineprogress", JSON.stringify(new Date().getTime()));
 	console.log("Game saved.");
 }
 function reseter(obj, obj2) {

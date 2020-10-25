@@ -12,7 +12,6 @@
 		<script defer src="javascripts/saving.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/loading.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/cultivator.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/core/premach/hive.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/queen.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
@@ -75,20 +74,24 @@
 			</div>
 			<div style="width: 50%; transition: none;">
 				<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
-					You have {{toNot(player.cvt.total.floor())}} level {{toNot(player.cvt.level)}} cultivators, making {{toNot(pps)}} plants per second.
+					You have {{toNot(player.cvt.total.floor())}} ({{toNot(player.cvt.bought)}} bought) level {{toNot(player.cvt.level)}} cultivators, making {{toNot(pps)}} plants per second.
 					<br><br>
-					<button onclick="buyCvt()" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Cultivator for ${{toNot(getCvtScal(player.cvt), 2)}}.</button>
-					<button onclick="upCvt()" :disabled="player.money.lt(Decimal.pow(2e3, player.cvt.level).mul(2e3))">Upgrade Cultivator for ${{getNSca(2e3, player.cvt.level, 2e3)}}.</button>
+					<button onclick="buyCvt('cvt')" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Cultivator for ${{toNot(getCvtScal(player.cvt), 2)}}.</button>
+					<button onclick="upCvt('cvt')" :disabled="player.money.lt(getCvtUpScal(player.cvt))">Upgrade Cultivator for ${{getNSca(2e3, player.cvt.level, 2e3)}}.</button>
 				</div>
 				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at $40.00</h3>
 				<br>
 				<div v-if="player.tutorial.unlockedPot&&player.tutorial.unlockedHoneybee">
-					You have {{toNot(player.hives.total.floor())}} level {{toNot(player.hives.level)}} hives, producing {{toNot(comps)}} honeycombs per second.
+					You have {{toNot(player.hives.total.floor())}}  ({{toNot(player.hives.bought)}} bought) level {{toNot(player.hives.level)}} hives, producing {{toNot(comps)}} honeycombs per second.
 					<br>
 					Your {{toNot(player.honeycombs)}} honeycombs are boosting bee production by x{{toNot(player.honeycombs.add(1).pow(0.3), 2)}}
 					<br><br>
-					<button onclick="buyHive()" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2)}}.</button>
-					<button onclick="upHive()" :disabled="player.money.lt(Decimal.pow(2e3, player.hives.level).mul(2e3))">Upgrade Beehive for ${{getNSca(2e3, player.hives.level, 2e3)}}.</button>
+					<button onclick="buyCvt('hives')" :disabled="player.money.lt(getCvtScal(player.hives))">Buy {{toNot(1)}} Beehive for ${{toNot(getCvtScal(player.hives), 2)}}.</button>
+					<button onclick="upCvt('hives')" :disabled="player.money.lt(getCvtUpScal(player.hives))">Upgrade Beehive for ${{getNSca(2e3, player.hives.level, 2e3)}}.</button>
+				</div>
+				<div v-if="pus[9].bought">
+					<br><br>
+					<cubtn v-for="cu in cus" :obj="cu"></cubtn>
 				</div>
 				<br><hr><br>
 				<div v-if="player.tutorial.unlockedMarketing">
@@ -110,14 +113,16 @@
 					</div>
 				</div>
 				<h3 v-else-if="player.tutorial.unlockedSell">Unlocked at ${{toNot(500, 2)}}</h3>
-				<br v-if="!pus[4].bought"><hr v-if="player.tutorial.madeFirstPlantium && !pus[4].bought"><br>
+				<br v-if="!pus[4].bought"><hr v-if="player.tutorial.madeFirstPlantium && !pus[4].bought"><br v-if="!pus[4].bought">
 				<div v-if="player.tutorial.madeFirstPlantium" style="display: block;">
 					You have {{toNot(player.factories)}} factories, producing {{toNot(player.factories.mul(0.2), 1)}} cultivators and {{toNot(player.factories.mul(0.1), 1)}} hives every second.
 					<br v-if="!pus[3].bought"><br v-if="!pus[3].bought">
 					<b v-if="!pus[3].bought">Each factory consumes {{toNot(0.05, 2)}} plant power per second to function. You have {{toNot(player.plantpow)}} plant power.</b>
 					<br><br>
-					<button onclick="buyFactory()" :disabled="player.money.lt(player.factories.lt(30)?Decimal.pow(10, player.factories).mul(1e4):Decimal.pow(50, player.factories).mul(1e34)) || (!pus[2].bought && player.generators.lt(player.factories.mul(0.5)))">Buy {{toNot(1)}} Factory for {{player.factories.lt(30)?getNSca(10, player.factories, 1e4):getNSca(50, player.factories, 1e34)}}</button>
+					<button onclick="buyFactory()" :disabled="player.money.lt(player.factories.lt(30)?Decimal.pow(10, player.factories).mul(1e4):Decimal.pow(50, player.factories.sub(30)).mul(1e34)) || (!pus[2].bought && player.generators.lt(player.factories.mul(0.5)))">Buy {{toNot(1)}} Factory for {{player.factories.lt(30)?getNSca(10, player.factories, 1e4):getNSca(50, player.factories.sub(30), 1e34)}}</button>
 					<button onclick="if (confirm('This will reset your factories. Are you sure?')) player.factories = new Decimal(0)">Reset factories</button>
+					<br><br>
+					<button class="hc">Testetst<br><b>Cost: test</b></button>
 				</div>
 			</div>
 		</div>
@@ -134,10 +139,10 @@
 					<br>
 					<div id="mach1" v-if="player.machines.gt(0)">
 						You have {{toNot(player.plants.picked)}} plants and {{toNot(player.honey)}} honey.
-						<button onclick="makePlantium()" :disabled="player.plants.picked.lt(1e15) || player.honey.lt(1e14)">Throw {{toNot(player.plantiumplantamt)}} plants and {{toNot(player.plantiumplantamt.div(10))}} honey into the machine and see what happens!</button>
+						<button onclick="makePlantium()" :disabled="player.plants.picked.lt(player.plantiumplantamt) || player.honey.lt(player.plantiumplantamt.div(10))">Throw {{toNot(player.plantiumplantamt)}} plants and {{toNot(player.plantiumplantamt.div(10))}} honey into the machine and see what happens!</button>
 					</div>
 					<br>
-					<div id="machinelore" v-if="player.madeFirstPlantium&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
+					<div id="machinelore" v-if="player.tutorial.madeFirstPlantium&&player.display.lore">The machine explodes violently. It destroys everything you had previously. Amazingly, you, and the machine, are left unfazed.
 					<br><br>
 					The machine outputs a glowing orb. You can feel the heat of it even from a distance. It seems to be an extremely powerful (and potentially destructive) substance. You decide to call it plantium because, uh, you couldn't think of a better name.
 					<br><br>
@@ -171,20 +176,36 @@
 			</span>
 			<button onclick="buyAuto('buycvt', new Decimal(1e8))" v-else-if="player.tutorial.unlockedHoneybee" :disabled="player.money.lt(1e8)">Unlock Automator for buying cultivators and hives for ${{toNot(1e8)}}</button>
 			<br><br>
+			<span v-if="player.automatorUnlocked.autoupgrades">
+				Auto-Cultivator Upgrades: <button onclick="toggleAuto('autoupgrades')">{{getnff(player.automator.autoupgrades)}}</button>
+			</span>
+			<button onclick="buyAuto('autoupgrades', new Decimal(1e60))" v-else :disabled="player.money.lt(1e60)">Unlock Auto-Cultivator Upgrades for ${{toNot(1e60)}}</button>
+			<br><br>
 			<span v-if="player.automatorUnlocked.autoplantium">
 				Auto-Plantium: <button onclick="toggleAuto('autoplantium')">{{getnff(player.automator.autoplantium)}}</button>
-				<br>
 			</span>
 			<button onclick="buyAuto('autoplantium', new Decimal(1e3), 'plantium')" v-else :disabled="player.plantium.lt(1e3)">Unlock Auto-plantium for {{toNot(1e3)}} plantium</button>
+			<br><br>
+			<span v-if="player.automatorUnlocked.autoqueen">
+				Auto-Queen: <button onclick="toggleAuto('autoqueen')">{{getnff(player.automator.autoqueen)}}</button>
+				<br>
+			</span>
+			<button onclick="buyAuto('autoqueen', new Decimal(1e80), 'bees')" v-else :disabled="player.bees.lt(1e80)">Unlock Auto-queens for {{toNot(1e80)}} bees</button>
 		</div>
 		<div v-else-if="player.navigation.tab == 'Plantium'" class="tab" align="center">
 			<div>
-				You have {{toNot(player.generators)}} generators, producing {{toNot(player.generators.sub(pus[3].bought?0:player.factories.div(2)).mul(0.1), 1)}} plant power every second.
+				You have {{toNot(player.generators)}} generators, producing {{toNot(plantpowps, 1)}} plant power every second.
 				<br>
 				You have {{toNot(player.plantpow, 1)}} plant power, boosting pre-plantium production by x{{toNot(plantpowbuff, 2)}}.
 				<br><br>
-				<button onclick="assign()" :disabled="player.plantium.lt(Decimal.pow(2, player.generators))">Buy 1 generator. Cost: {{getNSca(2, player.generators, 1)}} plantium</button>
+				<button onclick="assign()" :disabled="player.plantium.lt(Decimal.pow(2, player.generators))">Buy {{toNot(1)}} generator. Cost: {{getNSca(2, player.generators, 1)}} plantium</button>
 				<button onclick="assignMax(player.plantium)" :disabled="player.plantium.lt(Decimal.pow(2, player.generators))">Buy max generators</button>
+			</div>
+			<br><br>
+			<div v-if="pus[8].bought">
+				You have {{toNot(player.batteries)}} batteries, boosting plant power gain by x{{toNot(batteryboost)}}.
+				<br><br>
+				<button onclick="buybattery()" :disabled="player.generators.lt(Decimal.pow(2, player.batteries))">Buy {{toNot(1)}} battery. Cost: {{getNSca(2, player.batteries, 1)}} generators</button>
 			</div>
 			<br><br>
 			<pubtn v-for="pu in pus" :obj="pu"></pubtn>
