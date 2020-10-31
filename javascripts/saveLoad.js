@@ -1,3 +1,32 @@
+function save() {
+	localStorage.setItem("growthsimsave", JSON.stringify(player));
+	localStorage.setItem("growthsimofflineprogress", JSON.stringify(new Date().getTime()));
+	console.log("Game saved.");
+}
+function reseter(obj, obj2) {
+	Object.keys(obj2).forEach(function (key, index) {
+		if (key != "proto") {
+			if (typeof obj2[key] === "object" && typeof obj[key] === "object") {
+				reseter(obj[key], obj2[key]);
+			} else {
+				obj[key] = obj2[key];
+			}
+		}
+	});
+	return (obj);
+}
+function reset() {
+	if (confirm("Do you want to reset your save?")) {
+		setTimeout(function () {
+			if (prompt("Type RESET in caps to confirm.") === "RESET") {
+				player = reseter(player, initPlayer);
+			}
+		}, 400);
+	}
+}
+setInterval(function() {
+	if (player.option.autosave) save();
+}, 10000);
 function load(save, isOnload=false) {
 	if (typeof save !== "object") return;
 	if (save === null) return;
@@ -13,7 +42,7 @@ function load(save, isOnload=false) {
 	player = runParse(save, initPlayer);
 	if (player.plantiumprocess > 2) {
 		function pbarplus() {
-			if (vm.pus[1].bought) {
+			if (vm.pus[2].bought) {
 				player.plantiumprocess += 98/2;
 				player.plants.picked = player.plants.picked.sub(player.onplantiumgain.mul(5e14)).max(0);
 				player.honey = player.honey.sub(player.onplantiumgain.mul(5e13)).max(0);
@@ -24,7 +53,7 @@ function load(save, isOnload=false) {
 			}
 			if (player.plantiumprocess <= 100) setTimeout(pbarplus, 50);
 			else {
-				if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
+				if (!vm.pus[1].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
 				if (player.plantium.lt(1)) {
 					window.tmp = player.option.theme;
 					player.option.theme = "Dark";
@@ -61,6 +90,7 @@ if (localStorage.getItem("growthsimsave") !== null) {
 		for (var i = 0; i < 1000; i++) {
 			mainGameLoop((new Date().getTime()-JSON.parse(localStorage.getItem("growthsimofflineprogress")))/1000000);
 		}
+		vm.finished = true;
 	}, 50);
 } else {
 	localStorage.setItem("growthsimsave", JSON.stringify(initPlayer));

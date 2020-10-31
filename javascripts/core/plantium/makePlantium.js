@@ -14,7 +14,7 @@ function makePlantium() {
 	player.plantiumprocess = 2;
 	player.onplantiumgain = player.plants.picked.div(player.plantiumplantamt).min(player.honey.div(player.plantiumplantamt.div(10)).min(player.machines.mul(vm.pus[5].bought?5:1)));
 	function pbarplus() {
-		if (vm.pus[1].bought) {
+		if (vm.pus[2].bought) {
 			player.plantiumprocess += 98/2;
 			player.plants.picked = player.plants.picked.sub(player.onplantiumgain.mul(player.plantiumplantamt.mul(0.5))).max(0);
 			player.honey = player.honey.sub(player.onplantiumgain.mul(player.plantiumplantamt.mul(0.05))).max(0);
@@ -25,7 +25,7 @@ function makePlantium() {
 		}
 		if (player.plantiumprocess <= 100) setTimeout(pbarplus, 50);
 		else {
-			if (!vm.pus[2].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
+			if (!vm.pus[1].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain"]);
 			if (player.plantium.lt(1)) {
 				window.tmp = player.option.theme;
 				player.option.theme = "Dark";

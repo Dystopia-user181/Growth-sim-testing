@@ -25,7 +25,8 @@ var vdata = {
 	data: {
 		player: player,
 		Decimal: Decimal,
-		toScientific: toScientific
+		toScientific: toScientific,
+		finished: false
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
@@ -37,6 +38,7 @@ var vdata = {
 		hcvtboost: function () {return player.honey.add(1).pow(0.3);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(this.plantpowbuff));},
 		qulimit: function () {return Decimal.pow(10000, this.qus[1].bought?1.5:1)},
+		space: function () {return player.hives.bought.div(200).floor();},
 		comps: function () {return player.hives.total.floor().pow(this.qus[0].bought?2:1).mul(this.plantpowbuff).mul(Decimal.pow(1.5, player.hives.level)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(10).log(10), player.queens.amt)).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.hives.bought.div(200).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.1):1);},
 		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(1).pow(0.5).pow(player.queens.amt);},
 		tabbtns: function () {
@@ -152,25 +154,24 @@ var vdata = {
 				{
 					title: "Effective Power",
 					desc: "Plant power exponent x2.",
-					cost: new Decimal(5),
+					cost: new Decimal(3),
 					id: 0,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-1] == "1"
+				},
+				{
+					title: "Volatility",
+					desc: "Plantium no longer resets anything, only subtracts from plant and honey amount.",
+					cost: new Decimal(5),
+					id: 1,
+					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-2] == "1"
 				},
 				{
 					title: "Quick Unload",
 					desc: "Machine speed is 0.1 seconds.",
 					cost: new Decimal(6),
-					id: 1,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-2] == "1"
-				},
-				{
-					title: "Volatility",
-					desc: "Plantium no longer resets anything, only subtracts from plant and honey amount.",
-					cost: new Decimal(8),
 					id: 2,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-3] == "1"
-				},
-				{
+				},				{
 					title: "Solar factories",
 					desc: "Factories do not consume plant power.",
 					cost: new Decimal(200),
@@ -186,7 +187,7 @@ var vdata = {
 				},
 				{
 					title: "The Machine Room",
-					desc: "You can buy more machines in the machines tab. This results in more plantium per tick. Also increases the capacity of machines by x5.",
+					desc: "You can buy more machines in the machines tab. This results in more plantium per tick. Also adds 4 more slots to a machine.",
 					cost: new Decimal(2e3),
 					id: 5,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-6] == "1"
@@ -220,6 +221,34 @@ var vdata = {
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-10] == "1"
 				},
 			]
+		},
+		hc: function () {
+			return [
+				{
+					amt: player.combstructures[0],
+					cost: Decimal.pow(1e5, player.combstrucures[0]).mul(1e5),
+					id: 0,
+					desc: "Produce honeycombs x2.5 faster.",
+					boost: Decimal.pow(2.5, player.combstrutures[0]),
+					effect: `x${toNot(Decimal.pow(2.5, player.combstrutures[0]))}`
+				},
+				{
+					amt: player.combstructures[1],
+					cost: Decimal.pow(1e15, player.combstrucures[1]).mul(1e20),
+					id: 1,
+					desc: "The 4th queen upgrade has a larger base based on plantium.",
+					boost: player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1),
+					effect: `+${toNot(player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1))}`
+				},
+				{
+					amt: player.combstructures[2],
+					cost: Decimal.pow(1e15, player.combstrucures[1]).mul(1e20),
+					id: 2,
+					desc: "Who knew bees were sentient? Anyway,  produce intelligence based on bees.",
+					boost: player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1),
+					effect: `+${toNot(player.plantium.add(1).pow(player.combstrutures[2].div(40)).sub(1))}`
+				},
+			]
 		}
 	},
 	methods: {
@@ -234,6 +263,9 @@ var vdata = {
 		},
 		getFacScal: function () {
 			return player.factories.lt(30) ? getNScal(10, player.factories, 1e4) : getNScal(50, player.factories.sub(30).mul(Decimal.pow(1.5, player.factories.sub(100))), 1e34);
+		},
+		getGenScal: function () {
+			return Decimal.pow(2, player.generators.sub(1).max(0));
 		},
 		getNSca: function (scal, num, normal) {
 			return this.toNot(this.getNScal(scal, num, normal), 2);
@@ -320,6 +352,23 @@ Vue.component("pubtn", {
 	},
 	template: `<button :class="'pu ' + (obj.bought?'b':(player.plantium.gte(obj.cost)?'u':'d'))" v-on:click="
 	if (!obj.bought && player.plantium.gte(obj.cost)) {player.plantiumupgrades += Math.pow(2, obj.id);player.plantium = player.plantium.sub(obj.cost);}" :disabled="player.plantium.lt(obj.cost) && !obj.bought"><b>{{obj.title}}</b><br>{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
+	data: () => {
+		return {player: player}
+	},
+	methods: {
+		toNot: toNot
+	},
+	computed: vdata.computed
+});
+Vue.component("hcbtn", {
+	props: {
+		obj: Object
+	},
+	template: `<button class="hc" v-on:click="
+	if (player.honeycombs.gte(obj.cost) && player.combstructures.reduce((a, i) => a = a.add(i)).lte(space)) {
+		player.combstructures[obj.id] += 1;
+		player.honeycombs = player.honeycombs.sub(obj.cost);
+	}" :disabled="player.honeycombs.lt(obj.cost) || player.combstructures.reduce((a, i) => a = a.add(i)).gte(space)"><b>Structure {{toNot(obj.id+1)}}</b><br>Amount: {{toNot(obj.amt)}}<br>{{obj.desc}}<br>Currently: {{obj.effect}}<br>Cost: {{toNot(obj.cost)}} Honeycombs</button>`,
 	data: () => {
 		return {player: player}
 	},
