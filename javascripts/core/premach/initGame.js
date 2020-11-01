@@ -89,7 +89,6 @@ var player = initPlayer;
 function getnff(bool) {
 	if (bool) return "ON"; else return "OFF";
 }
-var ctx = document.getElementById("c").getContext("2d");
 function mainGameLoop(ticks=0.05) {
 	lastTick = thisTick;
 	thisTick = new Date().getTime();
