@@ -3,9 +3,10 @@ function assign() {
 	player.plantium = player.plantium.sub(vm.getGenScal());
 	player.generators = player.generators.add(1);
 }
-function assignMax(money) {
+function assignMax(money=player.plantium.sub(1).add(1)) {
 	if (money.lt(vm.getGenScal())) return;
-	while (money.gte(vm.getGenScal())) {
+	while (money.gte(vm.getGenScal())&&player.plantium.gte(vm.getGenScal())) {
+		money = money.sub(vm.getGenScal())
 		assign();
 	}
 }

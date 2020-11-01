@@ -174,14 +174,14 @@ var vdata = {
 				},				{
 					title: "Solar factories",
 					desc: "Factories do not consume plant power.",
-					cost: new Decimal(200),
+					cost: new Decimal(100),
 					id: 3,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-4] == "1"
 				},
 				{
 					title: "Automate it 420",
 					desc: "Unlock better automation.",
-					cost: new Decimal(420),
+					cost: new Decimal(300),
 					id: 4,
 					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-5] == "1"
 				},

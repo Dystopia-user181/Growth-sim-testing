@@ -13,6 +13,7 @@ function buyCvt(type) {
 function buyMaxCvt(money, type) {
 	var iterations = 0;
 	while (money.gte(vm.getCvtScal(player[type])) && iterations < 4000) {
+		money = money.sub(vm.getCvtUpScal(player[type]));
 		buyCvt(type);
 		iterations++;
 	}
