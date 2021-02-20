@@ -32,7 +32,7 @@ const initPlayer = {
 		level: D(0)
 	},
 	honeycombs: D(0),
-	combstructures: {0: D(0), 1: D(0), 2: D(0), 3: D(0), 4: D(0)},
+	combstructures: [D(0), D(0), D(0), D(0), D(0)],
 	intelligence: D(0),
 	queens: {
 		amt: D(0),

@@ -18,6 +18,7 @@ function reset() {
 		setTimeout(function () {
 			if (prompt("Type RESET in caps to confirm.") === "RESET") {
 				player = reseter(player, initPlayer);
+				player.batteryArray = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]];
 			}
 		}, 400);
 	}
