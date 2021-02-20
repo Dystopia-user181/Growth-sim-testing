@@ -107,7 +107,7 @@ function mainGameLoop(ticks=0.05) {
 	thisTick = new Date().getTime();
 
 	ticks *= player.devSpeed;
-	ticks *= 1-vm.qus[7].bought;
+	if (window.vm) ticks *= 1-vm.qus[7].bought;
 	if (isNaN(ticks)) ticks = 0;
 
 	player.plants.field = player.plants.field.add(ticks).add(player.plants.field.min(player.bees).mul(vm.plantpowbuff).mul(ticks).mul(vm.hcs[0].boost));
