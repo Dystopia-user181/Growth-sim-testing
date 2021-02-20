@@ -21,12 +21,4 @@ function sell(amt = 1) {
 		setTimeout(()=>player.option.theme = tmp, 30);
 	}
 	if (player.money.gte(1e14)) player.tutorial.unlockedMachine = true;
-	if (player.automator.buycvt) {
-		buyMaxCvt(player.automator.buycvtratio?player.automoney.div(1.9):player.money.div(1.9), "cvt");
-		buyMaxCvt(player.automator.buycvtratio?player.automoney:player.money, "hives");
-		buyMaxCvt(player.automator.buycvtratio?player.automoney:player.money, "cvt");
-	}
-	if (player.automator.buycvtratio) {
-		player.automoney = player.automoney.add(amt.mul(player.automator.buycvtr));
-	}
 }

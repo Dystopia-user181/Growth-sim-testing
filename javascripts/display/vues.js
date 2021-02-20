@@ -1,25 +1,3 @@
-var toNot = (decimal, places=0, placesafter1000=2, evalue=3) => {
-	switch (player.option.notation) {
-		case "Scientific":
-		return toScientific(decimal, places, placesafter1000, evalue);
-		break;
-		case "Engineering":
-		return toEngineering(decimal, places, placesafter1000, evalue);
-		break;
-		case "Logarithm":
-		return toLogarithm(decimal, places, placesafter1000, evalue);
-		break;
-		case "Binary":
-		return toBinary(decimal, places, placesafter1000, evalue);
-		break;
-		case "YESNO":
-		return toYESNO(decimal, places, placesafter1000, evalue);
-		break;
-		case "Blind":
-		return "";
-		break;
-	};
-}
 var vdata = {
 	el: "#main",
 	data: {
@@ -30,23 +8,25 @@ var vdata = {
 	},
 	computed: {
 		beecapped: function () {return this.queenbeecap.mul(1e7).lt(player.bees);},
-		pu7buff: function () {return this.pus[7].bought?Decimal.pow(1.5, player.plantium.log10()):1;},
-		batteryboost: function () {return Decimal.pow(4, player.batteries)},
-		plantpowps: function () {return player.generators.sub(vm.pus[3].bought?0:player.factories.div(2)).mul(this.batteryboost).mul(0.1);},
-		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).pow(this.pus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(3, player.queens.amt).mul(player.queens.honey.add(10).log(10)):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(this.plantpowbuff).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.cvt.bought.div(200).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.1):1);},
-		plantpowbuff: function () {return player.plantpow.add(1).pow(this.pus[0].bought?2.2:1.1);},
+		pu7buff: function () {return this.pus[7].bought?player.plantium.add(1).pow(0.4):1;},
+		batteryboost: function () {return Decimal.pow(this.batEffi.add(1), player.batteries)},
+		batteryboost2: function() {return D(player.batteries.mul(this.batEffi).add(7).log(7)).pow(0.35)},
+		plantpowps: function () {return player.generators.sub(vm.pus[3].bought?0:player.factories.div(2)).mul(this.batteryboost).mul(this.hcs[2].boost).mul(0.1);},
+		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).pow(this.cus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(3, player.queens.amt).mul(player.queens.honey.add(10).log(10)):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(this.plantpowbuff).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.cvt.bought.div(400).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.05):1).mul(this.hcs[0].boost);},
+		plantpowbuff: function () {return player.plantpow.add(1).pow(D(this.pus[0].bought?2.2:1.1).mul(this.batteryboost2));},
 		hcvtboost: function () {return player.honey.add(1).pow(0.3);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(this.plantpowbuff));},
 		qulimit: function () {return Decimal.pow(10000, this.qus[1].bought?1.5:1)},
-		space: function () {return player.hives.bought.div(200).floor();},
-		comps: function () {return player.hives.total.floor().pow(this.qus[0].bought?2:1).mul(this.plantpowbuff).mul(Decimal.pow(1.5, player.hives.level)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(10).log(10), player.queens.amt)).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.hives.bought.div(200).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.1):1);},
+		space: function () {return player.hives.bought.div(300).floor();},
+		spaceRem: function() {return this.space.sub(player.combstructures[0].add(player.combstructures[1]).add(player.combstructures[2]).add(player.combstructures[3]).add(player.combstructures[4]))},
+		comps: function () {return player.hives.total.floor().pow(this.qus[0].bought?2:1).mul(this.plantpowbuff).mul(Decimal.pow(1.5, player.hives.level)).mul(Decimal.pow(player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(10).log(10), player.queens.amt)).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.hives.bought.div(400).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.1):1).mul(this.hcs[1].boost);},
 		queenbeecap: function () {return player.queens.honey.div(player.queens.amt).max(0).min(this.qulimit).add(1).pow(0.5).pow(player.queens.amt);},
 		tabbtns: function () {
 			return [
 				{id: 1, req: true, tab: "Plants", onclick: `player.navigation.tab = "Plants"`},
-				{id: 2, req: player.tutorial.unlockedMachine, tab: "Machine", onclick: `player.navigation.tab = "Machine"`},
+				{id: 2, req: true, tab: player.tutorial.unlockedMachine?"Machine":"Locked (Requires $1e14)", onclick: player.tutorial.unlockedMachine?`player.navigation.tab = "Machine"`:""},
 				{id: 2.5, req: this.pus[4].bought, tab: "Automation", onclick: `player.navigation.tab = "Automation"`},
-				{id: 3, req: player.tutorial.madeFirstPlantium, tab: "Plantium", onclick: `player.navigation.tab = "Plantium"`},
+				{id: 3, req: player.tutorial.unlockedMachine, tab: player.tutorial.madeFirstPlantium?"Plantium":"Locked (Requires having used the machine at least once)", onclick: player.tutorial.madeFirstPlantium?`player.navigation.tab = "Plantium"`:""},
 				{id: 4, req: true, tab: "Options", onclick: `player.navigation.tab = "Options"`}
 			];
 		},
@@ -64,208 +44,80 @@ var vdata = {
 				],
 				row3: [
 					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
-					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Tilt", "Cancer(BEWARE)"], it: "theme"},
-					{id: 13, text: `Font`, el: ["Monospace", "Serif", "Sans", "Iosevka"], it: "font"}
+					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Tilt", "Ace"], it: "theme"},
 				]
 			}
 		},
-		qus: function () {
-			return [
-				{
-					desc: "Cultivator and hives base production ^2.",
-					cost: new Decimal(2),
-					id: 0,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-1] == "1"
-				},
-				{
-					desc: "Queen honey effect cap is ^1.5.",
-					cost: new Decimal(3),
-					id: 1,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-2] == "1"
-				},
-				{
-					desc: "Queen scaling is reduced by 50%.",
-					cost: new Decimal(4),
-					id: 2,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-3] == "1"
-				},
-				{
-					desc: "Cultivator production is boosted by Queens and Queen honey.",
-					cost: new Decimal(5),
-					id: 3,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-4] == "1"
-				},
-				{
-					desc: "Queens no longer reset anything.",
-					cost: new Decimal(40),
-					id: 4,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-5] == "1"
-				},
-				{
-					desc: "Unlock honeycomb structures.",
-					cost: new Decimal(45),
-					id: 5,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-6] == "1"
-				},
-				{
-					desc: "Queens directly boost bee production.",
-					cost: new Decimal(50),
-					id: 6,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-7] == "1"
-				},
-				{
-					desc: "Humans are irrelevant...",
-					cost: new Decimal(5000),
-					id: 7,
-					bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-8] == "1"
-				},
-			]
+		qus,
+		cus,
+		pus,
+		hcs,
+		cellDesc: function() {
+			return {
+				copper: "Add 0.2 to battery efficiency.",
+				silver: "Add 0.3 to battery efficiency.",
+				connected: "Add 0.04 to battery efficiency for every copper cell.",
+				chained: "Add 0.1 to battery efficiency (this is then multiplied by the number of neighbours.)"
+			}
 		},
-		cus: function () {
-			return [
-				{
-					desc: "Base Cultivator production is squared again.",
-					cost: new Decimal(5e3),
-					id: 0,
-					bought: player.cvtupgrades.toString(2)[player.cvtupgrades.toString(2).length-1] == "1"
+		cellUnlocks: function() {
+			return {
+				copper: {
+					unlocked: true
 				},
-				{
-					desc: "Post-4000 cultivator scaling is square rooted.",
-					cost: new Decimal(5.9e3),
-					id: 1,
-					bought: player.cvtupgrades.toString(2)[player.cvtupgrades.toString(2).length-2] == "1"
+				silver: {
+					unlocked: player.batteryUnlocks > 0,
+					desc: `Reach ${toNot(6)} batteries to unlock.`
 				},
-				{
-					desc: "For every 200 bought cultivator/hive double their respective production.",
-					cost: new Decimal(7.5e3),
-					id: 2,
-					bought: player.cvtupgrades.toString(2)[player.cvtupgrades.toString(2).length-3] == "1"
+				connected: {
+					unlocked: player.batteryUnlocks > 1,
+					desc: `Reach ${toNot(2.222e222)} bees to unlock.`
 				},
-				{
-					desc: "Boost Cultivator and Hive production by bees^0.1.",
-					cost: new Decimal(1e4),
-					id: 3,
-					bought: player.cvtupgrades.toString(2)[player.cvtupgrades.toString(2).length-4] == "1"
-				},
-			]
+				chained: {
+					unlocked: player.cellUnlocks > 2,
+					desc: "Wait for the next update to unlock."
+				}
+			}
 		},
-		pus: function () {
-			return [
-				{
-					title: "Effective Power",
-					desc: "Plant power exponent x2.",
-					cost: new Decimal(3),
-					id: 0,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-1] == "1"
-				},
-				{
-					title: "Volatility",
-					desc: "Plantium no longer resets anything, only subtracts from plant and honey amount.",
-					cost: new Decimal(5),
-					id: 1,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-2] == "1"
-				},
-				{
-					title: "Quick Unload",
-					desc: "Machine speed is 0.1 seconds.",
-					cost: new Decimal(6),
-					id: 2,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-3] == "1"
-				},				{
-					title: "Solar factories",
-					desc: "Factories do not consume plant power.",
-					cost: new Decimal(100),
-					id: 3,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-4] == "1"
-				},
-				{
-					title: "Automate it 420",
-					desc: "Unlock better automation.",
-					cost: new Decimal(300),
-					id: 4,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-5] == "1"
-				},
-				{
-					title: "The Machine Room",
-					desc: "You can buy more machines in the machines tab. This results in more plantium per tick. Also adds 4 more slots to a machine.",
-					cost: new Decimal(2e3),
-					id: 5,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-6] == "1"
-				},
-				{
-					title: "The Machine Room II",
-					desc: "You can input more plants into the machine, which returns more plantium (x1.5 for every OoM). This value is adjustable in the machines tab.",
-					cost: new Decimal(1e4),
-					id: 6,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-7] == "1"
-				},
-				{
-					title: "Direct conversion",
-					desc: "For every OoM of plantium, cultivators and hives are x1.5 as powerful.",
-					cost: new Decimal(1e7),
-					id: 7,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-8] == "1"
-				},
-				{
-					title: "Super Generators",
-					desc: "Unlock batteries.",
-					cost: new Decimal(1e9),
-					id: 8,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-9] == "1"
-				},
-				{
-					title: "More Upgrades",
-					desc: "Unlock cultivator upgrades and a second row of queen upgrades.",
-					cost: new Decimal(1e11),
-					id: 9,
-					bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-10] == "1"
-				},
-			]
+		cellVals: function() {
+			return player.batteryArray.map((_, i)=>{
+				return _.map((k, e) => {
+					switch(k.toLowerCase()) {
+						case "copper":
+						return D(0.2);
+						break;
+						case "silver":
+						return D(0.1).add(0.2);
+						break;
+						case "connected":
+						return D(player.batteryArray.reduce((a, i)=>a+=(i.reduce((b, j)=>b+= j=="copper", 0)), 0)).mul(0.04);
+						break;
+						case "chained":
+						var a = 0;
+						a += (player.batteryArray[i-1]!=undefined&&player.batteryArray[i-1][e]=="chained");
+						a += (player.batteryArray[i][e-1]=="chained");
+						a += (player.batteryArray[i+1]!=undefined&&player.batteryArray[i+1][e]=="chained");
+						a += (player.batteryArray[i][e+1]=="chained");
+						return D(a).mul(0.1);
+						default:
+						return D(0);
+					}
+				})
+			})
 		},
-		hc: function () {
-			return [
-				{
-					amt: player.combstructures[0],
-					cost: Decimal.pow(1e5, player.combstrucures[0]).mul(1e5),
-					id: 0,
-					desc: "Produce honeycombs x2.5 faster.",
-					boost: Decimal.pow(2.5, player.combstrutures[0]),
-					effect: `x${toNot(Decimal.pow(2.5, player.combstrutures[0]))}`
-				},
-				{
-					amt: player.combstructures[1],
-					cost: Decimal.pow(1e15, player.combstrucures[1]).mul(1e20),
-					id: 1,
-					desc: "The 4th queen upgrade has a larger base based on plantium.",
-					boost: player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1),
-					effect: `+${toNot(player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1))}`
-				},
-				{
-					amt: player.combstructures[2],
-					cost: Decimal.pow(1e15, player.combstrucures[1]).mul(1e20),
-					id: 2,
-					desc: "Who knew bees were sentient? Anyway,  produce intelligence based on bees.",
-					boost: player.plantium.add(1).pow(player.combstrutures[1].div(40)).sub(1),
-					effect: `+${toNot(player.plantium.add(1).pow(player.combstrutures[2].div(40)).sub(1))}`
-				},
-			]
+		batEffi: function() {
+			return this.cellVals.reduce((_, i)=> _ = _.add(i.reduce((a, b)=>a.add(b))), D(0));
 		}
 	},
 	methods: {
-		toNot: toNot,
-		getCvtScal: function (obj) {
-			return obj.bought.lt(4000) ? obj.bought.lte(200) ? 
-				obj.bought.mul(5).add(20) : 
-				Decimal.pow(1.01, obj.bought.sub(200)).mul(1000) : Decimal.pow(this.cus[1].bought?Math.sqrt(1.1):1.1, obj.bought.sub(4000).mul(Decimal.pow(1.1, obj.bought.sub(20000)).max(1))).mul(2.7e19);
-		},
-		getCvtUpScal: function (obj) {
-			return this.getNScal(2e3, obj.level.mul(Decimal.pow(2, obj.level.sub(50)).max(1)), 2e3);
-		},
+		toNot,
+		getCvtScal,
+		getCvtUpScal,
 		getFacScal: function () {
 			return player.factories.lt(30) ? getNScal(10, player.factories, 1e4) : getNScal(50, player.factories.sub(30).mul(Decimal.pow(1.5, player.factories.sub(100))), 1e34);
 		},
 		getGenScal: function () {
-			return Decimal.pow(2, player.generators.sub(1).max(0));
+			return Decimal.pow(2, player.generators.sub(1).max(0).add(player.generators.sub(50).max(0).pow(1.25).mul(0.5)));
 		},
 		getNSca: function (scal, num, normal) {
 			return this.toNot(this.getNScal(scal, num, normal), 2);
@@ -276,14 +128,24 @@ var vdata = {
 		getnff: function (bool) {
 			if (bool) return "ON"; else return "OFF";
 		},
-		btoa: function (text) {
-			return btoa(text);
-		},
-		save: save,
-		load: load,
-		expo: expo,
-		impo: impo,
-		reset: reset
+		btoa: function (a) {return btoa(a)},
+		save,
+		load,
+		expo,
+		impo,
+		reset,
+		buyCvtUpgrade,
+		buyQueenUpgrade,
+		buyHC,
+		buyPlantiumUpgrade,
+		buyCell,
+		getCellScaling,
+		placeCell,
+		removeCell,
+		expand,
+		getExpansionCost,
+		D,
+		comma
 	}
 };
 Vue.component("tabbtn", {
@@ -306,44 +168,29 @@ Vue.component("tbtn", {
 	},
 	template: `<button class="optionsbtn">{{text}}: <select v-model=player.option[it]><option v-for="els in el">{{els}}</option></select></button>`,
 	data: () => {
-		return {player: player}
+		return {player}
 	}
 });
 Vue.component("qubtn", {
 	props: {
 		obj: Object
 	},
-	template: `<button :class="'qu ' + (obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" v-on:click="
-	if (!obj.bought && player.queens.amt.gte(obj.cost)) {
-		player.queens.upgrades += Math.pow(2, obj.id);
-		player.queens.amt = player.queens.amt.sub(obj.cost);
-	}" :disabled="player.queens.amt.lt(obj.cost) && !obj.bought" v-if="obj.id<4||pus[9].bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
+	template: `<button :class="'qu ' + (obj.bought?'b':(player.queens.amt.gte(obj.cost)?'u':'d'))" v-on:click="buyQueenUpgrade(obj)" :disabled="player.queens.amt.lt(obj.cost) && !obj.bought" v-if="obj.id<4||pus[9].bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Queens</button>`,
 	data: () => {
-		return {player: player}
+		return {player}
 	},
-	methods: {
-		toNot: toNot
-	},
+	methods: vdata.methods,
 	computed: vdata.computed
 });
 Vue.component("cubtn", {
 	props: {
 		obj: Object
 	},
-	template: `<button :class="'cu ' + (obj.bought?'b':(player.cvt.bought.gte(obj.cost)&&player.hives.bought.gte(obj.cost)?'u':'d'))" v-on:click="
-		if (!obj.bought && player.cvt.bought.gte(obj.cost)&&player.hives.bought.gte(obj.cost)) {
-			player.cvtupgrades += Math.pow(2, obj.id);
-			player.cvt.bought = player.cvt.bought.sub(obj.cost);
-			player.cvt.total = player.cvt.total.sub(obj.cost);
-			player.hives.bought = player.hives.bought.sub(obj.cost);
-			player.hives.total = player.hives.total.sub(obj.cost);
-		}" :disabled="player.cvt.bought.lt(obj.cost)&&player.hives.bought.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Bought Cultivators and Hives</button>`,
+	template: `<button :class="'cu ' + (obj.bought?'b':(player.cvt.bought.gte(obj.cost)&&player.hives.bought.gte(obj.cost)?'u':'d'))" v-on:click="buyCvtUpgrade(obj)" :disabled="player.cvt.bought.lt(obj.cost)&&player.hives.bought.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{comma(obj.cost)}} Bought Cultivators and Hives</button>`,
 	data: () => {
-		return {player: player}
+		return {player}
 	},
-	methods: {
-		toNot: toNot
-	},
+	methods: vdata.methods,
 	computed: vdata.computed
 });
 Vue.component("pubtn", {
@@ -351,30 +198,107 @@ Vue.component("pubtn", {
 		obj: Object
 	},
 	template: `<button :class="'pu ' + (obj.bought?'b':(player.plantium.gte(obj.cost)?'u':'d'))" v-on:click="
-	if (!obj.bought && player.plantium.gte(obj.cost)) {player.plantiumupgrades += Math.pow(2, obj.id);player.plantium = player.plantium.sub(obj.cost);}" :disabled="player.plantium.lt(obj.cost) && !obj.bought"><b>{{obj.title}}</b><br>{{obj.desc}}<br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
+	buyPlantiumUpgrade(obj)" :disabled="player.plantium.lt(obj.cost) && !obj.bought"><b>{{obj.title}}</b><br>{{obj.desc}}<span v-if="obj.effect"><br>Currently: {{obj.effect}}</span><br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
 	data: () => {
-		return {player: player}
+		return {player}
 	},
-	methods: {
-		toNot: toNot
-	},
+	methods: vdata.methods,
 	computed: vdata.computed
 });
 Vue.component("hcbtn", {
 	props: {
 		obj: Object
 	},
-	template: `<button class="hc" v-on:click="
-	if (player.honeycombs.gte(obj.cost) && player.combstructures.reduce((a, i) => a = a.add(i)).lte(space)) {
-		player.combstructures[obj.id] += 1;
-		player.honeycombs = player.honeycombs.sub(obj.cost);
-	}" :disabled="player.honeycombs.lt(obj.cost) || player.combstructures.reduce((a, i) => a = a.add(i)).gte(space)"><b>Structure {{toNot(obj.id+1)}}</b><br>Amount: {{toNot(obj.amt)}}<br>{{obj.desc}}<br>Currently: {{obj.effect}}<br>Cost: {{toNot(obj.cost)}} Honeycombs</button>`,
+	template: `<button class="hc" v-if="qus[5].bought" v-on:click="buyHC(obj)" :disabled="player.honeycombs.lt(obj.cost) || spaceRem.lte(0)"><b>Structure {{toNot(obj.id+1)}}</b><br>Amount: {{toNot(obj.amt)}}<br>{{obj.desc}}<br>Currently: {{obj.effect()}}<br>Cost: {{toNot(obj.cost)}} Honeycombs</button>`,
 	data: () => {
-		return {player: player}
+		return {player}
 	},
-	methods: {
-		toNot: toNot
-	},
+	methods: vdata.methods,
 	computed: vdata.computed
 });
+
+Vue.component("battery-box", {
+	template:`<div v-if="pus[8].bought">
+	<br>
+	Total battery efficiency: {{toNot(batEffi, 2)}}
+	<br><br>
+	Click to place, right click to remove.
+	<br><br>
+		<battery-array></battery-array>
+		<br><br>
+		<span v-if="player.infoBatCell">{{player.infoBatCell[0].toUpperCase()+player.infoBatCell.substr(1)}} cell ({{cellDesc[player.infoBatCell]}})</span>
+		<br><br>
+		<div v-if="player.batteryUnlocks > 1">Array size: {{player.expansions+4}}x{{player.expansions+4}}
+		<br>
+		<button v-on:click="expand()" :disabled="player.plantium.lt(getExpansionCost())">Expand array size by 1. Cost: {{toNot(getExpansionCost())}} plantium</button></div>
+		<br><br>
+		<div style="display: flex; justify-content: center"><battery-buttons v-for="(obj, type) in cellUnlocks" :obj="obj" :type="type"></battery-buttons></div>
+	</div>`,
+	data: () => {
+		return {player}
+	},
+	methods: vdata.methods,
+	computed: vdata.computed
+});
+Vue.component("battery-array", {
+	template:`<div class="array">
+	<span>The Battery Box</span>
+	<battery-row v-for="(row, index) in player.batteryArray" :row="row" :index="index"></battery-row>
+	</div>`,
+	data: () => {
+		return {player}
+	},
+	methods: vdata.methods,
+	computed: vdata.computed
+});
+Vue.component("battery-row", {
+	props: {
+		row: Array,
+		index: Number
+	},
+	template: `<div><battery-cell v-for="(cell, col) in row" :row="index" :cell="cell" :col="col"></battery-cell></div>`
+});
+Vue.component("battery-cell", {
+	props: {
+		cell: String,
+		row: Number,
+		col: Number
+	},
+	template: `<button :class="cell" v-on:click="placeCell(row, col, player.selectedBatteryCell)" @contextmenu="removeCell($event, row, col)">{{toNot(cellVals[row][col], 2)}}</button>`,
+	data: () => {
+		return {player, Vue}
+	},
+	methods: vdata.methods,
+	computed: vdata.computed
+});
+Vue.component("battery-buttons", {
+	props: ["obj", "type"],
+	template: `<div class="batteryButton" :id="type" v-if="obj!=undefined">
+		<div v-if="obj.unlocked">
+			<button :class="{
+				batterybtn: true,
+				[type]: true,
+				selected: player.selectedBatteryCell==type,
+				disabled: player.batteryBox[type].lte(player.batteryArray.reduce((_, i)=>_+=i.reduce((a, b)=>a += b==type, 0), 0))
+			}"
+
+			v-on:click="player.selectedBatteryCell=type"
+			@mouseover="player.infoBatCell=type">
+			{{toNot(player.batteryBox[type].sub(player.batteryArray.reduce((_, i)=>_+=i.reduce((a, b)=>a += b==type, 0), 0)))}}
+			</button>
+			<br><br>
+			<button v-on:click="buyCell(type)" :disabled="player.plantium.lt(getCellScaling(type))">Buy 1
+			<br>
+			(Cost: {{toNot(getCellScaling(type))}} plantium)</button>
+		</div>
+		<div v-else-if="cellUnlocks[type]!=undefined" style="position: relative; border: 2px solid #fff; width: 100%; height: 100%;">
+			<span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">{{obj.desc}}</span>
+		</div>
+	</div>`,
+	data: () => {
+		return {player, Decimal}
+	},
+	methods: vdata.methods,
+	computed: vdata.computed
+})
 var vm = new Vue(vdata);

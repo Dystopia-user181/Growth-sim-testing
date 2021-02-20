@@ -23,7 +23,7 @@ button:hover {
 button:active {
 	background: var(--bg-3);
 }
-button:disabled {
+button:disabled, .disabled {
 	opacity: 0.5;
 }
 select {
@@ -106,7 +106,6 @@ select {
 	height: 10em;
 	width: 250px;
 	vertical-align: top;
-	background: #0f03;
 }
 .pu.d {
 	background: #f005;
@@ -115,13 +114,15 @@ select {
 	background: #fe05;
 }
 .hc {
-	height: 8.5em;
-	font-size: 0.7em;
-	width: 150px;
+	height: 100px;
+	width: 175px;
+	font-size: 12px;
 	border: 1px solid var(--c-1);
 	border-radius: 3px;
 	background: #da0;
 	color: #000 !important;
+	vertical-align: top;
+	margin: 3px;
 }
 .hc > b {
 	color: #000 !important;
@@ -131,4 +132,49 @@ select {
 }
 .hc:active {
 	background: #b80 !important;
+}
+
+.array {
+	border: 2px solid #eeddaa;
+	padding: 10px;
+	display: inline-block;
+}
+.array > div > button, .batterybtn {
+	width: 50px;
+	height: 50px;
+	font-size: 10px;
+}
+.array > div > button {
+	transition-property: border, box-shadow;
+}
+.batteryButton {
+	width: 200px;
+	text-align: center;
+}
+.selected {
+	border: 2px solid #0000ff;
+}
+.copper {
+	background-color: #b87333;
+}
+.copper:active {
+	background-color: #b87333;
+}
+.silver {
+	background-color: #888888;
+}
+.silver:active {
+	background-color: #888888;
+}
+.connected {
+	background-color: #1e90ff;
+}
+.connected:active {
+	background-color: #1e90ff;
+}
+.chained {
+	background-color: #cc6666;
+}
+.chained:active {
+	background-color: #cc6666;
 }
