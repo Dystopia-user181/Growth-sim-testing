@@ -44,7 +44,7 @@ var vdata = {
 				],
 				row3: [
 					{id: 11, text: `Notation`, el: ["Scientific", "Engineering", "Logarithm", "Binary", "YESNO", "Blind"], it: "notation"},
-					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Tilt", "Ace"], it: "theme"},
+					{id: 12, text: `Theme`, el: ["Dark", "Light", "Inverted Light", "Metro", "Tilt", "Purple"], it: "theme"},
 				]
 			}
 		},

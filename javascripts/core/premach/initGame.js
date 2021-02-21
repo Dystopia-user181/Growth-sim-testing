@@ -172,11 +172,6 @@ function mainGameLoop(ticks=0.05) {
 		if (player.plantiumprocess > 100) {
 			if (!vm.pus[1].bought) prestige(["plantium", "machines", "generators", "plantiumupgrades", "onplantiumgain", 
 				"batteries", "batteryUnlocks", "batteryArray", "selectedBatteryCell"]);
-			if (player.plantium.lt(1)) {
-				window.tmp = player.option.theme;
-				player.option.theme = "Dark";
-				setTimeout(()=>{player.option.theme=window.tmp}, 30);
-			}
 			player.plantium = player.plantium.add(player.onplantiumgain.mul(Decimal.pow(1.5, player.plantiumplantamt.add(1).log10()-15)));
 			player.plantiumprocess = 2;
 			player.tutorial.madeFirstPlantium = true;

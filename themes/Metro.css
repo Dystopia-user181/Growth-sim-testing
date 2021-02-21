@@ -5,20 +5,14 @@
 	--c-1: #ddd;
 }
 button {
-	animation: shift 10s infinite;
+	border: 3px solid #bbb !important;
+	box-shadow: 0px 0px 3px 1px #777;
 }
 button:hover {
 	border-color: #fef !important;
 	box-shadow: 0px 0px 7px 1px #fef !important;
 }
 .automatorDiv {
-	animation: shift 10s infinite;
-}
-
-@keyframes shift {
-	0% {border: 3px solid #bbb !important; box-shadow: 0px 0px 4px 1px #999;}
-	25% {border: 3px solid #bba !important; box-shadow: 0px 0px 4px 1px #998;}
-	50% {border: 3px solid #bab !important; box-shadow: 0px 0px 4px 1px #989;}
-	75% {border: 3px solid #abb !important; box-shadow: 0px 0px 4px 1px #899;}
-	100% {border: 3px solid #bbb !important; box-shadow: 0px 0px 4px 1px #999;}
+	border: 3px solid #bbb !important;
+	box-shadow: 0px 0px 3px 1px #777;
 }
