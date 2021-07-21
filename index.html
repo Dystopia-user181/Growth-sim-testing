@@ -9,13 +9,14 @@
 		<script defer src="javascripts/display/notation.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/planting.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/makePlantium.js" charset="utf-8" type="text/javascript"></script>
-		<script defer src="javascripts/saveLoad.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/cvthive.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/premach/bee.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/automator.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/prestigefunction.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/plantPower.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/core/plantium/factory.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/core/tmp.js" charset="utf-8" type="text/javascript"></script>
+		<script defer src="javascripts/saveLoad.js" charset="utf-8" type="text/javascript"></script>
 		<script defer src="javascripts/display/vues.js" charset="utf-8" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="themes/Defaults.css"/>
 	</head>
@@ -76,7 +77,7 @@
 						</div>
 						<div style="width: 50%; transition: none;">
 							<div v-if="player.tutorial.unlockedPot" style="width: 90%;">
-								You have {{toNot(player.cvt.total.floor())}} ({{comma(player.cvt.bought)}} bought) level {{toNot(player.cvt.level)}} cultivators, making {{toNot(pps)}} plants per second.
+								You have {{toNot(player.cvt.total.floor())}} ({{comma(player.cvt.bought)}} bought) level {{toNot(player.cvt.level)}} cultivators, making {{toNot(tmp.plantGen)}} plants per second.
 								<br><br>
 								<button onclick="buyCvt('cvt')" :disabled="player.money.lt(getCvtScal(player.cvt))">Buy {{toNot(1)}} Cultivator for ${{toNot(getCvtScal(player.cvt), 2)}}.</button>
 								<button onclick="upCvt('cvt')" :disabled="player.money.lt(getCvtUpScal(player.cvt))">Upgrade Cultivator for ${{toNot(getCvtUpScal(player.cvt))}}.</button>
@@ -103,8 +104,8 @@
 								<br><br>
 								<hcbtn v-for="hc in hcs" :obj="hc"></hcbtn>
 							</div>
-							<br><hr><br>
 							<div v-if="player.tutorial.unlockedMarketing">
+								<br><hr><br>
 								<b v-if="!pus[4].bought">Automators</b>
 								<br v-if="!pus[4].bought">
 								<div class="automatorDiv" v-if="!pus[4].bought">

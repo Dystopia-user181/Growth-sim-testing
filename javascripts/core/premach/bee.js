@@ -28,6 +28,9 @@ function giveHoney() {
 	player.queens.honey = player.queens.honey.add(player.honey.div(2));
 	player.honey = player.honey.div(2);
 }
+function getHoneyEffect() {
+	return player.honey.add(1).pow(0.3);
+}
 function buyQueenUpgrade(obj) {
 	if (!obj.bought && player.queens.amt.gte(obj.cost)) {
 		player.queens.upgrades += Math.pow(2, obj.id);
@@ -40,7 +43,7 @@ function qus() {
 			desc: "Square base cultivator and hive production.",
 			cost: new Decimal(2),
 			id: 0,
-			bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-1] == "1"
+			bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-1] == "1",
 		},
 		{
 			desc: "Queen honey effect cap is ^1.5.",
@@ -58,7 +61,8 @@ function qus() {
 			desc: "Cultivator production is boosted by Queens and Queen honey.",
 			cost: new Decimal(5),
 			id: 3,
-			bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-4] == "1"
+			bought: player.queens.upgrades.toString(2)[player.queens.upgrades.toString(2).length-4] == "1",
+			effect: Decimal.pow(3, player.queens.amt).mul(player.queens.honey.add(10).log(10))
 		},
 		{
 			desc: "Queens no longer reset anything.",

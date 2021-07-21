@@ -1,6 +1,6 @@
 const D = (d, log=false) => {if (log) console.log(d);return new Decimal(d);}
 const batteryTypes = ["copper", "silver", "connected", "chained"];
-const initPlayer = {
+function getInitPlayer() {return {
 	money: D(20),
 	automoney: D(0),
 	plants: {
@@ -14,6 +14,20 @@ const initPlayer = {
 		total: D(0),
 		level: D(0)
 	},
+	hives: {
+		bought: D(0),
+		total: D(0),
+		level: D(0)
+	},
+	factories: D(0),
+	honeycombs: D(0),
+	queens: {
+		amt: D(0),
+		honey: D(0),
+		beeproduction: 1,
+		upgrades: 0
+	},
+	combstructures: [D(0), D(0), D(0), D(0), D(0)],
 	plantium: D(0),
 	plantiumplantamt: D(1e15),
 	tmpplantiumplantamt: "1e15",
@@ -24,22 +38,8 @@ const initPlayer = {
 	plantpow: D(0),
 	generators: D(0),
 	batteries: D(0),
-	factories: D(0),
 	machines: D(0),
-	hives: {
-		bought: D(0),
-		total: D(0),
-		level: D(0)
-	},
-	honeycombs: D(0),
-	combstructures: [D(0), D(0), D(0), D(0), D(0)],
 	intelligence: D(0),
-	queens: {
-		amt: D(0),
-		honey: D(0),
-		beeproduction: 1,
-		upgrades: 0
-	},
 	batteryBox: {
 		copper: D(0),
 		silver: D(0),
@@ -94,11 +94,18 @@ const initPlayer = {
 	},
 	version: "1.0.0.0-balancing",
 	devSpeed: 1
-};
+}}
+const initPlayer = getInitPlayer();
+
 var lastTick = new Date().getTime();
 var thisTick = new Date().getTime();
+
 Object.seal(initPlayer);
-var player = initPlayer;
+var player = getInitPlayer();
+
+function getNScal(scal, num, normal=1) {
+	return Decimal.pow(scal, num).mul(normal);
+}
 function getnff(bool) {
 	if (bool) return "ON"; else return "OFF";
 }
@@ -110,7 +117,9 @@ function mainGameLoop(ticks=0.05) {
 	if (window.vm) ticks *= 1-vm.qus[7].bought;
 	if (isNaN(ticks)) ticks = 0;
 
-	player.plants.field = player.plants.field.add(ticks).add(player.plants.field.min(player.bees).mul(vm.plantpowbuff).mul(ticks).mul(vm.hcs[0].boost));
+	updateTmp();
+
+	player.plants.field = player.plants.field.add(ticks).add(player.plants.field.min(player.bees).mul(tmp.plantium.pPowEffect).mul(ticks).mul(vm.hcs[0].boost));
 	if (player.plants.field.gt(300) && player.tutorial.unlockedSell) player.tutorial.unlockedHoneybee = true;
 	if (player.bees.gt(1e6)) player.tutorial.unlockedQueen = true;
 
@@ -127,7 +136,7 @@ function mainGameLoop(ticks=0.05) {
 	}
 
 	var prevPlants = player.plants.picked;
-	player.plants.picked = player.plants.picked.add(vm.pps.mul(ticks));
+	player.plants.picked = player.plants.picked.add(tmp.plantGen.mul(ticks));
 	prevPlants = player.plants.picked.sub(prevPlants);
 	sell(prevPlants.mul(player.automator.sellPlant));
 

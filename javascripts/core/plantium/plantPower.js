@@ -10,10 +10,49 @@ function assignMax(money=player.plantium.sub(1).add(1)) {
 		assign();
 	}
 }
+function getPPowEffect() {
+	return player.plantpow.add(1).pow(D(upgs.pus[0].bought ? 2.2 : 1.1).mul(tmp.plantium.bEffect[1]))
+}
 function buybattery() {
 	if (player.generators.lt(Decimal.pow(2, player.batteries))) return;
 	player.generators = player.generators.sub(Decimal.pow(2, player.batteries));
 	player.batteries = player.batteries.add(1);
+}
+
+function getBatCellVals() {
+	return player.batteryArray.map((_, i)=>{
+		return _.map((k, e) => {
+			switch(k.toLowerCase()) {
+				case "copper":
+				return D(0.2);
+				break;
+				case "silver":
+				return D(0.1).add(0.2);
+				break;
+				case "connected":
+				return D(player.batteryArray.reduce((a, i)=>a+=(i.reduce((b, j)=>b+= j=="copper", 0)), 0)).mul(0.04);
+				break;
+				case "chained":
+				var a = 0;
+				a += (player.batteryArray[i-1] != undefined && player.batteryArray[i-1][e] == "chained");
+				a += (player.batteryArray[i][e-1] == "chained");
+				a += (player.batteryArray[i+1] != undefined && player.batteryArray[i+1][e] == "chained");
+				a += (player.batteryArray[i][e+1] == "chained");
+				return D(a).mul(0.1);
+				default:
+				return D(0);
+			}
+		})
+	})
+}
+function getBatEffi() {
+	return tmp.plantium.box.cellVals.reduce((_, i)=> _ = _.add(i.reduce((a, b)=>a.add(b))), D(0));
+}
+function getBatteryEffect1() {
+	return Decimal.pow(tmp.plantium.box.batEffi.add(1), player.batteries);
+}
+function getBatteryEffect2() {
+	return D(player.batteries.mul(tmp.plantium.box.batEffi).add(7).log(7)).pow(0.35);
 }
 function buyCell(type) {
 	if (!vm.cellUnlocks[type].unlocked || player.plantium.lt(getCellScaling(type))) return;

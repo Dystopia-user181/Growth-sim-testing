@@ -78,7 +78,8 @@ function pus() {
 			cost: new Decimal(1e6),
 			id: 7,
 			bought: player.plantiumupgrades.toString(2)[player.plantiumupgrades.toString(2).length-8] == "1",
-			effect: `x${toNot(player.plantium.add(1).pow(0.4), 2)}`
+			effect: player.plantium.add(1).pow(0.4),
+			effectDisplay: `x${toNot(player.plantium.add(1).pow(0.4), 2)}`
 		},
 		{
 			title: "Super Generators",

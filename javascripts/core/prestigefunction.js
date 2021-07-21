@@ -11,3 +11,9 @@ function prestige(keystokeep) {
 	player.tutorial.madeFirstPlantium = true;
 	load(player);
 }
+function reset() {}
+
+let resets = {
+	0: ["money", "automoney", "plants", "bees", "honey", "cvt", "hives", "factories", "honeycombs", "queens",
+	"combstructures", "automator", "automatorUnlocked", "plantpow"]
+}

@@ -1,9 +1,10 @@
 var vdata = {
 	el: "#main",
 	data: {
-		player: player,
-		Decimal: Decimal,
-		toScientific: toScientific,
+		player,
+		Decimal,
+		toScientific,
+		tmp,
 		finished: false
 	},
 	computed: {
@@ -13,7 +14,7 @@ var vdata = {
 		batteryboost2: function() {return D(player.batteries.mul(this.batEffi).add(7).log(7)).pow(0.35)},
 		plantpowps: function () {return player.generators.sub(vm.pus[3].bought?0:player.factories.div(2)).mul(this.batteryboost).mul(this.hcs[2].boost).mul(0.1);},
 		pps: function () {return player.plants.picked.max(1).min(player.cvt.total.floor()).pow(this.qus[0].bought?2:1).pow(this.cus[0].bought?2:1).mul(this.qus[3].bought?Decimal.pow(3, player.queens.amt).mul(player.queens.honey.add(10).log(10)):1).mul(Decimal.pow(1.5, player.cvt.level)).mul(this.hcvtboost).mul(this.plantpowbuff).mul(this.pu7buff).mul(this.cus[2].bought?Decimal.pow(2, player.cvt.bought.div(400).floor()):1).mul(this.cus[3].bought?player.bees.pow(0.05):1).mul(this.hcs[0].boost);},
-		plantpowbuff: function () {return player.plantpow.add(1).pow(D(this.pus[0].bought?2.2:1.1).mul(this.batteryboost2));},
+		plantpowbuff: getPPowEffect,
 		hcvtboost: function () {return player.honey.add(1).pow(0.3);},
 		hps: function () {return player.bees.min(player.plants.field).pow(0.5).mul(player.honeycombs.pow(0.3).add(1).mul(this.plantpowbuff));},
 		qulimit: function () {return Decimal.pow(10000, this.qus[1].bought?1.5:1)},
@@ -113,21 +114,15 @@ var vdata = {
 		toNot,
 		getCvtScal,
 		getCvtUpScal,
-		getFacScal: function () {
-			return player.factories.lt(30) ? getNScal(10, player.factories, 1e4) : getNScal(50, player.factories.sub(30).mul(Decimal.pow(1.5, player.factories.sub(100))), 1e34);
-		},
+		getFacScal,
 		getGenScal: function () {
 			return Decimal.pow(2, player.generators.sub(1).max(0).add(player.generators.sub(50).max(0).pow(1.25).mul(0.5)));
 		},
 		getNSca: function (scal, num, normal) {
 			return this.toNot(this.getNScal(scal, num, normal), 2);
 		},
-		getNScal: function (scal, num, normal=1) {
-			return Decimal.pow(scal, num).mul(normal);
-		},
-		getnff: function (bool) {
-			if (bool) return "ON"; else return "OFF";
-		},
+		getNScal,
+		getnff,
 		btoa: function (a) {return btoa(a)},
 		save,
 		load,
@@ -198,7 +193,7 @@ Vue.component("pubtn", {
 		obj: Object
 	},
 	template: `<button :class="'pu ' + (obj.bought?'b':(player.plantium.gte(obj.cost)?'u':'d'))" v-on:click="
-	buyPlantiumUpgrade(obj)" :disabled="player.plantium.lt(obj.cost) && !obj.bought"><b>{{obj.title}}</b><br>{{obj.desc}}<span v-if="obj.effect"><br>Currently: {{obj.effect}}</span><br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
+	buyPlantiumUpgrade(obj)" :disabled="player.plantium.lt(obj.cost) && !obj.bought"><b>{{obj.title}}</b><br>{{obj.desc}}<span v-if="obj.effectDisplay"><br>Currently: {{obj.effectDisplay}}</span><br>Cost: {{toNot(obj.cost)}} Plantium</button>`,
 	data: () => {
 		return {player}
 	},
