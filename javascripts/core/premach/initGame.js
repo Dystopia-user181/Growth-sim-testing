@@ -46,7 +46,7 @@ const initPlayer = {
 		connected: D(0),
 		chained: D(0)
 	},
-	selectedBatteryCell: "",
+	selectedBatteryCell: "copper",
 	infoBatCell: "",
 	batteryUnlocks: 0,
 	batteryArray: [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]],
