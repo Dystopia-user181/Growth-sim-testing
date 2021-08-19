@@ -77,6 +77,11 @@ function expo() {
 	sv.style.display = "none";
 }
 function impo() {
-	load(JSON.parse(atob(prompt("Paste your save here."))));
-	location.reload();
+	try {
+		let save = JSON.parse(atob(prompt("Paste your save here.")));
+		localStorage.setItem("growthsimsave", JSON.stringify(save));
+		location.reload();
+	} catch {
+		alert("Invalid save.")
+	}
 }
