@@ -186,7 +186,7 @@ Vue.component("cubtn", {
 	props: {
 		obj: Object
 	},
-	template: `<button :class="'cu ' + (obj.bought?'b':(player.cvt.bought.gte(obj.cost)&&player.hives.bought.gte(obj.cost)?'u':'d'))" v-on:click="buyCvtUpgrade(obj)" :disabled="player.cvt.bought.lt(obj.cost)&&player.hives.bought.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{comma(obj.cost)}} Bought Cultivators and Hives</button>`,
+	template: `<button :class="'cu ' + (obj.bought?'b':((player.cvt.bought.gte(obj.cost)&&player.hives.bought.gte(obj.cost))?'u':'d'))" v-on:click="buyCvtUpgrade(obj)" :disabled="player.cvt.bought.lt(obj.cost)&&player.hives.bought.lt(obj.cost) && !obj.bought">{{obj.desc}}<br>Cost: {{comma(obj.cost)}} Bought Cultivators and Hives</button>`,
 	data: () => {
 		return {player}
 	},
