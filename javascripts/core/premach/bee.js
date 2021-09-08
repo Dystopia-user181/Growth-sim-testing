@@ -7,9 +7,6 @@ function sellHoney(amt=200) {
 	if (player.money.gte(500)) player.tutorial.unlockedMarketing = true;
 	if (player.money.gte(1e14) && !player.tutorial.unlockedMachine) {
 		player.navigation.tab = "Machine";
-		let tmp = player.option.theme;
-		player.option.theme = "a";
-		setTimeout(()=>player.option.theme = temp, 30);
 	}
 	if (player.money.gte(1e14)) player.tutorial.unlockedMachine = true;
 }

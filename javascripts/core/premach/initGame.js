@@ -123,7 +123,7 @@ function mainGameLoop(ticks=0.05) {
 
 	if (player.tutorial.unlockedHoneybee) {
 		var softcap = (vm.beecapped ? player.bees.pow(0.7) : 1)
-		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(vm.plantpowbuff).mul(ticks).mul(Math.pow(player.queens.beeproduction, 6)).div(softcap).mul(vm.pus[5].bought?player.queens.amt:1)).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
+		player.bees = player.bees.add(player.plants.field.pow(0.55).mul(player.honeycombs.pow(0.3).add(1)).mul(vm.plantpowbuff).mul(ticks).mul(Math.pow(player.queens.beeproduction, 6)).div(softcap).mul(vm.pus[5].bought?player.queens.amt.max(1):1)).min(player.plants.field.div(50).mul(player.honeycombs.pow(Decimal.div(1, player.honeycombs.add(100).log(100))).add(1)));
 	}
 
 	var prevPlants = player.plants.picked;
