@@ -4,7 +4,7 @@ function getCvtScal (obj) {
 		Decimal.pow(1.01, obj.bought.sub(200)).mul(1000) : Decimal.pow(vm.cus[1].bought?Math.sqrt(1.1):1.1, obj.bought.sub(4000)).mul(2.7e19);
 }
 function getCvtUpScal (obj) {
-	return vm.getNScal(2e3, obj.level.add(obj.level.sub(50).max(1).pow(2)), 2e3);
+	return vm.getNScal(2e3, obj.level.add(obj.level.sub(50).max(0).pow(2)), 2e3);
 }
 function upCvt(type) {
 	if (player.money.lt(getCvtUpScal(player[type]))) return;
