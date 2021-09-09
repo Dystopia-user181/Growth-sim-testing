@@ -24,7 +24,7 @@ var vdata = {
 		tabbtns: function () {
 			return [
 				{id: 1, req: true, tab: "Plants", onclick: `player.navigation.tab = "Plants"`},
-				{id: 2, req: true, tab: player.tutorial.unlockedMachine?"Machine":"Locked (Requires $1e14)", onclick: player.tutorial.unlockedMachine?`player.navigation.tab = "Machine"`:""},
+				{id: 2, req: true, tab: player.tutorial.unlockedMachine?"Machine":"Locked (Requires $" + toNot(1e14) + ")", onclick: player.tutorial.unlockedMachine?`player.navigation.tab = "Machine"`:""},
 				{id: 2.5, req: this.pus[4].bought, tab: "Automation", onclick: `player.navigation.tab = "Automation"`},
 				{id: 3, req: player.tutorial.unlockedMachine, tab: player.tutorial.madeFirstPlantium?"Plantium":"Locked (Requires having used the machine at least once)", onclick: player.tutorial.madeFirstPlantium?`player.navigation.tab = "Plantium"`:""},
 				{id: 4, req: true, tab: "Options", onclick: `player.navigation.tab = "Options"`}

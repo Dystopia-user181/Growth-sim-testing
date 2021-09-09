@@ -1,10 +1,22 @@
 function toScientific (decimal, places=0, placesafter1000=2, evalue=3) {
 	decimal = new Decimal(decimal);
-	if (Math.abs(decimal.e) < evalue) return (Math.floor(decimal.m*Math.pow(10, decimal.e+places)+0.000001)/Math.pow(10, places)).toFixed(places); else return `${decimal.m.toFixed(placesafter1000)}e${toScientific(decimal.e, 0, 4, 6)}`;
+	let e = decimal.e, m = decimal.m
+	if (m.toFixed(placesafter1000) > 10) {
+		m = 1;
+		e++;
+	}
+	if (Math.abs(e) < evalue) return (Math.floor(m*Math.pow(10, decimal.e+places)+Number.EPSILON)/Math.pow(10, places)).toFixed(places);
+	else return `${m.toFixed(placesafter1000)}e${toScientific(decimal.e, 0, 4, 6)}`;
 }
 function toEngineering (decimal, places=0, placesafter1000=2, evalue=3) {
 	decimal = new Decimal(decimal);
-	if (Math.abs(decimal.e) < evalue) return (Math.floor(decimal.m*Math.pow(10, decimal.e+places))/Math.pow(10, places)).toFixed(places); else return `${d(ecimal.m*Math.pow(10, decimal.e%3)).toFixed(placesafter1000)}e${toScientific(Math.floor(decimal.e/3)*3,
+	let e = decimal.e, m = decimal.m
+	if (m.toFixed(placesafter1000) > 10) {
+		m = 1;
+		e++;
+	}
+	if (Math.abs(e) < evalue) return (Math.floor(m*Math.pow(10, e+places))/Math.pow(10, places)).toFixed(places);
+	else return `${(m*Math.pow(10, e%3)).toFixed(placesafter1000)}e${toScientific(Math.floor(e/3)*3,
 	 0, 4, 6)}`;
 }
 function toLogarithm (decimal, places=0, placesafter1000=2, evalue=3) {
