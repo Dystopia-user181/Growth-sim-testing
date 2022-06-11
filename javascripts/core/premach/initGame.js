@@ -145,7 +145,7 @@ function mainGameLoop(ticks=0.05) {
 
 	if (player.automator.autoplantium) makePlantium();
 	if (player.automator.autoqueen) queenReset();
-	if (player.automator.buycvt) {
+	if (player.automator.buycvt || player.automator.buycvtratio) {
 		buyMaxCvt(player.automator.buycvtratio?player.money.mul(player.automator.buycvtr).div(1.9):player.money.div(1.9), "cvt");
 		buyMaxCvt(player.automator.buycvtratio?player.money.mul(player.automator.buycvtr):player.money, "hives");
 		buyMaxCvt(player.automator.buycvtratio?player.money.mul(player.automator.buycvtr):player.money, "cvt");
